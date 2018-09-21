@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class CardBattleManager : MonoBehaviour {
 
+    public CardBattleManager instance;
+
     public GameObject cardPrefab;
 
     public Card[] cards;
 
     public Vector3[] spawnPoints;
+
+    private void Awake()
+    {
+        if (instance == null){
+            instance = this;
+        }
+        else{
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     private void Start()
     {

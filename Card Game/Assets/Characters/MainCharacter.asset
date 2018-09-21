@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f095c5d6fd840e680411f16ede2f17, type: 3}
+  m_Name: MainCharacter
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 21300000, guid: 30d365fe575fc434e99584a024b9b57a, type: 3}
+  healthBar: {fileID: 0}
