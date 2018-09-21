@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Scorch
   discription: Deal 2 damage to all enemies
-  art: {fileID: 0}
+  art: {fileID: 21300000, guid: 15c88dd45033c4567bb0a632b2f630b6, type: 3}
   isPowerUp: 0
   isAttack: 1
   isHeal: 0
