@@ -70,7 +70,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4745337109707044}
+  - component: {fileID: 65132785055021154}
   - component: {fileID: 114262164117654122}
+  - component: {fileID: 114556155741697580}
+  - component: {fileID: 114100950964363548}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -161,6 +164,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65132785055021154
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364672442513524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.713478, y: 2.39434, z: 0.01}
+  m_Center: {x: 0, y: 0, z: -0.02}
+--- !u!114 &114100950964363548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364672442513524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ae95c39be474b7ab27b9c20a22f316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114164082564471848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,6 +305,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114556155741697580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364672442513524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cae740d044e4d69978b8178375ad60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCursorOffset: 1
 --- !u!114 &114682633387711314
 MonoBehaviour:
   m_ObjectHideFlags: 1

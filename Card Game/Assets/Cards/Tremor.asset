@@ -14,9 +14,7 @@ MonoBehaviour:
   cardName: Tremor
   discription: Deal 2 damage to all enemies
   art: {fileID: 0}
-  isPowerUp: 0
-  isAttack: 1
-  isHeal: 0
+  targets: 1
   damage: 2
   numberOfTargets: 3
   heal: 0

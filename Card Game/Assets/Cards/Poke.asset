@@ -14,9 +14,7 @@ MonoBehaviour:
   cardName: Poke
   discription: Deal 4 damage to 1 enemy.
   art: {fileID: 21300000, guid: 2f3e876309faf4c3ab9ad21dfbc9e1fc, type: 3}
-  isPowerUp: 0
-  isAttack: 1
-  isHeal: 0
+  targets: 1
   damage: 4
   numberOfTargets: 1
   heal: 0
