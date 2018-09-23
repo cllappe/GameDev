@@ -11,6 +11,8 @@ public enum Targets{
 [CreateAssetMenu(fileName = "New Card", menuName = "Card")]
 
 public class Card : ScriptableObject, IComparable<Card> {
+    public int cardID;
+
     [Header("Standard Info")]
     public string cardName;
     public string discription;
