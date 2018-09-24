@@ -6,6 +6,5 @@ using UnityEngine;
 public class Deck : ScriptableObject {
     public int deckID;
     public Card[] cards;
-
-
 }
+
