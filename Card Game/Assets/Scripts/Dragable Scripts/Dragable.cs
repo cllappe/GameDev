@@ -16,6 +16,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public float mouseOffset;
     public static bool validDrop = false;
     public static bool dragging = false;
+    private bool validDropHappened = false;
 
     private Vector3 startPos;
 
@@ -89,6 +90,12 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (validDrop){
             //Debug.Log("In Valid Drop");
             startPos = this.transform.position;
+            validDropHappened = true;
+            this.transform.SetParent(parentToReturnTo);
+            this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+            foreach (Transform child in transform) {
+                GameObject.Destroy(child.gameObject);
+            }
         }
         else{
             startPos = new Vector3(this.transform.position.x, startPos.y, startPos.z);
@@ -103,7 +110,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void OnMouseExit()
     {
-        if (!Input.GetMouseButton(0))
+        if (!Input.GetMouseButton(0) && !validDropHappened)
         {
             iTween.MoveTo(gameObject, startPos, 0f);
         }

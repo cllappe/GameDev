@@ -14,6 +14,10 @@ public class CardBattleManager : MonoBehaviour {
     public Canvas hand;
 
     public List<Card> inUseDeck;
+    
+    public static List<Character> charOrder = new List<Character>();
+
+    public static int deadEnemies = 0;
 
     private void Awake()
     {
@@ -55,9 +59,9 @@ public class CardBattleManager : MonoBehaviour {
             CardDisplay display = go.GetComponent<CardDisplay>();
             Dragable dragable = go.GetComponent<Dragable>();
             int randomSelectedCard = Random.Range(0, inUseDeck.Count);
+            Debug.Log(inUseDeck.Count);
             display.CardSetup(inUseDeck[randomSelectedCard]);
             inUseDeck.RemoveAt(randomSelectedCard);
-            display.CardSetup(inUseDeck[Random.Range(0, inUseDeck.Count)]);
             display.transform.SetParent(hand.transform.GetChild(0), false);
             dragable.parentToReturnTo = display.transform.parent;
             dragable.placeholderParent = display.transform.parent;

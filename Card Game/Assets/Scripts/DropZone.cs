@@ -34,17 +34,17 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
+        //Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
 
         Dragable d = eventData.pointerDrag.GetComponent<Dragable>();
         if (acceptableCard == d.targets)
         {
             //Debug.Log(acceptableCard);
             //Debug.Log(d.targets);
-            //Dragable.validDrop = true;
+            Dragable.validDrop = true;
             if (d != null){
-                Debug.Log(acceptableCard);
-                Debug.Log(d.targets);
+                //Debug.Log(acceptableCard);
+                //Debug.Log(d.targets);
                 d.parentToReturnTo = this.transform;
             }
         }
