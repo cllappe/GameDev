@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Object = System.Object;
 
 public class LevelManager : MonoBehaviour {
 
     public Character player;
-    public Character enemy1;
-    public Character enemy2;
-    public Character enemy3;
+    public List<Character> enemyList;
+
+    public Enemies enemyArray;
+    public static int enemyId = 0;
+    public static int numberOfEnemies;
 
     public GameObject avatarPrefab;
 
@@ -17,31 +21,43 @@ public class LevelManager : MonoBehaviour {
     public Transform enemy2Spawn;
     public Transform enemy3Spawn;
 
+    public List<Transform> enemySpawn;
+
     private void Start()
     {
+        enemySpawn.Add(enemy1Spawn);
+        enemySpawn.Add(enemy2Spawn);
+        enemySpawn.Add(enemy3Spawn);
+        numberOfEnemies = UnityEngine.Random.Range(1,4);
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            Character enemyCopy = Instantiate(enemyArray.enemies[enemyId]);
+            enemyList.Add(enemyCopy);
+            EnemySetup(enemySpawn[i]);
+        }
         PlayerSetup();
-        EnemySetup();
     }
 
-    private void EnemySetup()
+    private void EnemySetup(Transform enemySpawnPoint)
     {
-        GameObject go1 = Instantiate(avatarPrefab, new Vector3(enemy1Spawn.position.x, enemy1Spawn.position.y, -1.0f), Quaternion.identity);
+        GameObject go1 = Instantiate(avatarPrefab,
+            new Vector3(enemySpawnPoint.position.x, enemySpawnPoint.position.y, -1.0f), Quaternion.identity);
         CharacterDisplay display1 = go1.GetComponent<CharacterDisplay>();
-        display1.characterSetup(enemy1);
-
-        GameObject go2 = Instantiate(avatarPrefab, new Vector3(enemy2Spawn.position.x, enemy2Spawn.position.y, -1.0f), Quaternion.identity);
-        CharacterDisplay display2 = go2.GetComponent<CharacterDisplay>();
-        display2.characterSetup(enemy2);
-
-        GameObject go3 = Instantiate(avatarPrefab, new Vector3(enemy3Spawn.position.x, enemy3Spawn.position.y, -1.0f), Quaternion.identity);
-        CharacterDisplay display3 = go3.GetComponent<CharacterDisplay>();
-        display3.characterSetup(enemy3);
+        CharacterStateMachine csm1 = go1.GetComponent<CharacterStateMachine>();
+        display1.characterSetup(enemyList.First());
+        csm1.csm_Set(enemyList[0]);
+        enemyList.RemoveAt(0);
     }
 
     private void PlayerSetup()
     {
-        GameObject go = Instantiate(avatarPrefab, new Vector3(playerSpawn.position.x, playerSpawn.position.y, -1.0f), Quaternion.identity);
+        GameObject go = Instantiate(avatarPrefab, new Vector3(playerSpawn.position.x, playerSpawn.position.y, -1.0f),
+            Quaternion.identity);
         CharacterDisplay display = go.GetComponent<CharacterDisplay>();
+        CharacterStateMachine csm = go.GetComponent<CharacterStateMachine>();
         display.characterSetup(player);
+        csm.character = player;
+
+
     }
 }

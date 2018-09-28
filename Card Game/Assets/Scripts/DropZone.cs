@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public Targets acceptableCard;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -33,12 +34,19 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
+        //Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
 
         Dragable d = eventData.pointerDrag.GetComponent<Dragable>();
-        if (d != null)
+        if (acceptableCard == d.targets)
         {
-            d.parentToReturnTo = this.transform;
+            //Debug.Log(acceptableCard);
+            //Debug.Log(d.targets);
+            Dragable.validDrop = true;
+            if (d != null){
+                //Debug.Log(acceptableCard);
+                //Debug.Log(d.targets);
+                d.parentToReturnTo = this.transform;
+            }
         }
 
     }
