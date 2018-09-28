@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 182824801}
   - component: {fileID: 182824800}
   - component: {fileID: 182824802}
+  - component: {fileID: 182824803}
   m_Layer: 0
   m_Name: Enemy3DropZone
   m_TagString: Untagged
@@ -194,6 +195,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8660033bec2724a208ae487ab67172b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptableCard: 1
+--- !u!114 &182824803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 182824798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
 --- !u!1 &225702884
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,13 +248,8 @@ MonoBehaviour:
   instance: {fileID: 0}
   cardPrefab: {fileID: 1364672442513524, guid: cfa6014b9390144d09eab586c28ee632, type: 2}
   deck: {fileID: 11400000, guid: ab944da3178ee46718660c938141a062, type: 2}
-  spawnPoints:
-  - {x: -4.5, y: -3, z: 0}
-  - {x: -2.25, y: -3, z: 0}
-  - {x: 0, y: -3, z: 0}
-  - {x: 2.25, y: -3, z: 0}
-  - {x: 4.5, y: -3, z: 0}
   hand: {fileID: 2073423785}
+  inUseDeck: []
 --- !u!4 &225702886
 Transform:
   m_ObjectHideFlags: 0
@@ -242,7 +261,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511926302
 GameObject:
@@ -285,7 +304,7 @@ GameObject:
   - component: {fileID: 534669903}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,7 +425,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1154588024
 MonoBehaviour:
@@ -489,7 +508,7 @@ Transform:
   - {fileID: 1902609828}
   - {fileID: 2073423781}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1311725673
 GameObject:
@@ -502,6 +521,7 @@ GameObject:
   - component: {fileID: 1311725676}
   - component: {fileID: 1311725675}
   - component: {fileID: 1311725677}
+  - component: {fileID: 1311725678}
   m_Layer: 0
   m_Name: Enemy1DropZone
   m_TagString: Untagged
@@ -572,6 +592,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8660033bec2724a208ae487ab67172b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptableCard: 1
+--- !u!114 &1311725678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1311725673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
 --- !u!1 &1339634345
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,11 +686,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1339634345}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6.5}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1420018342
 GameObject:
@@ -660,6 +703,7 @@ GameObject:
   - component: {fileID: 1420018345}
   - component: {fileID: 1420018344}
   - component: {fileID: 1420018346}
+  - component: {fileID: 1420018347}
   m_Layer: 0
   m_Name: Enemy2DropZone
   m_TagString: Untagged
@@ -730,6 +774,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8660033bec2724a208ae487ab67172b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptableCard: 1
+--- !u!114 &1420018347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420018342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
 --- !u!1 &1505020613
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +866,7 @@ GameObject:
   - component: {fileID: 1643442703}
   - component: {fileID: 1643442702}
   - component: {fileID: 1643442704}
+  - component: {fileID: 1643442705}
   m_Layer: 0
   m_Name: PlayerDropZone
   m_TagString: Untagged
@@ -869,6 +937,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8660033bec2724a208ae487ab67172b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptableCard: 0
+--- !u!114 &1643442705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1643442700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
 --- !u!1 &1706854949
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,8 +993,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.16, y: -11.3}
-  m_SizeDelta: {x: -5.49, y: -23.62}
+  m_AnchoredPosition: {x: 0, y: -14.1050005}
+  m_SizeDelta: {x: -5.49, y: -28.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1706854951
 MonoBehaviour:
@@ -919,10 +1010,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 3
     m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 5
+  m_ChildAlignment: 1
+  m_Spacing: 6
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -961,6 +1052,83 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1706854949}
   m_CullTransparentMesh: 0
+--- !u!1 &1898366084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1898366087}
+  - component: {fileID: 1898366086}
+  - component: {fileID: 1898366085}
+  m_Layer: 10
+  m_Name: CardCamera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &1898366085
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898366084}
+  m_Enabled: 1
+--- !u!20 &1898366086
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898366084}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.01
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 6.473093
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1898366087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898366084}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -6.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1902609827
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,7 +1153,7 @@ Transform:
   m_GameObject: {fileID: 1902609827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 1261351474}
   m_RootOrder: 0
@@ -1096,7 +1264,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2073423780
 GameObject:
@@ -1133,8 +1301,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.07, y: -0.04}
-  m_SizeDelta: {x: 64.37, y: 36.201}
+  m_AnchoredPosition: {x: -0.013, y: 0.007}
+  m_SizeDelta: {x: 77.395, y: 43.546}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2073423783
 MonoBehaviour:

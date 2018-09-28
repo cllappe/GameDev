@@ -6,6 +6,6 @@ using UnityEngine;
 
 public class Character : ScriptableObject{
     public Sprite avatar;
-    public SimpleHealthBar healthBar;
+    public int health;
 
 }

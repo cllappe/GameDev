@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardBattleManager : MonoBehaviour {
@@ -10,9 +11,9 @@ public class CardBattleManager : MonoBehaviour {
 
     public Deck deck;
 
-    public Vector3[] spawnPoints;
-
     public Canvas hand;
+
+    public List<Card> inUseDeck;
 
     private void Awake()
     {
@@ -23,30 +24,40 @@ public class CardBattleManager : MonoBehaviour {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+       
     }
 
     private void Start()
     {
+        for (int j = 0; j < 25; j++)
+        {
+            inUseDeck.Add(deck.cards[j]);
+        }
         for (int i = 0; i < 5; i++){
             GameObject go = Instantiate(cardPrefab) as GameObject;
             CardDisplay display = go.GetComponent<CardDisplay>();
             Dragable dragable = go.GetComponent<Dragable>();
-            display.CardSetup(deck.cards[Random.Range(0, 6)]);
+            int randomSelectedCard = Random.Range(0, inUseDeck.Count);
+            display.CardSetup(inUseDeck[randomSelectedCard]);
+            inUseDeck.RemoveAt(randomSelectedCard);
             display.transform.SetParent(hand.transform.GetChild(0), false);
             dragable.parentToReturnTo = display.transform.parent;
             dragable.placeholderParent = display.transform.parent;
-
+            dragable.targets = display.cardTargets;
 
         }
     }
     private void Update()
     {
         
-        if (hand.transform.GetChild(0).childCount < 5 && !Input.GetMouseButton(0)){
+        if (hand.transform.GetChild(0).childCount < 5 && !Dragable.dragging){
             GameObject go = Instantiate(cardPrefab) as GameObject;
             CardDisplay display = go.GetComponent<CardDisplay>();
             Dragable dragable = go.GetComponent<Dragable>();
-            display.CardSetup(deck.cards[Random.Range(0, 6)]);
+            int randomSelectedCard = Random.Range(0, inUseDeck.Count);
+            display.CardSetup(inUseDeck[randomSelectedCard]);
+            inUseDeck.RemoveAt(randomSelectedCard);
+            display.CardSetup(inUseDeck[Random.Range(0, inUseDeck.Count)]);
             display.transform.SetParent(hand.transform.GetChild(0), false);
             dragable.parentToReturnTo = display.transform.parent;
             dragable.placeholderParent = display.transform.parent;

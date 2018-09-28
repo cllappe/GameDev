@@ -7,6 +7,8 @@ public class CardDisplay : MonoBehaviour {
 
     [HideInInspector]
     public Card card;
+    [HideInInspector]
+    public Targets cardTargets;
 
     public Text discriptionText;
     public Text nameText;
@@ -20,5 +22,6 @@ public class CardDisplay : MonoBehaviour {
         discriptionText.text = card.discription;
 
         cardImage.sprite = card.art;
+        cardTargets = card.targets;
     }
 }

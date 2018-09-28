@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4914513418124092}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FacePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 224359071229563674}
   - component: {fileID: 222166554643201996}
   - component: {fileID: 114197746301461654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DiscriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 224640236690773632}
   - component: {fileID: 222108634455224470}
   - component: {fileID: 114846881145666668}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CardNamePlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 224923978320840836}
   - component: {fileID: 222320346252192408}
   - component: {fileID: 114828879633687996}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CardName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,8 +91,7 @@ GameObject:
   - component: {fileID: 114052867681786320}
   - component: {fileID: 114262164117654122}
   - component: {fileID: 114556155741697580}
-  - component: {fileID: 114057496411274274}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +109,7 @@ GameObject:
   - component: {fileID: 223678250730516070}
   - component: {fileID: 114767732482063446}
   - component: {fileID: 114434427799478342}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CardBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +126,7 @@ GameObject:
   - component: {fileID: 224357938895336318}
   - component: {fileID: 222674066631293922}
   - component: {fileID: 114164082564471848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CardImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +143,7 @@ GameObject:
   - component: {fileID: 224377320798783598}
   - component: {fileID: 222170206983239448}
   - component: {fileID: 114488172820860298}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CardBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +160,7 @@ GameObject:
   - component: {fileID: 224138213426441780}
   - component: {fileID: 222010774376612144}
   - component: {fileID: 114682633387711314}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CardFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +198,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364672442513524}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 508c52a4c67514857b7e3ee01d521626, type: 3}
   m_Name: 
@@ -208,17 +207,6 @@ MonoBehaviour:
   cardBack: {fileID: 224377320798783598}
   TargetFacePoint: {fileID: 4914513418124092}
   col: {fileID: 65132785055021154}
---- !u!114 &114057496411274274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1364672442513524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5615d6cc156347288146b2edfa4a85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114164082564471848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentToReturnTo: {fileID: 0}
   placeholderParent: {fileID: 0}
+  mouseOffset: 0
 --- !u!114 &114682633387711314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -577,7 +566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 29.440002, y: -6.2904997}
+  m_AnchoredPosition: {x: 35.6675, y: -3}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &224357938895336318
