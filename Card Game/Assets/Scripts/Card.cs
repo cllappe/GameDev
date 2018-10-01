@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Targets{
+public enum Targets
+{
     PLAYER,
     ENEMY
-}
+};
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Card")]
 
