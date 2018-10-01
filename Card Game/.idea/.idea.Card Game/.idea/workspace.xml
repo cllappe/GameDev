@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8417fca3-4dd9-490a-b7ed-dea32a3c8f81" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Card Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Card Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dragable Scripts/Dragable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dragable Scripts/Dragable.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,12 +34,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cs" value="4501" />
+          <entry key="cs" value="4543" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="C#" value="4501" />
+          <entry key="C#" value="4543" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -82,8 +81,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/CardBattleManager.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1050">
+            <state relative-caret-position="1112">
               <caret line="83" selection-start-line="83" selection-end-line="83" />
+              <folding>
+                <marker date="1538428329518" expanded="false" signature="6:168" ph="..." />
+                <marker date="1538428329518" expanded="true" signature="217:2565" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="545:736" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="581:621" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="621:678" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="762:1653" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="897:959" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="995:1647" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="1679:2468" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="1771:2462" ph="{...}" />
+                <marker date="1538428329518" expanded="true" signature="2514:2563" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -166,24 +178,27 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Dragable Scripts/Dragable.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="119" column="26" selection-start-line="119" selection-start-column="26" selection-end-line="119" selection-end-column="26" />
+            <state relative-caret-position="421">
+              <caret line="122" column="12" selection-start-line="122" selection-start-column="12" selection-end-line="122" selection-end-column="12" />
               <folding>
-                <marker date="1538430385746" expanded="false" signature="6:98" ph="..." />
-                <marker date="1538430385746" expanded="true" signature="100:182" ph="/// Script for dragging and card hover on mouse over. ... " />
-                <marker date="1538430385746" expanded="true" signature="271:3807" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="687:945" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="731:939" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="1003:1837" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="1889:2736" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="2349:2664" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="2445:2654" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="2791:3595" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="2820:3221" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="3142:3211" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="3221:3473" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="3627:3802" ph="{...}" />
-                <marker date="1538430385746" expanded="true" signature="3693:3768" ph="{...}" />
+                <marker date="1538431307126" expanded="false" signature="6:98" ph="..." />
+                <marker date="1538431307126" expanded="true" signature="100:182" ph="/// Script for dragging and card hover on mouse over. ... " />
+                <marker date="1538431307126" expanded="true" signature="271:4114" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="687:943" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="731:937" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="1001:1938" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="1031:1932" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="1990:2954" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="2020:2947" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="2515:2866" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="2619:2852" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="3009:3932" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="3039:3926" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="3076:3513" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="3422:3499" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="3513:3785" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="3964:4109" ph="{...}" />
+                <marker date="1538431307126" expanded="true" signature="4002:4075" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -324,12 +339,12 @@
       <workItem from="1538427954297" duration="62000" />
       <workItem from="1538428182041" duration="423000" />
       <workItem from="1538429471103" duration="9000" />
-      <workItem from="1538429639532" duration="297000" />
+      <workItem from="1538429639532" duration="808000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19951000" />
+    <option name="totallyTimeSpent" value="20462000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -411,13 +426,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CardBattleManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Deck.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -483,26 +491,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CardBattleManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1112">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <marker date="1538428329518" expanded="false" signature="6:168" ph="..." />
+            <marker date="1538428329518" expanded="true" signature="217:2565" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="545:736" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="581:621" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="621:678" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="762:1653" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="897:959" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="995:1647" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="1679:2468" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="1771:2462" ph="{...}" />
+            <marker date="1538428329518" expanded="true" signature="2514:2563" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Dragable Scripts/Dragable.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="119" column="26" selection-start-line="119" selection-start-column="26" selection-end-line="119" selection-end-column="26" />
+        <state relative-caret-position="421">
+          <caret line="122" column="12" selection-start-line="122" selection-start-column="12" selection-end-line="122" selection-end-column="12" />
           <folding>
-            <marker date="1538430385746" expanded="false" signature="6:98" ph="..." />
-            <marker date="1538430385746" expanded="true" signature="100:182" ph="/// Script for dragging and card hover on mouse over. ... " />
-            <marker date="1538430385746" expanded="true" signature="271:3807" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="687:945" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="731:939" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="1003:1837" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="1889:2736" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="2349:2664" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="2445:2654" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="2791:3595" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="2820:3221" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="3142:3211" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="3221:3473" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="3627:3802" ph="{...}" />
-            <marker date="1538430385746" expanded="true" signature="3693:3768" ph="{...}" />
+            <marker date="1538431307126" expanded="false" signature="6:98" ph="..." />
+            <marker date="1538431307126" expanded="true" signature="100:182" ph="/// Script for dragging and card hover on mouse over. ... " />
+            <marker date="1538431307126" expanded="true" signature="271:4114" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="687:943" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="731:937" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="1001:1938" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="1031:1932" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="1990:2954" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="2020:2947" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="2515:2866" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="2619:2852" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="3009:3932" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="3039:3926" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="3076:3513" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="3422:3499" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="3513:3785" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="3964:4109" ph="{...}" />
+            <marker date="1538431307126" expanded="true" signature="4002:4075" ph="{...}" />
           </folding>
         </state>
       </provider>
