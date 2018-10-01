@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterStateMachine : MonoBehaviour
 {
 
 	public Character character;
 	private int actionsLeft = 0;
+	private int turnCount = 0;
 
+	private Text turnBox;
 	public enum TurnState
 	{
 		BEGINING,
@@ -25,8 +28,13 @@ public class CharacterStateMachine : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		if (character.charType == Character.Type.PLAYER)
+		{
+			GameObject turnBoxGO = GameObject.Find("Turn Counter Text");
+			turnBox = turnBoxGO.GetComponent<Text>();
+		}
+		turnCount = 1;
 		currentState = TurnState.BEGINING;
-		Debug.Log(character.health);
 	}
 	
 	// Update is called once per frame
@@ -40,25 +48,44 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.ACTION):
 			{
-				actionsLeft = 1;
-				
+				if (actionsLeft == 0)
+				{
+					actionsLeft = 1;
+				}
 				if (character.charType == Character.Type.PLAYER)
 				{
-					Debug.Log("Character Action");
-					actionsLeft--;
+					turnBox.text = "Actions Remaining = " + actionsLeft;
+					Dragable.playerTurn = true;
+					//Debug.Log("Character Action");
+					if (Dragable.validDrop)
+					{
+						actionsLeft--;
+						Dragable.playerTurn = false;
+					}
+					//actionsLeft--;
 				}
 				else
 				{
-					Debug.Log("Enemy Action");
+					//Debug.Log("Enemy Action");
 					character.health = 0;
 					actionsLeft--;
-				}
+					
+				}	
+
+				turnCount++;
 				turnMonitor();
 				break;
 			}
 			case (TurnState.ADDTOLIST):
 			{
-				CardBattleManager.charOrder.Add(character);
+				if (character.charType == Character.Type.PLAYER && turnCount == 1)
+				{
+					CardBattleManager.charOrder.Insert(0,character);
+				}
+				else
+				{
+					CardBattleManager.charOrder.Add(character);	
+				}
 				currentState = TurnState.WAITING;
 				break;
 			}
@@ -69,7 +96,7 @@ public class CharacterStateMachine : MonoBehaviour
 				{
 					CardBattleManager.deadEnemies++;
 					currentState = TurnState.DEAD;
-					Debug.Log(CardBattleManager.deadEnemies);
+					//Debug.Log(CardBattleManager.deadEnemies);
 				}
 				break;
 			}
@@ -79,6 +106,10 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.WAITING):
 			{
+				if (character.charType == Character.Type.PLAYER)
+				{
+					turnBox.text = "Enemy Turn";
+				}
 				if (CardBattleManager.charOrder.Count > 1)
 				{
 					if (character == CardBattleManager.charOrder.First())
@@ -95,7 +126,7 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.VICTORY):
 			{
-				Debug.Log("Player Was Victorious");
+				turnBox.text = "VICTORY!";
 				enabled = false;
 				break;
 			}
@@ -107,12 +138,12 @@ public class CharacterStateMachine : MonoBehaviour
 		{
 			currentState = TurnState.VICTORY;
 		}
-		else if (actionsLeft == 0 && character.health > 0)
+		else if (actionsLeft == 0 && character.health > 0 && currentState == TurnState.ACTION || currentState == TurnState.BEGINING)
 		{
 			currentState = TurnState.ADDTOLIST;
 			Debug.Log("Added " + character.charType + " to list.");
 		}
-		else if (character.health == 0)
+		else if (character.health <= 0)
 		{
 			currentState = TurnState.DYING;
 		}
@@ -123,3 +154,4 @@ public class CharacterStateMachine : MonoBehaviour
 		character = thisCharacter;
 	}
 }
+

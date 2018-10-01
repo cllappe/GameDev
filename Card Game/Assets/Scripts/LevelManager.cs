@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = System.Object;
 
 public class LevelManager : MonoBehaviour {
@@ -23,17 +24,28 @@ public class LevelManager : MonoBehaviour {
 
     public List<Transform> enemySpawn;
 
+    public List<GameObject> dropZones;
+
+
     private void Start()
     {
         enemySpawn.Add(enemy1Spawn);
         enemySpawn.Add(enemy2Spawn);
         enemySpawn.Add(enemy3Spawn);
+        dropZones.Add(GameObject.Find("Enemy1DropZone"));
+        dropZones.Add(GameObject.Find("Enemy2DropZone"));
+        dropZones.Add(GameObject.Find("Enemy3DropZone"));
+        for (int i = 0; i < 3; i++)
+        {
+            dropZones[i].SetActive(false);
+        }
         numberOfEnemies = UnityEngine.Random.Range(1,4);
         for (int i = 0; i < numberOfEnemies; i++)
         {
             Character enemyCopy = Instantiate(enemyArray.enemies[enemyId]);
             enemyList.Add(enemyCopy);
             EnemySetup(enemySpawn[i]);
+            dropZones[i].SetActive(true);
         }
         PlayerSetup();
     }
@@ -60,4 +72,5 @@ public class LevelManager : MonoBehaviour {
 
 
     }
+
 }

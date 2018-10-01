@@ -17,6 +17,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public static bool validDrop = false;
     public static bool dragging = false;
     private bool validDropHappened = false;
+    public static bool playerTurn;
 
     private Vector3 startPos;
 
@@ -59,6 +60,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 rayPoint = ray.GetPoint(mouseOffset);
+        rayPoint.z = 0;
         this.transform.position = rayPoint;
         
 

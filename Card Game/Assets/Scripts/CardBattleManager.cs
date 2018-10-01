@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CardBattleManager : MonoBehaviour {
 
@@ -19,6 +22,8 @@ public class CardBattleManager : MonoBehaviour {
 
     public static int deadEnemies = 0;
 
+    public Text turnMonitor;
+
     private void Awake()
     {
         if (instance == null){
@@ -33,6 +38,8 @@ public class CardBattleManager : MonoBehaviour {
 
     private void Start()
     {
+        turnMonitor = gameObject.GetComponent<Text>();
+        Dragable.playerTurn = false;
         for (int j = 0; j < 25; j++)
         {
             inUseDeck.Add(deck.cards[j]);
@@ -65,6 +72,12 @@ public class CardBattleManager : MonoBehaviour {
             display.transform.SetParent(hand.transform.GetChild(0), false);
             dragable.parentToReturnTo = display.transform.parent;
             dragable.placeholderParent = display.transform.parent;
+            dragable.targets = display.cardTargets;
         }
+    }
+
+    public void setTurnText(String thisText)
+    {
+        turnMonitor.text = thisText;
     }
 }
