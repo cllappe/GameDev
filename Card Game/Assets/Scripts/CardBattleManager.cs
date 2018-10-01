@@ -24,6 +24,8 @@ public class CardBattleManager : MonoBehaviour {
 
     public Text turnMonitor;
 
+    public Text DeckCounter;
+
     private void Awake()
     {
         if (instance == null){
@@ -60,13 +62,13 @@ public class CardBattleManager : MonoBehaviour {
     }
     private void Update()
     {
+        DeckCounter.text = "Remaining Cards =" + inUseDeck.Count;
         
         if (hand.transform.GetChild(0).childCount < 5 && !Dragable.dragging){
             GameObject go = Instantiate(cardPrefab) as GameObject;
             CardDisplay display = go.GetComponent<CardDisplay>();
             Dragable dragable = go.GetComponent<Dragable>();
             int randomSelectedCard = Random.Range(0, inUseDeck.Count);
-            Debug.Log(inUseDeck.Count);
             display.CardSetup(inUseDeck[randomSelectedCard]);
             inUseDeck.RemoveAt(randomSelectedCard);
             display.transform.SetParent(hand.transform.GetChild(0), false);
