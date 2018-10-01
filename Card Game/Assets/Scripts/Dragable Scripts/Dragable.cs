@@ -28,7 +28,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (!Input.GetMouseButton(0))
         {
             startPos = transform.position;
-            iTween.MoveTo(gameObject, new Vector3(transform.position.x - 0.5f, transform.position.y + 1.2f, transform.position.z - 1.2f), 1f);
+            //iTween.MoveTo(gameObject, new Vector3(transform.position.x - 0.5f, transform.position.y + 1.2f, transform.position.z - 1.2f), 1f);
         }
     }
 
@@ -114,8 +114,10 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (!Input.GetMouseButton(0) && !validDropHappened)
         {
-            iTween.MoveTo(gameObject, startPos, 0f);
+            //iTween.MoveTo(gameObject, startPos, 0f);
         }
+
+        validDrop = false;
     }
 
 

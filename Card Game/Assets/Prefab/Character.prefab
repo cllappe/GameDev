@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 114935290724489472}
   health: 0
+  characterType: 0
 --- !u!114 &114242496828071724
 MonoBehaviour:
   m_ObjectHideFlags: 1
