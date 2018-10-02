@@ -38,7 +38,8 @@ public class CharacterStateMachine : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	private void Update () {
+	private void Update ()
+	{
 		switch (currentState)
 		{
 			case (TurnState.BEGINING):
@@ -66,10 +67,11 @@ public class CharacterStateMachine : MonoBehaviour
 				}
 				else
 				{
+					CardBattleManager.enemyTurn = true;
 					//Debug.Log("Enemy Action");
-					character.health = 0;
+					//character.health = 0;
 					actionsLeft--;
-					
+					CardBattleManager.enemyTurn = false;
 				}	
 
 				turnCount++;
@@ -105,13 +107,14 @@ public class CharacterStateMachine : MonoBehaviour
 				break;
 			}
 			case (TurnState.WAITING):
-			{
+			{					
 				if (character.charType == Character.Type.PLAYER)
 				{
-					turnBox.text = "Enemy Turn";
-				}
-				if (CardBattleManager.charOrder.Count > 1)
+             		turnBox.text = "Enemy Turn";
+       			}
+				if (CardBattleManager.charOrder.Count > 1 && !CardBattleManager.enemyTurn && !Dragable.playerTurn)
 				{
+
 					if (character == CardBattleManager.charOrder.First())
 					{
 						currentState = TurnState.ACTION;
@@ -138,10 +141,14 @@ public class CharacterStateMachine : MonoBehaviour
 		{
 			currentState = TurnState.VICTORY;
 		}
-		else if (actionsLeft == 0 && character.health > 0 && currentState == TurnState.ACTION || currentState == TurnState.BEGINING)
+		else if (currentState == TurnState.WAITING)
+		{
+			currentState = TurnState.WAITING;
+		}
+		else if ((actionsLeft == 0 && character.health > 0 && currentState == TurnState.ACTION) || currentState == TurnState.BEGINING)
 		{
 			currentState = TurnState.ADDTOLIST;
-			Debug.Log("Added " + character.charType + " to list.");
+			//Debug.Log("Added " + character.charType + " to list.");
 		}
 		else if (character.health <= 0)
 		{

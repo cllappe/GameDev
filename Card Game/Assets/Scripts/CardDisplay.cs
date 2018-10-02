@@ -14,6 +14,9 @@ public class CardDisplay : MonoBehaviour {
     public Text nameText;
 
     public Image cardImage;
+    public int damage;
+
+    public int numberOfTargets;
 
     public void CardSetup(Card thisCard){
         card = thisCard;
@@ -23,5 +26,7 @@ public class CardDisplay : MonoBehaviour {
 
         cardImage.sprite = card.art;
         cardTargets = card.targets;
+        damage = card.damage;
+        numberOfTargets = card.numberOfTargets;
     }
 }

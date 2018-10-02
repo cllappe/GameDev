@@ -9,6 +9,7 @@ public class CharacterDisplay : MonoBehaviour {
     public Image avatar;
     public int health;
     public Character.Type characterType;
+    public int charLuck;
     private Character myCharacter;
 
     public void characterSetup(Character thisCharacter){
@@ -16,6 +17,6 @@ public class CharacterDisplay : MonoBehaviour {
         avatar.sprite = myCharacter.avatar;
         health = myCharacter.health;
         characterType = myCharacter.charType;
-
+        charLuck = myCharacter.luck;
     }
 }

@@ -26,6 +26,8 @@ public class CardBattleManager : MonoBehaviour {
 
     public Text DeckCounter;
 
+    public static bool enemyTurn = false;
+
     private void Awake()
     {
         if (instance == null){
@@ -57,7 +59,6 @@ public class CardBattleManager : MonoBehaviour {
             dragable.parentToReturnTo = display.transform.parent;
             dragable.placeholderParent = display.transform.parent;
             dragable.targets = display.cardTargets;
-
         }
     }
     private void Update()

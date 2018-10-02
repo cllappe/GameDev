@@ -102,6 +102,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 validDropHappened = true;
                 this.transform.SetParent(parentToReturnTo);
                 this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+                cardAction(DropZone.droppedOn);
                 foreach (Transform child in transform) {
                     GameObject.Destroy(child.gameObject);
                 }
@@ -128,6 +129,41 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         validDrop = false;
     }
 
-
+    private void cardAction(string dropZoneName)
+    {
+        if (this.GetComponent<CardDisplay>().numberOfTargets == 1)
+        {
+            if (dropZoneName == "Enemy1DropZone")
+            {
+                GameObject dropedOn = GameObject.Find("Enemy 1");
+                Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
+                //Debug.Log(dropedOnChar.health);
+                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;   
+            }
+            else if (dropZoneName == "Enemy2DropZone")
+            {
+                GameObject dropedOn = GameObject.Find("Enemy 2");
+                Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
+                //Debug.Log(dropedOnChar.health);
+                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;   
+            }
+            else if (dropZoneName == "Enemy3DropZone")
+            {
+                GameObject dropedOn = GameObject.Find("Enemy 3");
+                Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
+                //Debug.Log(dropedOnChar.health);
+                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;   
+            }   
+        }
+        else
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                Character effectedChar = enemies[i].GetComponent<CharacterStateMachine>().character;
+                effectedChar.health -= this.GetComponent<CardDisplay>().damage;
+            }
+        }
+    }
 
 }

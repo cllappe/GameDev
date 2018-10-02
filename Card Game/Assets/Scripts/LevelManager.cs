@@ -44,21 +44,22 @@ public class LevelManager : MonoBehaviour {
         {
             Character enemyCopy = Instantiate(enemyArray.enemies[enemyId]);
             enemyList.Add(enemyCopy);
-            EnemySetup(enemySpawn[i]);
+            EnemySetup(enemySpawn[i], i);
             dropZones[i].SetActive(true);
         }
         PlayerSetup();
     }
 
-    private void EnemySetup(Transform enemySpawnPoint)
+    private void EnemySetup(Transform enemySpawnPoint, int iteration)
     {
         GameObject go1 = Instantiate(avatarPrefab,
             new Vector3(enemySpawnPoint.position.x, enemySpawnPoint.position.y, -1.0f), Quaternion.identity);
+        go1.name = "Enemy " + (iteration + 1);
         CharacterDisplay display1 = go1.GetComponent<CharacterDisplay>();
         CharacterStateMachine csm1 = go1.GetComponent<CharacterStateMachine>();
         display1.characterSetup(enemyList.First());
-        csm1.csm_Set(enemyList[0]);
-        enemyList.RemoveAt(0);
+        csm1.csm_Set(enemyList[iteration]);
+        go1.tag = "Enemy";
     }
 
     private void PlayerSetup()
@@ -72,5 +73,4 @@ public class LevelManager : MonoBehaviour {
 
 
     }
-
 }
