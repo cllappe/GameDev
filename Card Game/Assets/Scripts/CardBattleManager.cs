@@ -28,6 +28,8 @@ public class CardBattleManager : MonoBehaviour {
 
     public static bool enemyTurn = false;
 
+    public static bool draw1card;
+
     private void Awake()
     {
         if (instance == null){
@@ -64,8 +66,21 @@ public class CardBattleManager : MonoBehaviour {
     private void Update()
     {
         DeckCounter.text = "Remaining Cards =" + inUseDeck.Count;
-        
-        if (hand.transform.GetChild(0).childCount < 5 && !Dragable.dragging){
+        if (draw1card)
+        {
+            drawACard();
+            draw1card = false;
+        }
+    }
+
+    public void setTurnText(String thisText)
+    {
+        turnMonitor.text = thisText;
+    }
+
+    public void drawACard()
+    {
+        if (hand.transform.GetChild(0).childCount < 5){
             GameObject go = Instantiate(cardPrefab) as GameObject;
             CardDisplay display = go.GetComponent<CardDisplay>();
             Dragable dragable = go.GetComponent<Dragable>();
@@ -76,11 +91,6 @@ public class CardBattleManager : MonoBehaviour {
             dragable.parentToReturnTo = display.transform.parent;
             dragable.placeholderParent = display.transform.parent;
             dragable.targets = display.cardTargets;
-        }
-    }
-
-    public void setTurnText(String thisText)
-    {
-        turnMonitor.text = thisText;
+        }  
     }
 }

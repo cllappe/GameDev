@@ -18,5 +18,6 @@ public class Character : ScriptableObject{
     public Sprite avatar;
     public int health;
     public int luck;
+    public int basicAttackDmg;
 
 }

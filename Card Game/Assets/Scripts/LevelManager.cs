@@ -9,6 +9,7 @@ using Object = System.Object;
 public class LevelManager : MonoBehaviour {
 
     public Character player;
+    private Character playerCopy;
     public List<Character> enemyList;
 
     public Enemies enemyArray;
@@ -47,6 +48,8 @@ public class LevelManager : MonoBehaviour {
             EnemySetup(enemySpawn[i], i);
             dropZones[i].SetActive(true);
         }
+
+        playerCopy = Instantiate(player);
         PlayerSetup();
     }
 
@@ -64,12 +67,14 @@ public class LevelManager : MonoBehaviour {
 
     private void PlayerSetup()
     {
-        GameObject go = Instantiate(avatarPrefab, new Vector3(playerSpawn.position.x, playerSpawn.position.y, -1.0f),
+        GameObject go = Instantiate(avatarPrefab, 
+            new Vector3(playerSpawn.position.x, playerSpawn.position.y, -1.0f),
             Quaternion.identity);
+        go.name = "Player";
         CharacterDisplay display = go.GetComponent<CharacterDisplay>();
         CharacterStateMachine csm = go.GetComponent<CharacterStateMachine>();
-        display.characterSetup(player);
-        csm.character = player;
+        display.characterSetup(playerCopy);
+        csm.character = playerCopy;
 
 
     }

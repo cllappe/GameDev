@@ -10,8 +10,11 @@ public class CharacterStateMachine : MonoBehaviour
 	public Character character;
 	private int actionsLeft = 0;
 	private int turnCount = 0;
+	private Character player;
 
+	private bool enemyDmgEnabled;
 	private Text turnBox;
+
 	public enum TurnState
 	{
 		BEGINING,
@@ -20,7 +23,8 @@ public class CharacterStateMachine : MonoBehaviour
 		WAITING,
 		DEAD,
 		VICTORY,
-		DYING
+		DYING,
+		DEFEAT
 	}
 
 	public TurnState currentState;
@@ -32,6 +36,10 @@ public class CharacterStateMachine : MonoBehaviour
 		{
 			GameObject turnBoxGO = GameObject.Find("Turn Counter Text");
 			turnBox = turnBoxGO.GetComponent<Text>();
+		}
+		else if (character.charType == Character.Type.ENEMY)
+		{
+			player = GameObject.Find("Player").GetComponent<CharacterStateMachine>().character;
 		}
 		turnCount = 1;
 		currentState = TurnState.BEGINING;
@@ -55,23 +63,23 @@ public class CharacterStateMachine : MonoBehaviour
 				}
 				if (character.charType == Character.Type.PLAYER)
 				{
+					//Debug.Log("Current Player Health " + character.health);
 					turnBox.text = "Actions Remaining = " + actionsLeft;
 					Dragable.playerTurn = true;
-					//Debug.Log("Character Action");
 					if (Dragable.validDrop)
 					{
 						actionsLeft--;
-						Dragable.playerTurn = false;
+						if (actionsLeft == 0)
+						{
+							Dragable.playerTurn = false;
+							CardBattleManager.draw1card = true;
+						}
 					}
-					//actionsLeft--;
 				}
 				else
 				{
 					CardBattleManager.enemyTurn = true;
-					//Debug.Log("Enemy Action");
-					//character.health = 0;
-					actionsLeft--;
-					CardBattleManager.enemyTurn = false;
+					StartCoroutine(enemyAttackDelay());	
 				}	
 
 				turnCount++;
@@ -99,6 +107,10 @@ public class CharacterStateMachine : MonoBehaviour
 					CardBattleManager.deadEnemies++;
 					currentState = TurnState.DEAD;
 					//Debug.Log(CardBattleManager.deadEnemies);
+				}
+				else
+				{
+					currentState = TurnState.DEFEAT;
 				}
 				break;
 			}
@@ -133,6 +145,12 @@ public class CharacterStateMachine : MonoBehaviour
 				enabled = false;
 				break;
 			}
+			case (TurnState.DEFEAT):
+			{
+				turnBox.text = "Defeat";
+				enabled = false;
+				break;
+			}
 		}
 	}
 	public void turnMonitor()
@@ -159,6 +177,30 @@ public class CharacterStateMachine : MonoBehaviour
 	public void csm_Set(Character thisCharacter)
 	{
 		character = thisCharacter;
+	}
+
+	IEnumerator enemyAttackDelay()
+	{
+		if (enemyDmgEnabled)
+		{
+			yield break;
+		}
+		enemyDmgEnabled = true;
+		yield return new WaitForSeconds(5);
+		enemyAttack();
+
+	}
+	
+	public void enemyAttack()
+	{
+		//Debug.Log(character.name + " " + actionsLeft);
+		player.health -= character.basicAttackDmg;
+		//Debug.Log("Did Damage to Player");
+		actionsLeft--;
+		//Debug.Log(character.name + " " + actionsLeft);
+		enemyDmgEnabled = false;
+		CardBattleManager.enemyTurn = false;
+		turnMonitor();
 	}
 }
 

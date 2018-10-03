@@ -10,6 +10,7 @@ public class CharacterDisplay : MonoBehaviour {
     public int health;
     public Character.Type characterType;
     public int charLuck;
+    public int basicAttack;
     private Character myCharacter;
 
     public void characterSetup(Character thisCharacter){
@@ -18,5 +19,6 @@ public class CharacterDisplay : MonoBehaviour {
         health = myCharacter.health;
         characterType = myCharacter.charType;
         charLuck = myCharacter.luck;
+        basicAttack = myCharacter.basicAttackDmg;
     }
 }
