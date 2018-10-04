@@ -124,24 +124,24 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.DEAD):
 			{
-				String name = this.gameObject.name;
 				Debug.Log(name);
-				/*if (!isDead)
+				if (!isDead)
 				{
 					if (name == "Enemy 1")
 					{
-						GetComponent<LevelManager>().dropZones[0].SetActive(false);
+						GameObject.Find("Enemy1DropZone").SetActive(false);
 					}
 					else if (name == "Enemy 2")
 					{
-						GetComponent<LevelManager>().dropZones[1].SetActive(false);
+						GameObject.Find("Enemy2DropZone").SetActive(false);
 					}
 					else if (name == "Enemy 3")
 					{
-						GetComponent<LevelManager>().dropZones[2].SetActive(false);
+						GameObject.Find("Enemy3DropZone").SetActive(false);
 					}
+					GameObject.Find(name).SetActive(false);
 					isDead = true;
-				}*/
+				}
 				break;
 			}
 			case (TurnState.WAITING):
