@@ -11,10 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4890163b9ad23468a8dbcf0d8295e44b, type: 3}
   m_Name: Wave
   m_EditorClassIdentifier: 
+  cardID: 0
   cardName: Wave
   discription: Deal 2 damage to all Enemies
   art: {fileID: 0}
   targets: 1
+  type: 2
   damage: 2
   numberOfTargets: 3
   heal: 0

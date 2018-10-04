@@ -11,10 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4890163b9ad23468a8dbcf0d8295e44b, type: 3}
   m_Name: Poke
   m_EditorClassIdentifier: 
+  cardID: 0
   cardName: Poke
   discription: Deal 4 damage to 1 enemy.
   art: {fileID: 21300000, guid: 2f3e876309faf4c3ab9ad21dfbc9e1fc, type: 3}
   targets: 1
+  type: 2
   damage: 4
   numberOfTargets: 1
   heal: 0

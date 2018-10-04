@@ -9,6 +9,13 @@ public enum Targets
     ENEMY
 };
 
+public enum Type
+{
+    HEALCARD,
+    POWERUPCARD,
+    ATTACKCARD
+}
+
 [CreateAssetMenu(fileName = "New Card", menuName = "Card")]
 
 public class Card : ScriptableObject, IComparable<Card> {
@@ -19,6 +26,7 @@ public class Card : ScriptableObject, IComparable<Card> {
     public string discription;
     public Sprite art;
     public Targets targets;
+    public Type type;
 
     [Header("Attack Card Info")]
     public int damage;

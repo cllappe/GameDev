@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = System.Object;
 
 public class LevelManager : MonoBehaviour {
 
@@ -26,6 +25,13 @@ public class LevelManager : MonoBehaviour {
     public List<Transform> enemySpawn;
 
     public List<GameObject> dropZones;
+
+    public Slider playerHealthBar;
+    public Slider enemy1HealthBar;
+    public Slider enemy2HealthBar;
+    public Slider enemy3HealthBar;
+
+    public List<Slider> healthBarList;
 
 
     private void Start()
@@ -63,6 +69,27 @@ public class LevelManager : MonoBehaviour {
         display1.characterSetup(enemyList.First());
         csm1.csm_Set(enemyList[iteration]);
         go1.tag = "Enemy";
+        if (iteration == 0)
+        {
+            display1.healthBarGO = go1.transform.GetChild(0).GetChild(1).gameObject;
+            enemy1HealthBar = display1.healthBarGO.GetComponent<Slider>();
+            enemy1HealthBar.maxValue = display1.health;
+            healthBarList.Add(enemy1HealthBar);
+        }
+        else if (iteration == 1)
+        {
+            display1.healthBarGO = go1.transform.GetChild(0).GetChild(1).gameObject;
+            enemy2HealthBar = display1.healthBarGO.GetComponent<Slider>();
+            enemy2HealthBar.maxValue = display1.health;
+            healthBarList.Add(enemy2HealthBar);
+        }
+        else if (iteration == 2)
+        {
+            display1.healthBarGO = go1.transform.GetChild(0).GetChild(1).gameObject;
+            enemy3HealthBar = display1.healthBarGO.GetComponent<Slider>();
+            enemy3HealthBar.maxValue = display1.health;
+            healthBarList.Add(enemy3HealthBar);
+        }
     }
 
     private void PlayerSetup()
@@ -75,7 +102,18 @@ public class LevelManager : MonoBehaviour {
         CharacterStateMachine csm = go.GetComponent<CharacterStateMachine>();
         display.characterSetup(playerCopy);
         csm.character = playerCopy;
+        display.healthBarGO = go.transform.GetChild(0).GetChild(1).gameObject;
+        playerHealthBar = display.healthBarGO.GetComponent<Slider>();
+        playerHealthBar.maxValue = display.health;
+    }
 
+    private void Update()
+    {
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            healthBarList[i].value = enemyList[i].health;
+        }
 
+        playerHealthBar.value = playerCopy.health;
     }
 }

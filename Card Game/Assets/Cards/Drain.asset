@@ -11,10 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4890163b9ad23468a8dbcf0d8295e44b, type: 3}
   m_Name: Drain
   m_EditorClassIdentifier: 
+  cardID: 0
   cardName: Drain
   discription: Deal 2 damage to 1 enemy
-  art: {fileID: 0}
+  art: {fileID: 21300000, guid: cfd40851ac6a04258880042b0facea9c, type: 3}
   targets: 1
+  type: 2
   damage: 2
   numberOfTargets: 1
   heal: 2

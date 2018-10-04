@@ -102,6 +102,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 validDropHappened = true;
                 this.transform.SetParent(parentToReturnTo);
                 this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+                //Debug.Log(DropZone.droppedOn);
                 cardAction(DropZone.droppedOn);
                 foreach (Transform child in transform) {
                     GameObject.Destroy(child.gameObject);
@@ -138,22 +139,51 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 GameObject dropedOn = GameObject.Find("Enemy 1");
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 //Debug.Log(dropedOnChar.health);
-                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;   
+                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;
+                if (this.GetComponent<CardDisplay>().heal != 0)
+                {
+                    GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.health +=
+                        this.GetComponent<CardDisplay>().heal;
+                }
             }
             else if (dropZoneName == "Enemy2DropZone")
             {
                 GameObject dropedOn = GameObject.Find("Enemy 2");
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 //Debug.Log(dropedOnChar.health);
-                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;   
+                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;
+                if (this.GetComponent<CardDisplay>().heal != 0)
+                {
+                    GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.health +=
+                        this.GetComponent<CardDisplay>().heal;
+                }
             }
             else if (dropZoneName == "Enemy3DropZone")
             {
                 GameObject dropedOn = GameObject.Find("Enemy 3");
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 //Debug.Log(dropedOnChar.health);
-                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;   
-            }   
+                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage;
+                if (this.GetComponent<CardDisplay>().heal != 0)
+                {
+                    GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.health +=
+                        this.GetComponent<CardDisplay>().heal;
+                }
+            }
+            else if (dropZoneName == "PlayerDropZone")
+            {
+                Debug.Log("Dropped a Card on The Player");
+                GameObject dropedOn = GameObject.Find("Player");
+                Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
+                if (GetComponent<CardDisplay>().cardType == Type.HEALCARD)
+                {
+                    dropedOnChar.health += this.GetComponent<CardDisplay>().heal;   
+                }
+                else
+                {
+                    Debug.Log("This would be a powerup action");
+                }
+            }
         }
         else
         {

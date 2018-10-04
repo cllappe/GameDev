@@ -19,5 +19,6 @@ public class Character : ScriptableObject{
     public int health;
     public int luck;
     public int basicAttackDmg;
+    public GameObject healthBar;
 
 }

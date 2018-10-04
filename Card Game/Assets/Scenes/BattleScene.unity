@@ -526,6 +526,11 @@ MonoBehaviour:
   enemy3Spawn: {fileID: 1560949832}
   enemySpawn: []
   dropZones: []
+  playerHealthBar: {fileID: 0}
+  enemy1HealthBar: {fileID: 0}
+  enemy2HealthBar: {fileID: 0}
+  enemy3HealthBar: {fileID: 0}
+  healthBarList: []
 --- !u!1 &1173683841
 GameObject:
   m_ObjectHideFlags: 0

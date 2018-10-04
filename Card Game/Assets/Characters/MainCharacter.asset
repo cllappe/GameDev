@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: MainCharacter
   m_EditorClassIdentifier: 
   charType: 0
-  avatar: {fileID: 21300000, guid: 97ead3e6794bc4665aeb0ca9cf61b5b3, type: 3}
+  avatar: {fileID: 21300000, guid: 96fb89be8caa348b6a386305abeeae94, type: 3}
   health: 100
   luck: 0
   basicAttackDmg: 0
+  healthBar: {fileID: 0}

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class CharacterStateMachine : MonoBehaviour
 
 	private bool enemyDmgEnabled;
 	private Text turnBox;
+	private bool dyingState;
+	private bool isDead;
 
 	public enum TurnState
 	{
@@ -52,6 +55,8 @@ public class CharacterStateMachine : MonoBehaviour
 		{
 			case (TurnState.BEGINING):
 			{
+				dyingState = false;
+				isDead = false;
 				turnMonitor();
 				break;
 			}
@@ -104,7 +109,10 @@ public class CharacterStateMachine : MonoBehaviour
 				if (character.charType == Character.Type.ENEMY || character.charType == Character.Type.MINIBOSS ||
 				    character.charType == Character.Type.BOSS)
 				{
-					CardBattleManager.deadEnemies++;
+					//CardBattleManager.deadEnemies++;
+					deathCount();
+					dyingState = true;
+					//Debug.Log(CardBattleManager.deadEnemies);
 					currentState = TurnState.DEAD;
 					//Debug.Log(CardBattleManager.deadEnemies);
 				}
@@ -116,6 +124,24 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.DEAD):
 			{
+				String name = this.gameObject.name;
+				Debug.Log(name);
+				/*if (!isDead)
+				{
+					if (name == "Enemy 1")
+					{
+						GetComponent<LevelManager>().dropZones[0].SetActive(false);
+					}
+					else if (name == "Enemy 2")
+					{
+						GetComponent<LevelManager>().dropZones[1].SetActive(false);
+					}
+					else if (name == "Enemy 3")
+					{
+						GetComponent<LevelManager>().dropZones[2].SetActive(false);
+					}
+					isDead = true;
+				}*/
 				break;
 			}
 			case (TurnState.WAITING):
@@ -186,7 +212,7 @@ public class CharacterStateMachine : MonoBehaviour
 			yield break;
 		}
 		enemyDmgEnabled = true;
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(2);
 		enemyAttack();
 
 	}
@@ -201,6 +227,15 @@ public class CharacterStateMachine : MonoBehaviour
 		enemyDmgEnabled = false;
 		CardBattleManager.enemyTurn = false;
 		turnMonitor();
+	}
+
+	public void deathCount()
+	{
+		if (!dyingState)
+		{
+			CardBattleManager.deadEnemies++;
+			//Debug.Log("In deathcount function with dead enemies = " + CardBattleManager.deadEnemies);
+		}
 	}
 }
 

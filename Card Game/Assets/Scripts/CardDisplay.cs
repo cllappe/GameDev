@@ -9,6 +9,8 @@ public class CardDisplay : MonoBehaviour {
     public Card card;
     [HideInInspector]
     public Targets cardTargets;
+    [HideInInspector] 
+    public Type cardType;
 
     public Text discriptionText;
     public Text nameText;
@@ -18,15 +20,18 @@ public class CardDisplay : MonoBehaviour {
 
     public int numberOfTargets;
 
+    public int heal;
+
     public void CardSetup(Card thisCard){
         card = thisCard;
 
         nameText.text = card.cardName;
         discriptionText.text = card.discription;
-
+        cardType = card.type;
         cardImage.sprite = card.art;
         cardTargets = card.targets;
         damage = card.damage;
         numberOfTargets = card.numberOfTargets;
+        heal = card.heal;
     }
 }

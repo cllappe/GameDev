@@ -12,6 +12,7 @@ public class CharacterDisplay : MonoBehaviour {
     public int charLuck;
     public int basicAttack;
     private Character myCharacter;
+    public GameObject healthBarGO;
 
     public void characterSetup(Character thisCharacter){
         myCharacter = thisCharacter;
@@ -20,5 +21,6 @@ public class CharacterDisplay : MonoBehaviour {
         characterType = myCharacter.charType;
         charLuck = myCharacter.luck;
         basicAttack = myCharacter.basicAttackDmg;
+        healthBarGO = myCharacter.healthBar;
     }
 }
