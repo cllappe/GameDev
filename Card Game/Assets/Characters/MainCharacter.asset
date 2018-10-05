@@ -17,3 +17,6 @@ MonoBehaviour:
   luck: 0
   basicAttackDmg: 0
   healthBar: {fileID: 0}
+  dmgReflected: 0
+  defence: 1
+  dmgMod: 1

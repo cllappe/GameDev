@@ -24,7 +24,17 @@ public class CardDisplay : MonoBehaviour {
 
     public int turnIncrease;
 
+    public bool turnOnReflect;
+    public int numOfTurns;
+
     public int drawCards;
+
+    public int luckUp;
+
+    public float reduceDmgMod;
+    public int dmgIncMod;
+    public bool lifeSteal;
+    
     public void CardSetup(Card thisCard){
         card = thisCard;
 
@@ -38,5 +48,11 @@ public class CardDisplay : MonoBehaviour {
         heal = card.heal;
         turnIncrease = card.playableAmountIncrease;
         drawCards = card.draw;
+        turnOnReflect = card.reflects;
+        numOfTurns = card.numOfTurns;
+        luckUp = card.addLuck;
+        reduceDmgMod = card.damageReducedBy;
+        dmgIncMod = card.increaseDamage;
+        lifeSteal = card.lifeSteal;
     }
 }

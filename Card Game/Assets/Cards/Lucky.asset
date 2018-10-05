@@ -20,9 +20,10 @@ MonoBehaviour:
   damage: 0
   numberOfTargets: 1
   heal: 0
-  numOfTurns: 0
-  addLuck: 0
+  numOfTurns: 3
+  addLuck: 35
   increamDmg: 0
   increasedDef: 0
   playableAmountIncrease: 0
   draw: 0
+  reflects: 0

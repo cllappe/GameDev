@@ -24,5 +24,6 @@ MonoBehaviour:
   addLuck: 0
   increamDmg: 0
   increasedDef: 0
-  playableAmountIncrease: 0
-  draw: 0
+  playableAmountIncrease: 1
+  draw: 2
+  reflects: 0

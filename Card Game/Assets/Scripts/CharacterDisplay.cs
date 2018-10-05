@@ -13,6 +13,9 @@ public class CharacterDisplay : MonoBehaviour {
     public int basicAttack;
     private Character myCharacter;
     public GameObject healthBarGO;
+    public bool dmgWillBeReflected;
+    public float defence;
+    public int dmgMod;
 
     public void characterSetup(Character thisCharacter){
         myCharacter = thisCharacter;
@@ -22,5 +25,8 @@ public class CharacterDisplay : MonoBehaviour {
         charLuck = myCharacter.luck;
         basicAttack = myCharacter.basicAttackDmg;
         healthBarGO = myCharacter.healthBar;
+        dmgWillBeReflected = myCharacter.dmgReflected;
+        defence = myCharacter.defence;
+        dmgMod = myCharacter.dmgMod;
     }
 }

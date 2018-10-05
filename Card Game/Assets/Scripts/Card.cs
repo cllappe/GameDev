@@ -31,6 +31,7 @@ public class Card : ScriptableObject, IComparable<Card> {
     [Header("Attack Card Info")]
     public int damage;
     public int numberOfTargets;
+    public bool lifeSteal;
 
     [Header("Heal Card Info")]
     public int heal;
@@ -38,10 +39,11 @@ public class Card : ScriptableObject, IComparable<Card> {
     [Header("Power Up Info")]
     public int numOfTurns;
     public int addLuck;
-    public int increamDmg;
-    public int increasedDef;
+    public int increaseDamage;
+    public float damageReducedBy;
     public int playableAmountIncrease;
     public int draw;
+    public bool reflects;
 
     public int CompareTo(Card Other){
         return this.cardName.CompareTo(Other.cardName);

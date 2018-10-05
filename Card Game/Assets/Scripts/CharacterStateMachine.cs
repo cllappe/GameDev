@@ -67,6 +67,7 @@ public class CharacterStateMachine : MonoBehaviour
 				if (character.charType == Character.Type.PLAYER)
 				{
 					//Debug.Log("Current Player Health " + character.health);
+					//Debug.Log("Current Luck " + character.luck);
 					turnBox.text = "Actions Remaining = " + actionsLeft;
 					Dragable.playerTurn = true;
 					if (Dragable.validDrop)
@@ -245,8 +246,18 @@ public class CharacterStateMachine : MonoBehaviour
 	public void enemyAttack()
 	{
 		//Debug.Log(character.name + " " + actionsLeft);
-		player.health -= character.basicAttackDmg;
-		GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
+		if (character.dmgReflected)
+		{
+			//Debug.Log("Damage Should Be Reflected");
+			character.health -= character.basicAttackDmg;
+			character.dmgReflected = false;
+			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
+		}
+		else
+		{
+			player.health -= Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
+		}
 		//Debug.Log("Did Damage to Player");
 		actionsLeft--;
 		//Debug.Log(character.name + " " + actionsLeft);
