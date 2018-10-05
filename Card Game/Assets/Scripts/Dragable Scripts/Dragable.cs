@@ -18,6 +18,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public static bool dragging = false;
     private bool validDropHappened = false;
     public static bool playerTurn;
+    public static bool actionsIncreased = false;
 
     private Vector3 startPos;
 
@@ -181,7 +182,23 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 }
                 else
                 {
-                    Debug.Log("This would be a powerup action");
+                    if (this.GetComponent<CardDisplay>().turnIncrease != 0)
+                    {
+                        actionsIncreased = true;
+                        dropedOn.GetComponent<CharacterStateMachine>().actionsLeft +=
+                            this.GetComponent<CardDisplay>().turnIncrease;
+                        actionsIncreased = false;
+                        Debug.Log(dropedOn.GetComponent<CharacterStateMachine>().actionsLeft);
+                    }
+
+                    if (this.GetComponent<CardDisplay>().drawCards != 0)
+                    {
+                        Debug.Log("Draw Cards:" + this.GetComponent<CardDisplay>().drawCards);
+                        for (int i = 0; i < this.GetComponent<CardDisplay>().drawCards; i++)
+                        {
+                            GameObject.Find("GameManager").GetComponent<CardBattleManager>().drawACard();
+                        }
+                    }
                 }
             }
         }

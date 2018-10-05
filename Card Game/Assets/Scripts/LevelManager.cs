@@ -5,7 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     public Character player;
     private Character playerCopy;
@@ -33,6 +34,9 @@ public class LevelManager : MonoBehaviour {
 
     public List<Slider> healthBarList;
 
+    public int turnCount;
+    public bool charRemoved;
+
 
     private void Start()
     {
@@ -46,7 +50,8 @@ public class LevelManager : MonoBehaviour {
         {
             dropZones[i].SetActive(false);
         }
-        numberOfEnemies = UnityEngine.Random.Range(1,4);
+
+        numberOfEnemies = UnityEngine.Random.Range(1, 4);
         for (int i = 0; i < numberOfEnemies; i++)
         {
             Character enemyCopy = Instantiate(enemyArray.enemies[enemyId]);
@@ -94,7 +99,7 @@ public class LevelManager : MonoBehaviour {
 
     private void PlayerSetup()
     {
-        GameObject go = Instantiate(avatarPrefab, 
+        GameObject go = Instantiate(avatarPrefab,
             new Vector3(playerSpawn.position.x, playerSpawn.position.y, -1.0f),
             Quaternion.identity);
         go.name = "Player";
@@ -109,11 +114,20 @@ public class LevelManager : MonoBehaviour {
 
     private void Update()
     {
+        UpdateHealthBars();
+        UpdatePlayerHealthBar();
+    }
+
+    public void UpdatePlayerHealthBar()
+    {
+        playerHealthBar.value = playerCopy.health;
+    }
+
+    public void UpdateHealthBars()
+    {
         for (int i = 0; i < numberOfEnemies; i++)
         {
             healthBarList[i].value = enemyList[i].health;
         }
-
-        playerHealthBar.value = playerCopy.health;
     }
 }

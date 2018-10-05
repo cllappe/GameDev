@@ -18,7 +18,7 @@ public class CardBattleManager : MonoBehaviour {
 
     public List<Card> inUseDeck;
     
-    public static List<Character> charOrder = new List<Character>();
+    public List<Character> charOrder;
 
     public static int deadEnemies = 0;
 

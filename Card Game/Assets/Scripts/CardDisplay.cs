@@ -22,6 +22,9 @@ public class CardDisplay : MonoBehaviour {
 
     public int heal;
 
+    public int turnIncrease;
+
+    public int drawCards;
     public void CardSetup(Card thisCard){
         card = thisCard;
 
@@ -33,5 +36,7 @@ public class CardDisplay : MonoBehaviour {
         damage = card.damage;
         numberOfTargets = card.numberOfTargets;
         heal = card.heal;
+        turnIncrease = card.playableAmountIncrease;
+        drawCards = card.draw;
     }
 }
