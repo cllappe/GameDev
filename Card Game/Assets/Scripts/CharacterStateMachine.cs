@@ -146,7 +146,7 @@ public class CharacterStateMachine : MonoBehaviour
 					{
 						GameObject.Find("Enemy3DropZone").SetActive(false);
 					}
-					GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.RemoveAt(0);
+					GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
 					GameObject.Find(name).SetActive(false);
 					isDead = true;
 				}
