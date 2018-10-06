@@ -16,6 +16,7 @@ public class CharacterDisplay : MonoBehaviour {
     public bool dmgWillBeReflected;
     public float defence;
     public int dmgMod;
+    public GameObject CBText;
 
     public void characterSetup(Character thisCharacter){
         myCharacter = thisCharacter;
@@ -28,5 +29,6 @@ public class CharacterDisplay : MonoBehaviour {
         dmgWillBeReflected = myCharacter.dmgReflected;
         defence = myCharacter.defence;
         dmgMod = myCharacter.dmgMod;
+        CBText = myCharacter.combatDMGText;
     }
 }

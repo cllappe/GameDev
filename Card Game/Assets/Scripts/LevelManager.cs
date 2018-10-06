@@ -80,6 +80,7 @@ public class LevelManager : MonoBehaviour
             enemy1HealthBar = display1.healthBarGO.GetComponent<Slider>();
             enemy1HealthBar.maxValue = display1.health;
             healthBarList.Add(enemy1HealthBar);
+            display1.CBText = go1.transform.GetChild(0).GetChild(2).gameObject;
         }
         else if (iteration == 1)
         {
@@ -87,6 +88,7 @@ public class LevelManager : MonoBehaviour
             enemy2HealthBar = display1.healthBarGO.GetComponent<Slider>();
             enemy2HealthBar.maxValue = display1.health;
             healthBarList.Add(enemy2HealthBar);
+            display1.CBText = go1.transform.GetChild(0).GetChild(2).gameObject;
         }
         else if (iteration == 2)
         {
@@ -94,6 +96,7 @@ public class LevelManager : MonoBehaviour
             enemy3HealthBar = display1.healthBarGO.GetComponent<Slider>();
             enemy3HealthBar.maxValue = display1.health;
             healthBarList.Add(enemy3HealthBar);
+            display1.CBText = go1.transform.GetChild(0).GetChild(2).gameObject;
         }
     }
 
@@ -110,6 +113,7 @@ public class LevelManager : MonoBehaviour
         display.healthBarGO = go.transform.GetChild(0).GetChild(1).gameObject;
         playerHealthBar = display.healthBarGO.GetComponent<Slider>();
         playerHealthBar.maxValue = display.health;
+        display.CBText = go.transform.GetChild(0).GetChild(2).gameObject;
     }
 
     private void Update()

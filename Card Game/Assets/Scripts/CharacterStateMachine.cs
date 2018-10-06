@@ -11,6 +11,8 @@ public class CharacterStateMachine : MonoBehaviour
 	public Character character;
 	public int actionsLeft = 0;
 	private Character player;
+	private GameObject playerGO;
+	private GameObject self;
 
 	private bool enemyDmgEnabled;
 	private Text turnBox;
@@ -40,7 +42,9 @@ public class CharacterStateMachine : MonoBehaviour
 		}
 		else if (character.charType == Character.Type.ENEMY)
 		{
-			player = GameObject.Find("Player").GetComponent<CharacterStateMachine>().character;
+			playerGO = GameObject.Find("Player");
+			player = playerGO.GetComponent<CharacterStateMachine>().character;
+			self = GameObject.Find(this.name);
 		}
 		currentState = TurnState.BEGINING;
 		Dragable.actionsIncreased = false;
@@ -252,10 +256,12 @@ public class CharacterStateMachine : MonoBehaviour
 			character.health -= character.basicAttackDmg;
 			character.dmgReflected = false;
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
+			StartCoroutine(selfDamageText());
 		}
 		else
 		{
 			player.health -= Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			StartCoroutine(damagePlayerText());
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
 		}
 		//Debug.Log("Did Damage to Player");
@@ -273,6 +279,23 @@ public class CharacterStateMachine : MonoBehaviour
 			CardBattleManager.deadEnemies++;
 			//Debug.Log("In deathcount function with dead enemies = " + CardBattleManager.deadEnemies);
 		}
+	}
+
+	IEnumerator damagePlayerText()
+	{
+		playerGO.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().color = Color.red;
+		playerGO.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text =
+			"-" + Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+		yield return new WaitForSeconds(2);
+		playerGO.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "";
+	}
+
+	IEnumerator selfDamageText()
+	{
+		self.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().color = Color.red;
+		self.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "-" + character.basicAttackDmg;
+		yield return new WaitForSeconds(2);
+		self.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "";
 	}
 }
 

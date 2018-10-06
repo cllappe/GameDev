@@ -140,18 +140,23 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 GameObject dropedOn = GameObject.Find("Enemy 1");
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 //Debug.Log(dropedOnChar.health);
-                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage * 
-                                       GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
-                if (this.GetComponent<CardDisplay>().lifeSteal)
-                {
-                    GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.health +=
-                        this.GetComponent<CardDisplay>().damage * 
-                        GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
-                }
-
                 if (this.GetComponent<CardDisplay>().turnOnReflect)
                 {
                     dropedOnChar.dmgReflected = true;
+                }
+                else
+                {
+                    dropedOnChar.health -= this.GetComponent<CardDisplay>().damage * 
+                                           GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                    StartCoroutine(dmgTo1EnemyCoRoutine(dropedOn));
+                    if (this.GetComponent<CardDisplay>().lifeSteal)
+                    {
+                        GameObject player = GameObject.Find("Player");
+                        player.GetComponent<CharacterStateMachine>().character.health +=
+                            this.GetComponent<CardDisplay>().damage * 
+                            GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                        StartCoroutine(healPlayerCoRoutine(player, true));
+                    }   
                 }
             }
             else if (dropZoneName == "Enemy2DropZone")
@@ -159,18 +164,23 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 GameObject dropedOn = GameObject.Find("Enemy 2");
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 //Debug.Log(dropedOnChar.health);
-                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage * 
-                                       GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
-                if (this.GetComponent<CardDisplay>().lifeSteal)
-                {
-                    GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.health +=
-                        this.GetComponent<CardDisplay>().damage * 
-                        GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
-                }
-                
                 if (this.GetComponent<CardDisplay>().turnOnReflect)
                 {
                     dropedOnChar.dmgReflected = true;
+                }
+                else
+                {
+                    dropedOnChar.health -= this.GetComponent<CardDisplay>().damage * 
+                                           GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                    StartCoroutine(dmgTo1EnemyCoRoutine(dropedOn));
+                    if (this.GetComponent<CardDisplay>().lifeSteal)
+                    {
+                        GameObject player = GameObject.Find("Player");
+                        player.GetComponent<CharacterStateMachine>().character.health +=
+                            this.GetComponent<CardDisplay>().damage * 
+                            GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                        StartCoroutine(healPlayerCoRoutine(player, true));
+                    }   
                 }
             }
             else if (dropZoneName == "Enemy3DropZone")
@@ -178,17 +188,23 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 GameObject dropedOn = GameObject.Find("Enemy 3");
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 //Debug.Log(dropedOnChar.health);
-                dropedOnChar.health -= this.GetComponent<CardDisplay>().damage * 
-                                       GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
-                if (this.GetComponent<CardDisplay>().lifeSteal)
-                {
-                    GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.health +=
-                        this.GetComponent<CardDisplay>().damage * 
-                        GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
-                }
                 if (this.GetComponent<CardDisplay>().turnOnReflect)
                 {
                     dropedOnChar.dmgReflected = true;
+                }
+                else
+                {
+                    dropedOnChar.health -= this.GetComponent<CardDisplay>().damage * 
+                                           GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                    StartCoroutine(dmgTo1EnemyCoRoutine(dropedOn));
+                    if (this.GetComponent<CardDisplay>().lifeSteal)
+                    {
+                        GameObject player = GameObject.Find("Player");
+                        player.GetComponent<CharacterStateMachine>().character.health +=
+                            this.GetComponent<CardDisplay>().damage * 
+                            GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                        StartCoroutine(healPlayerCoRoutine(player, true));
+                    }   
                 }
             }
             else if (dropZoneName == "PlayerDropZone")
@@ -198,7 +214,8 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 if (GetComponent<CardDisplay>().cardType == Type.HEALCARD)
                 {
-                    dropedOnChar.health += this.GetComponent<CardDisplay>().heal;   
+                    dropedOnChar.health += this.GetComponent<CardDisplay>().heal;
+                    StartCoroutine(healPlayerCoRoutine(dropedOn, false));
                 }
                 else
                 {
@@ -236,7 +253,8 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 Character effectedChar = enemies[i].GetComponent<CharacterStateMachine>().character;
                 effectedChar.health -= this.GetComponent<CardDisplay>().damage * 
-                                       GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;;
+                                       GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                StartCoroutine(dmgTo1EnemyCoRoutine(enemies[i]));
             }
         }
     }
@@ -280,5 +298,34 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 Debug.Log("Dmg Mod Reset");
             }
         }
+    }
+
+    IEnumerator dmgTo1EnemyCoRoutine(GameObject dropedOn)
+    {
+        dropedOn.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().color = Color.red;
+        dropedOn.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "-" + 
+                                                       (this.GetComponent<CardDisplay>().damage * 
+                 GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod);
+        yield return new WaitForSeconds(2);
+        dropedOn.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "";
+    }
+
+    IEnumerator healPlayerCoRoutine(GameObject dropedOn, bool lifeSteal)
+    {
+        dropedOn.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().color = Color.green;
+        if (lifeSteal)
+        {
+            dropedOn.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text =
+                "+" + (this.GetComponent<CardDisplay>().damage *
+                       GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod);
+        }
+        else
+        {
+            dropedOn.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text =
+                "+" + this.GetComponent<CardDisplay>().heal;
+        }
+
+        yield return new WaitForSeconds(2);
+        dropedOn.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "";
     }
 }

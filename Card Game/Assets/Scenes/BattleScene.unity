@@ -325,6 +325,7 @@ MonoBehaviour:
   deck: {fileID: 11400000, guid: ab944da3178ee46718660c938141a062, type: 2}
   hand: {fileID: 2073423785}
   inUseDeck: []
+  charOrder: []
   turnMonitor: {fileID: 0}
   DeckCounter: {fileID: 1519411682}
 --- !u!4 &225702886
@@ -531,6 +532,8 @@ MonoBehaviour:
   enemy2HealthBar: {fileID: 0}
   enemy3HealthBar: {fileID: 0}
   healthBarList: []
+  turnCount: 0
+  charRemoved: 0
 --- !u!1 &1173683841
 GameObject:
   m_ObjectHideFlags: 0
