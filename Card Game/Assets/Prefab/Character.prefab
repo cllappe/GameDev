@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 224920705363425850}
   - component: {fileID: 114235820071835084}
   - component: {fileID: 114526747369853890}
-  - component: {fileID: 114628478876646538}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -166,7 +165,7 @@ MonoBehaviour:
   dmgWillBeReflected: 0
   defence: 0
   dmgMod: 0
-  CBText: {fileID: 1592620149250310}
+  skipTurn: 0
 --- !u!114 &114242496828071724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,27 +309,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114628478876646538
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1875272612858154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5196d1eb0db9b314cbecde430274b018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theCamera: {fileID: 0}
-  canvas: {fileID: 223445059354899304}
-  overlaping: 1
-  followsTarget: 0
-  offsetUnits: 100
-  damping: 20
-  textTypes:
-  - keyType: damage
-    poolCount: 20
-    prefab: {fileID: 114685088414384168, guid: 74837713fa6c9ca40beb9f0df4fb1830, type: 2}
 --- !u!114 &114855937776710084
 MonoBehaviour:
   m_ObjectHideFlags: 1

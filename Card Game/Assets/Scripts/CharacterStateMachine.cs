@@ -13,7 +13,6 @@ public class CharacterStateMachine : MonoBehaviour
 	public int actionsLeft = 0;
 	private Character player;
 	private GameObject playerGO;
-	private GameObject self;
 
 	private bool enemyDmgEnabled;
 	private Text turnBox;
@@ -45,7 +44,6 @@ public class CharacterStateMachine : MonoBehaviour
 		{
 			playerGO = GameObject.Find("Player");
 			player = playerGO.GetComponent<CharacterStateMachine>().character;
-			self = GameObject.Find(this.name);
 		}
 		currentState = TurnState.BEGINING;
 		Dragable.actionsIncreased = false;
@@ -69,6 +67,7 @@ public class CharacterStateMachine : MonoBehaviour
 				{
 					actionsLeft = 1;
 				}
+
 				if (character.charType == Character.Type.PLAYER)
 				{
 					//Debug.Log("Current Player Health " + character.health);
@@ -111,7 +110,8 @@ public class CharacterStateMachine : MonoBehaviour
 				}
 				else
 				{
-					GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Add(character);	
+					GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Add(character);
+					character.skipTurn = false;
 				}
 				currentState = TurnState.WAITING;
 				break;
@@ -169,24 +169,41 @@ public class CharacterStateMachine : MonoBehaviour
 					{
 						if (character.charType == Character.Type.ENEMY && GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount != 0)
 						{
-							enemyDmgEnabled = true;
-							
-							if (!GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved)
+							if (character.skipTurn)
 							{
-								currentState = TurnState.ACTION;
+								currentState = TurnState.ADDTOLIST;
 								GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
-								GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved = true;
+								GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved = false;
+							}
+							else
+							{
+								enemyDmgEnabled = true;
+							
+								if (!GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved)
+								{
+									currentState = TurnState.ACTION;
+									GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
+									GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved = true;
+								}	
 							}
 							
 						}
 
 						if (!GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved)
 						{
-							currentState = TurnState.ACTION;
-                            GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
-							GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved = true;
+							if (character.skipTurn)
+							{
+								currentState = TurnState.ADDTOLIST;
+								GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
+								GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved = false;
+							}
+							else
+							{
+								currentState = TurnState.ACTION;
+								GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
+								GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved = true;
+							}	
 						}
-						
 					}
 				}
 				else
@@ -236,17 +253,7 @@ public class CharacterStateMachine : MonoBehaviour
 		character = thisCharacter;
 	}
 
-	IEnumerator enemyAttackDelay()
-	{
-		if (enemyDmgEnabled)
-		{
-			yield break;
-		}
-		enemyDmgEnabled = true;
-		yield return new WaitForSeconds(2);
-		enemyAttack();
 
-	}
 	
 	public void enemyAttack()
 	{
@@ -296,23 +303,6 @@ public class CharacterStateMachine : MonoBehaviour
 			CardBattleManager.deadEnemies++;
 			//Debug.Log("In deathcount function with dead enemies = " + CardBattleManager.deadEnemies);
 		}
-	}
-
-	IEnumerator damagePlayerText()
-	{
-		playerGO.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().color = Color.red;
-		playerGO.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text =
-			"-" + Mathf.RoundToInt(character.basicAttackDmg * player.defence);
-		yield return new WaitForSeconds(2);
-		playerGO.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "";
-	}
-
-	IEnumerator selfDamageText()
-	{
-		self.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().color = Color.red;
-		self.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "-" + character.basicAttackDmg;
-		yield return new WaitForSeconds(2);
-		self.GetComponent<CharacterDisplay>().CBText.GetComponent<Text>().text = "";
 	}
 }
 

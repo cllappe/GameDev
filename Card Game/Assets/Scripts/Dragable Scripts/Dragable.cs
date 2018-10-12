@@ -148,6 +148,10 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     dropedOnChar.dmgReflected = true;
                     EnemyUTD.GetComponent<UltimateTextDamageManager>()
                         .Add("Reflect Turned On", EnemyUTD.transform, "status");
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn);
+                    }
                 }
                 else
                 {
@@ -166,13 +170,17 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         GameObject PlayerUTD = GameObject.Find("PlayerUTD");
                         PlayerUTD.GetComponent<UltimateTextDamageManager>()
                             .Add(damage.ToString(), PlayerUTD.transform, "heal");
-                    }   
+                    }
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn);
+                    }
                 }
             }
             else if (dropZoneName == "Enemy2DropZone")
             {
                 GameObject EnemyUTD = GameObject.Find("Enemy2UTD");
-                GameObject dropedOn = GameObject.Find("Enemy 1");
+                GameObject dropedOn = GameObject.Find("Enemy 2");
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 //Debug.Log(dropedOnChar.health);
                 if (this.GetComponent<CardDisplay>().turnOnReflect)
@@ -180,6 +188,10 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     dropedOnChar.dmgReflected = true;
                     EnemyUTD.GetComponent<UltimateTextDamageManager>()
                         .Add("Reflect Turned On", EnemyUTD.transform, "status");
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn);
+                    }
                 }
                 else
                 {
@@ -198,13 +210,17 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         GameObject PlayerUTD = GameObject.Find("PlayerUTD");
                         PlayerUTD.GetComponent<UltimateTextDamageManager>()
                             .Add(damage.ToString(), PlayerUTD.transform, "heal");
-                    }   
+                    } 
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn);
+                    }
                 }
             }
             else if (dropZoneName == "Enemy3DropZone")
             {
                 GameObject EnemyUTD = GameObject.Find("Enemy3UTD");
-                GameObject dropedOn = GameObject.Find("Enemy 1");
+                GameObject dropedOn = GameObject.Find("Enemy 3");
                 Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
                 //Debug.Log(dropedOnChar.health);
                 if (this.GetComponent<CardDisplay>().turnOnReflect)
@@ -212,6 +228,10 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     dropedOnChar.dmgReflected = true;
                     EnemyUTD.GetComponent<UltimateTextDamageManager>()
                         .Add("Reflect Turned On", EnemyUTD.transform, "status");
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn);
+                    }
                 }
                 else
                 {
@@ -230,7 +250,11 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         GameObject PlayerUTD = GameObject.Find("PlayerUTD");
                         PlayerUTD.GetComponent<UltimateTextDamageManager>()
                             .Add(damage.ToString(), PlayerUTD.transform, "heal");
-                    }   
+                    }  
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn);
+                    }
                 }
             }
             else if (dropZoneName == "PlayerDropZone")
@@ -248,6 +272,10 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
                     PlayerUTD.GetComponent<UltimateTextDamageManager>()
                         .Add(this.GetComponent<CardDisplay>().heal.ToString(), PlayerUTD.transform, "heal");
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn);
+                    }
                 }
                 else
                 {
@@ -293,6 +321,12 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 effectedChar.health -= dmg;
                 utds[i].GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), utds[i].transform, "damage");
             }
+
+            if (this.GetComponent<CardDisplay>().canCrit)
+            {
+                GameObject dummy = enemies[0];
+                critMethod(dummy);
+            }
         }
     }
 
@@ -311,6 +345,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (this.GetComponent<CardDisplay>().luckUp != 0)
             {
                 dropedOnChar.luck += this.GetComponent<CardDisplay>().luckUp;
+                Debug.Log(dropedOnChar.luck);
                 PlayerUTD.GetComponent<UltimateTextDamageManager>()
                     .Add(this.GetComponent<CardDisplay>().luckUp + "% luck added for 3 turns", PlayerUTD.transform, "status");
                 yield return new WaitUntil(() =>
@@ -343,7 +378,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
-    void critMethod()
+    void critMethod(GameObject DropedOn)
     {
         GameObject player = GameObject.Find("Player");
         int blessingValue = Random.Range(0, 100);
@@ -351,6 +386,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             if (this.GetComponent<CardDisplay>().critHeal != 0)
             {
+                Debug.Log("Heal Crit");
                 player.GetComponent<CharacterStateMachine>().character.health +=
                     this.GetComponent<CardDisplay>().critHeal;
                 if (player.GetComponent<CharacterStateMachine>().character.health > 100)
@@ -358,7 +394,83 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     player.GetComponent<CharacterStateMachine>().character.health = 100;
                 }
             }
-        }
-        
+
+            if (this.GetComponent<CardDisplay>().critLifeSteal)
+            {
+                Debug.Log("Life Steal Crit");
+                player.GetComponent<CharacterStateMachine>().character.health +=
+                    this.GetComponent<CardDisplay>().damage * player.GetComponent<CharacterDisplay>().dmgMod;
+                if (player.GetComponent<CharacterStateMachine>().character.health > 100)
+                {
+                    player.GetComponent<CharacterStateMachine>().character.health = 100;
+                }
+            }
+
+            if (this.GetComponent<CardDisplay>().numOfTurns != 0)
+            {
+                Debug.Log("Play Extra Crit");
+                player.GetComponent<CharacterStateMachine>().actionsLeft += this.GetComponent<CardDisplay>().numOfTurns;
+            }
+
+            if (this.GetComponent<CardDisplay>().critDmgAdd != 0)
+            {
+                Debug.Log("Dmg Crit");
+                int dmg = this.GetComponent<CardDisplay>().critDmgAdd;
+                if (this.GetComponent<CardDisplay>().critNumOfTargets == 3)
+                {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                    for (int i = 0; i < enemies.Length; i++)
+                    {
+                        Character effectedChar = enemies[i].GetComponent<CharacterStateMachine>().character;
+                        effectedChar.health -= dmg;
+                    }   
+                }
+                else
+                {
+                    Character effectedChar = DropedOn.GetComponent<CharacterStateMachine>().character;
+                    effectedChar.health -= dmg;
+                }
+            }
+
+            if (this.GetComponent<CardDisplay>().critSkip)
+            {
+                Debug.Log("Crit Skip");
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                for (int i = 0; i < enemies.Length; i++)
+                {
+                    Character effectedChar = enemies[i].GetComponent<CharacterStateMachine>().character;
+                    effectedChar.skipTurn = true;
+                }
+            }
+
+            if (this.GetComponent<CardDisplay>().critEnemyCritNegate)
+            {
+                Debug.Log("Crit Neg");
+                Character dropedOnChar = DropedOn.GetComponent<CharacterStateMachine>().character;
+                StartCoroutine(critNegateCoRoutine(dropedOnChar,
+                    GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount,
+                    GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4));
+
+            }
+
+            if (this.GetComponent<CardDisplay>().critDraw != 0)
+            {
+                Debug.Log("Draw crit");
+                for (int i = 0; i < this.GetComponent<CardDisplay>().critDraw; i++)
+                {
+                    GameObject.Find("GameManager").GetComponent<CardBattleManager>().drawACard();
+                }
+            }
+        } 
     }
+
+    IEnumerator critNegateCoRoutine(Character effectedChar, int startTurn, int endTurn)
+    {
+        int initalLuck = effectedChar.luck;
+        effectedChar.luck = 0;
+        yield return new WaitUntil(() =>
+            GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == endTurn);
+        effectedChar.luck = initalLuck;
+    }
+    
 }

@@ -28,3 +28,12 @@ MonoBehaviour:
   playableAmountIncrease: 0
   draw: 0
   reflects: 1
+  canCrit: 1
+  critNumOfTargets: 0
+  critHeal: 0
+  critLifeSteal: 0
+  critNumOfTurns: 0
+  critDmgAdd: 0
+  critSkip: 0
+  critEnemyCritNegate: 0
+  critDraw: 1

@@ -23,6 +23,6 @@ public class Character : ScriptableObject{
     public bool dmgReflected = false;
     public float defence;
     public int dmgMod;
-    public GameObject combatDMGText;
+    public bool skipTurn = false;
 
 }

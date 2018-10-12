@@ -55,6 +55,7 @@ public class Card : ScriptableObject, IComparable<Card> {
     public int critDmgAdd;
     public bool critSkip;
     public bool critEnemyCritNegate;
+    public int critDraw;
     
     
     

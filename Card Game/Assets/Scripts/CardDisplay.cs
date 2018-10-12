@@ -43,7 +43,7 @@ public class CardDisplay : MonoBehaviour {
     public int critDmgAdd;
     public bool critSkip;
     public bool critEnemyCritNegate;
-    
+    public int critDraw;
     
     public void CardSetup(Card thisCard){
         card = thisCard;
@@ -73,5 +73,6 @@ public class CardDisplay : MonoBehaviour {
         critDmgAdd = card.critDmgAdd;
         critSkip = card.critSkip;
         critEnemyCritNegate = card.critEnemyCritNegate;
+        critDraw = card.critDraw;
     }
 }

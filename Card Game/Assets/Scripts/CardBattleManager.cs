@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Guirao.UltimateTextDamage;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -91,6 +92,13 @@ public class CardBattleManager : MonoBehaviour {
             dragable.parentToReturnTo = display.transform.parent;
             dragable.placeholderParent = display.transform.parent;
             dragable.targets = display.cardTargets;
-        }  
+        }
+        else
+        {
+            int randomSelectedCard = Random.Range(0, inUseDeck.Count);
+            inUseDeck.RemoveAt(randomSelectedCard);
+            GameObject PlayerUTD = GameObject.Find("PlayerUTD");
+            PlayerUTD.GetComponent<UltimateTextDamageManager>().Add("Over Drawn. Lost a Card.",PlayerUTD.transform,"status");
+        }
     }
 }

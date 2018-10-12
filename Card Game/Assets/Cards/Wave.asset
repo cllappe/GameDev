@@ -19,11 +19,21 @@ MonoBehaviour:
   type: 2
   damage: 2
   numberOfTargets: 3
+  lifeSteal: 0
   heal: 0
   numOfTurns: 0
   addLuck: 0
-  increamDmg: 0
-  increasedDef: 0
+  increaseDamage: 0
+  damageReducedBy: 0
   playableAmountIncrease: 0
   draw: 0
   reflects: 0
+  canCrit: 1
+  critNumOfTargets: 0
+  critHeal: 0
+  critLifeSteal: 0
+  critNumOfTurns: 0
+  critDmgAdd: 0
+  critSkip: 0
+  critEnemyCritNegate: 1
+  critDraw: 0

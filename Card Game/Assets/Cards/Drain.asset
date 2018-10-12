@@ -13,13 +13,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 0
   cardName: Drain
-  discription: Deal 2 lifesteal damage to the target.
+  discription: Deal 2  damage to the target.
   art: {fileID: 21300000, guid: cfd40851ac6a04258880042b0facea9c, type: 3}
   targets: 1
   type: 2
   damage: 2
   numberOfTargets: 1
-  lifeSteal: 1
+  lifeSteal: 0
   heal: 0
   numOfTurns: 0
   addLuck: 0
@@ -28,3 +28,12 @@ MonoBehaviour:
   playableAmountIncrease: 0
   draw: 0
   reflects: 0
+  canCrit: 1
+  critNumOfTargets: 0
+  critHeal: 0
+  critLifeSteal: 1
+  critNumOfTurns: 0
+  critDmgAdd: 0
+  critSkip: 0
+  critEnemyCritNegate: 0
+  critDraw: 0

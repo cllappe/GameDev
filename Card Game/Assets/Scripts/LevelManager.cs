@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public Character player;
     private Character playerCopy;
     public List<Character> enemyList;
+    
 
     public Enemies enemyArray;
     public static int enemyId = 0;
@@ -33,6 +34,7 @@ public class LevelManager : MonoBehaviour
     public Slider enemy3HealthBar;
 
     public List<Slider> healthBarList;
+    public List<GameObject> enemyUTDs;
 
     public int turnCount;
     public bool charRemoved;
@@ -46,9 +48,13 @@ public class LevelManager : MonoBehaviour
         dropZones.Add(GameObject.Find("Enemy1DropZone"));
         dropZones.Add(GameObject.Find("Enemy2DropZone"));
         dropZones.Add(GameObject.Find("Enemy3DropZone"));
+        enemyUTDs.Add(GameObject.Find("Enemy1UTD"));
+        enemyUTDs.Add(GameObject.Find("Enemy2UTD"));
+        enemyUTDs.Add(GameObject.Find("Enemy3UTD"));
         for (int i = 0; i < 3; i++)
         {
             dropZones[i].SetActive(false);
+            enemyUTDs[i].SetActive(false);
         }
 
         numberOfEnemies = UnityEngine.Random.Range(1, 4);
@@ -58,6 +64,7 @@ public class LevelManager : MonoBehaviour
             enemyList.Add(enemyCopy);
             EnemySetup(enemySpawn[i], i);
             dropZones[i].SetActive(true);
+            enemyUTDs[i].SetActive(true);
         }
 
         playerCopy = Instantiate(player);
@@ -80,7 +87,6 @@ public class LevelManager : MonoBehaviour
             enemy1HealthBar = display1.healthBarGO.GetComponent<Slider>();
             enemy1HealthBar.maxValue = display1.health;
             healthBarList.Add(enemy1HealthBar);
-            display1.CBText = go1.transform.GetChild(0).GetChild(2).gameObject;
         }
         else if (iteration == 1)
         {
@@ -88,7 +94,6 @@ public class LevelManager : MonoBehaviour
             enemy2HealthBar = display1.healthBarGO.GetComponent<Slider>();
             enemy2HealthBar.maxValue = display1.health;
             healthBarList.Add(enemy2HealthBar);
-            display1.CBText = go1.transform.GetChild(0).GetChild(2).gameObject;
         }
         else if (iteration == 2)
         {
@@ -96,7 +101,6 @@ public class LevelManager : MonoBehaviour
             enemy3HealthBar = display1.healthBarGO.GetComponent<Slider>();
             enemy3HealthBar.maxValue = display1.health;
             healthBarList.Add(enemy3HealthBar);
-            display1.CBText = go1.transform.GetChild(0).GetChild(2).gameObject;
         }
     }
 
@@ -113,7 +117,6 @@ public class LevelManager : MonoBehaviour
         display.healthBarGO = go.transform.GetChild(0).GetChild(1).gameObject;
         playerHealthBar = display.healthBarGO.GetComponent<Slider>();
         playerHealthBar.maxValue = display.health;
-        display.CBText = go.transform.GetChild(0).GetChild(2).gameObject;
     }
 
     private void Update()
