@@ -34,6 +34,16 @@ public class CardDisplay : MonoBehaviour {
     public float reduceDmgMod;
     public int dmgIncMod;
     public bool lifeSteal;
+
+    public bool canCrit;
+    public int critNumOfTargets;
+    public int critHeal;
+    public bool critLifeSteal;
+    public int critNumOfTurns;
+    public int critDmgAdd;
+    public bool critSkip;
+    public bool critEnemyCritNegate;
+    
     
     public void CardSetup(Card thisCard){
         card = thisCard;
@@ -54,5 +64,14 @@ public class CardDisplay : MonoBehaviour {
         reduceDmgMod = card.damageReducedBy;
         dmgIncMod = card.increaseDamage;
         lifeSteal = card.lifeSteal;
+
+        canCrit = card.canCrit;
+        critNumOfTargets = card.critNumOfTargets;
+        critHeal = card.critHeal;
+        critLifeSteal = card.critLifeSteal;
+        critNumOfTurns = card.critNumOfTurns;
+        critDmgAdd = card.critDmgAdd;
+        critSkip = card.critSkip;
+        critEnemyCritNegate = card.critEnemyCritNegate;
     }
 }

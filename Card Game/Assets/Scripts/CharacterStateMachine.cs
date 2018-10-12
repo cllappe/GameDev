@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Guirao.UltimateTextDamage;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -256,12 +257,28 @@ public class CharacterStateMachine : MonoBehaviour
 			character.health -= character.basicAttackDmg;
 			character.dmgReflected = false;
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
-			StartCoroutine(selfDamageText());
+			if (name == "Enemy 1")
+			{
+				GameObject UTD = GameObject.Find("Enemy1UTD");
+				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+			}
+			else if (name == "Enemy 2")
+			{
+				GameObject UTD = GameObject.Find("Enemy2UTD");
+				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+			}
+			else if (name == "Enemy 3")
+			{
+				GameObject UTD = GameObject.Find("Enemy3UTD");
+				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+			}
 		}
 		else
 		{
-			player.health -= Mathf.RoundToInt(character.basicAttackDmg * player.defence);
-			StartCoroutine(damagePlayerText());
+			GameObject PlayerUTD = GameObject.Find("PlayerUTD");
+			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			player.health -= dmg;
+			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
 		}
 		//Debug.Log("Did Damage to Player");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public enum Targets
@@ -44,6 +45,19 @@ public class Card : ScriptableObject, IComparable<Card> {
     public int playableAmountIncrease;
     public int draw;
     public bool reflects;
+
+    [Header("Critical Values")] 
+    public bool canCrit;
+    public int critNumOfTargets;
+    public int critHeal;
+    public bool critLifeSteal;
+    public int critNumOfTurns;
+    public int critDmgAdd;
+    public bool critSkip;
+    public bool critEnemyCritNegate;
+    
+    
+    
 
     public int CompareTo(Card Other){
         return this.cardName.CompareTo(Other.cardName);
