@@ -31,6 +31,8 @@ public class CardBattleManager : MonoBehaviour {
 
     public static bool draw1card;
 
+    public GameObject dragBlock;
+
     private void Awake()
     {
         if (instance == null){
@@ -45,6 +47,7 @@ public class CardBattleManager : MonoBehaviour {
 
     private void Start()
     {
+        dragBlock = GameObject.Find("Hand Block");
         turnMonitor = gameObject.GetComponent<Text>();
         Dragable.playerTurn = false;
         for (int j = 0; j < 25; j++)
@@ -71,6 +74,15 @@ public class CardBattleManager : MonoBehaviour {
         {
             drawACard();
             draw1card = false;
+        }
+
+        if (Dragable.playerTurn)
+        {
+            dragBlock.SetActive(false);
+        }
+        else
+        {
+            dragBlock.SetActive(true);
         }
     }
 

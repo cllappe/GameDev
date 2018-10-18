@@ -94,7 +94,7 @@ public class CharacterStateMachine : MonoBehaviour
 					if (enemyDmgEnabled)
 					{
 						CardBattleManager.enemyTurn = true;
-						Invoke("enemyAttack",2);
+						Invoke("enemyAttack", 2);
 						enemyDmgEnabled = false;
 					}
 				}	
@@ -124,6 +124,22 @@ public class CharacterStateMachine : MonoBehaviour
 					//CardBattleManager.deadEnemies++;
 					deathCount();
 					dyingState = true;
+					if (this.name == "Enemy 1")
+					{
+						StartCoroutine(DeathAnimate(1));
+					}
+					else if (name == "Enemy 2")
+					{
+						StartCoroutine(DeathAnimate(2));
+					}
+					else if (name == "Enemy 3")
+					{
+						StartCoroutine(DeathAnimate(3));
+					}					
+					else if (name == "Player")
+					{
+						StartCoroutine(DeathAnimate(4));
+					}
 					//Debug.Log(CardBattleManager.deadEnemies);
 					currentState = TurnState.DEAD;
 					//Debug.Log(CardBattleManager.deadEnemies);
@@ -142,14 +158,17 @@ public class CharacterStateMachine : MonoBehaviour
 					if (name == "Enemy 1")
 					{
 						GameObject.Find("Enemy1DropZone").SetActive(false);
+						GameObject.Find("Enemy1UTD").SetActive(false);
 					}
 					else if (name == "Enemy 2")
 					{
 						GameObject.Find("Enemy2DropZone").SetActive(false);
+						GameObject.Find("Enemy2UTD").SetActive(false);
 					}
 					else if (name == "Enemy 3")
 					{
 						GameObject.Find("Enemy3DropZone").SetActive(false);
+						GameObject.Find("Enemy3UTD").SetActive(false);
 					}
 					GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
 					GameObject.Find(name).SetActive(false);
@@ -216,12 +235,17 @@ public class CharacterStateMachine : MonoBehaviour
 			case (TurnState.VICTORY):
 			{
 				turnBox.text = "VICTORY!";
+				GameObject go = GameObject.Find("Animation Master");
+				go.transform.GetChild(13).gameObject.SetActive(true);
 				enabled = false;
 				break;
 			}
 			case (TurnState.DEFEAT):
 			{
 				turnBox.text = "Defeat";
+				GameObject go = GameObject.Find("Animation Master");
+				go.transform.GetChild(10).SetPositionAndRotation(new Vector3(-5, 0, 4), Quaternion.identity);
+				go.transform.GetChild(10).gameObject.SetActive(true);
 				enabled = false;
 				break;
 			}
@@ -268,16 +292,19 @@ public class CharacterStateMachine : MonoBehaviour
 			{
 				GameObject UTD = GameObject.Find("Enemy1UTD");
 				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+				StartCoroutine(EnemyDmgAnimate(1));
 			}
 			else if (name == "Enemy 2")
 			{
 				GameObject UTD = GameObject.Find("Enemy2UTD");
 				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+				StartCoroutine(EnemyDmgAnimate(2));
 			}
 			else if (name == "Enemy 3")
 			{
 				GameObject UTD = GameObject.Find("Enemy3UTD");
 				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+				StartCoroutine(EnemyDmgAnimate(3));
 			}
 		}
 		else
@@ -287,6 +314,7 @@ public class CharacterStateMachine : MonoBehaviour
 			player.health -= dmg;
 			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
+			StartCoroutine(EnemyDmgAnimate(4));
 		}
 		//Debug.Log("Did Damage to Player");
 		actionsLeft--;
@@ -302,6 +330,65 @@ public class CharacterStateMachine : MonoBehaviour
 		{
 			CardBattleManager.deadEnemies++;
 			//Debug.Log("In deathcount function with dead enemies = " + CardBattleManager.deadEnemies);
+		}
+	}
+
+	IEnumerator EnemyDmgAnimate(int tarNum)
+	{
+		GameObject go = GameObject.Find("Animation Master");
+		if (tarNum == 1)
+		{
+			go.transform.GetChild(5).SetPositionAndRotation(new Vector3(1, 0, 4), Quaternion.identity);	
+			go.transform.GetChild(5).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(5).gameObject.SetActive(false);
+		}
+		else if (tarNum == 2)
+		{
+			go.transform.GetChild(5).SetPositionAndRotation(new Vector3(4, 0.5f , 4), Quaternion.identity);
+			go.transform.GetChild(5).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(5).gameObject.SetActive(false);
+		}
+		else if (tarNum == 3)
+		{
+			go.transform.GetChild(5).SetPositionAndRotation(new Vector3(7, 0, 4), Quaternion.identity);
+			go.transform.GetChild(5).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(5).gameObject.SetActive(false);
+		}
+		else if (tarNum == 4)
+		{
+			go.transform.GetChild(5).SetPositionAndRotation(new Vector3(-5, 0, 4), Quaternion.identity);
+			go.transform.GetChild(5).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(5).gameObject.SetActive(false);
+		}
+	}
+
+	IEnumerator DeathAnimate(int tarNum)
+	{
+		GameObject go = GameObject.Find("Animation Master");
+		if (tarNum == 1)
+		{
+			go.transform.GetChild(10).SetPositionAndRotation(new Vector3(1, 0, 4), Quaternion.identity);	
+			go.transform.GetChild(10).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(10).gameObject.SetActive(false);
+		}
+		else if (tarNum == 2)
+		{
+			go.transform.GetChild(10).SetPositionAndRotation(new Vector3(4, 0.5f , 4), Quaternion.identity);
+			go.transform.GetChild(10).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(10).gameObject.SetActive(false);
+		}
+		else if (tarNum == 3)
+		{
+			go.transform.GetChild(10).SetPositionAndRotation(new Vector3(7, 0, 4), Quaternion.identity);
+			go.transform.GetChild(10).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(10).gameObject.SetActive(false);
 		}
 	}
 }

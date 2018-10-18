@@ -112,7 +112,6 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 }
             }
             else{
-                startPos = new Vector3(this.transform.position.x, startPos.y, startPos.z);
                 this.transform.SetParent(parentToReturnTo);
                 this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
             }
@@ -176,6 +175,8 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         critMethod(dropedOn);
                     }
                 }
+
+                StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 1));
             }
             else if (dropZoneName == "Enemy2DropZone")
             {
@@ -216,6 +217,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         critMethod(dropedOn);
                     }
                 }
+                StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 2));
             }
             else if (dropZoneName == "Enemy3DropZone")
             {
@@ -256,6 +258,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         critMethod(dropedOn);
                     }
                 }
+                StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 3));
             }
             else if (dropZoneName == "PlayerDropZone")
             {
@@ -307,6 +310,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         StartCoroutine(powerUpCoRoutine(PlayerUTD, startTurn,endTurn));
                     }
                 }
+                StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 4));
             }
         }
         else
@@ -327,6 +331,8 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 GameObject dummy = enemies[0];
                 critMethod(dummy);
             }
+
+            StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 1));
         }
     }
 
@@ -471,6 +477,145 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         yield return new WaitUntil(() =>
             GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == endTurn);
         effectedChar.luck = initalLuck;
+    }
+
+    IEnumerator annimationCoRoutine(string CardName, int tarNum)
+    {
+        GameObject go = GameObject.Find("Animation Master");
+        if (CardName == "Scorch")
+        {
+            go.transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(5);
+            go.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else if (CardName == "Wave")
+        {
+            go.transform.GetChild(1).gameObject.SetActive(true);
+            yield return new WaitForSeconds(4);
+            go.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        else if (CardName == "Tremor")
+        {
+            go.transform.GetChild(2).gameObject.SetActive(true);
+            yield return new WaitForSeconds(5);
+            go.transform.GetChild(2).gameObject.SetActive(false);
+        }
+        else if (CardName == "Drain")
+        {
+            if (tarNum == 1)
+            {
+                go.transform.GetChild(3).SetPositionAndRotation(new Vector3(1,0,2), Quaternion.identity);
+                go.transform.GetChild(3).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(3).gameObject.SetActive(false);
+            }
+            else if (tarNum == 2)
+            {
+                go.transform.GetChild(3).SetPositionAndRotation(new Vector3(4,0.5f,2), Quaternion.identity);
+                go.transform.GetChild(3).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(3).gameObject.SetActive(false);
+            }
+            else if (tarNum == 3)
+            {
+                go.transform.GetChild(3).SetPositionAndRotation(new Vector3(7,0,2), Quaternion.identity);
+                go.transform.GetChild(3).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(3).gameObject.SetActive(false);
+            }
+        }
+        else if (CardName == "Counterstrike")
+        {
+            if (tarNum == 1)
+            {
+                go.transform.GetChild(4).SetPositionAndRotation(new Vector3(1, 0, 4), Quaternion.identity);
+                go.transform.GetChild(4).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(4).gameObject.SetActive(false);
+            }
+            else if (tarNum == 2)
+            {
+                go.transform.GetChild(4).SetPositionAndRotation(new Vector3(4, 0.5f, 4), Quaternion.identity);
+                go.transform.GetChild(4).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(4).gameObject.SetActive(false);
+            }
+            else if (tarNum == 3)
+            {
+                go.transform.GetChild(4).SetPositionAndRotation(new Vector3(7, 0, 4), Quaternion.identity);
+                go.transform.GetChild(4).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(4).gameObject.SetActive(false);
+            }
+        }
+        else if (CardName == "Poke")
+        {
+            if (tarNum == 1)
+            {
+                go.transform.GetChild(5).SetPositionAndRotation(new Vector3(1, 0, 4), Quaternion.identity);
+                go.transform.GetChild(5).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(5).gameObject.SetActive(false);
+            }
+            else if (tarNum == 2)
+            {
+                go.transform.GetChild(5).SetPositionAndRotation(new Vector3(4, 0.5f, 4), Quaternion.identity);
+                go.transform.GetChild(5).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(5).gameObject.SetActive(false);
+            }
+            else if (tarNum == 3)
+            {
+                go.transform.GetChild(5).SetPositionAndRotation(new Vector3(7, 0, 4), Quaternion.identity);
+                go.transform.GetChild(5).gameObject.SetActive(true);
+                yield return new WaitForSeconds(3);
+                go.transform.GetChild(5).gameObject.SetActive(false);
+            }
+        }
+        else if (CardName == "Potion")
+        {
+            go.transform.GetChild(6).gameObject.SetActive(true);
+            yield return new WaitForSeconds(3);
+            go.transform.GetChild(6).gameObject.SetActive(false);            
+        }
+        else if (CardName == "Lucky")
+        {
+            int endTurn = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
+            go.transform.GetChild(7).gameObject.SetActive(true);
+            yield return new WaitUntil(() =>
+                GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == endTurn);
+            go.transform.GetChild(7).gameObject.SetActive(false);                
+        }
+        else if (CardName == "Defensive")
+        {
+            int endTurn = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
+            go.transform.GetChild(8).gameObject.SetActive(true);
+            yield return new WaitUntil(() =>
+                GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount ==
+                endTurn);
+            go.transform.GetChild(8).gameObject.SetActive(false);                
+        }
+        else if (CardName == "Sleight")
+        {
+            go.transform.GetChild(9).gameObject.SetActive(true);
+            yield return new WaitForSeconds(2);
+            go.transform.GetChild(9).gameObject.SetActive(false);                
+        }
+        else if (CardName == "Aggression")
+        {
+            int endTurn = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
+            go.transform.GetChild(11).gameObject.SetActive(true);
+            yield return new WaitUntil(() =>
+                GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount ==
+                endTurn);
+            go.transform.GetChild(11).gameObject.SetActive(false);                
+        }
+        else if (CardName == "Haste")
+        {
+            go.transform.GetChild(12).gameObject.SetActive(true);
+            yield return new WaitForSeconds(3);
+            go.transform.GetChild(12).gameObject.SetActive(false); 
+        }
     }
     
 }

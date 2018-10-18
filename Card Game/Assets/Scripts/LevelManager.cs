@@ -81,6 +81,7 @@ public class LevelManager : MonoBehaviour
         display1.characterSetup(enemyList.First());
         csm1.csm_Set(enemyList[iteration]);
         go1.tag = "Enemy";
+        go1.transform.Rotate(Vector3.up * 180);
         if (iteration == 0)
         {
             display1.healthBarGO = go1.transform.GetChild(0).GetChild(1).gameObject;
