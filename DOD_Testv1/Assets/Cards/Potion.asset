@@ -14,7 +14,7 @@ MonoBehaviour:
   cardID: 0
   cardName: Potion
   discription: Gain 10 Hit Points
-  art: {fileID: 21300000, guid: d16f2ef7a7284498c9ca69caa4bd5ff3, type: 3}
+  art: {fileID: 21300000, guid: b9c61c6896eff5b43ae44d047f49b31d, type: 3}
   targets: 0
   type: 0
   damage: 0

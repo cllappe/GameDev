@@ -14,7 +14,7 @@ MonoBehaviour:
   cardID: 0
   cardName: Drain
   discription: Deal 2  damage to the target.
-  art: {fileID: 21300000, guid: cfd40851ac6a04258880042b0facea9c, type: 3}
+  art: {fileID: 21300000, guid: 6cc9f2390267d6f47b3bfdc10c348ba3, type: 3}
   targets: 1
   type: 2
   damage: 2
