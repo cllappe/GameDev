@@ -276,6 +276,19 @@
           <e p="Kingthings.txt" t="Include" />
           <e p="Readme.txt" t="Include" />
         </e>
+        <e p="Particle Attractor by Moonflower Carnivore" t="Include">
+          <e p="Particle Attractor documentation.txt" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="particleAttractorLinear.cs" t="Include" />
+            <e p="particleAttractorMove.cs" t="Include" />
+            <e p="particleAttractorSelf.cs" t="Include" />
+            <e p="particleAttractorSpherical.cs" t="Include" />
+            <e p="rotation.cs" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="Particles Additive Intensify.shader" t="Include" />
+          </e>
+        </e>
         <e p="Plugins" t="Include">
           <e p="Pixelplacement" t="Include">
             <e p="iTween" t="Include">

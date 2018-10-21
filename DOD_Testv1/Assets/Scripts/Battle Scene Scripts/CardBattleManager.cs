@@ -23,10 +23,6 @@ public class CardBattleManager : MonoBehaviour {
 
     public static int deadEnemies = 0;
 
-    public Text turnMonitor;
-
-    public Text DeckCounter;
-
     public static bool enemyTurn = false;
 
     public static bool draw1card;
@@ -50,7 +46,6 @@ public class CardBattleManager : MonoBehaviour {
     private void Start()
     {
         dragBlock = GameObject.Find("Hand Block");
-        turnMonitor = gameObject.GetComponent<Text>();
         Dragable.playerTurn = false;
         for (int j = 0; j < 25; j++)
         {
@@ -71,7 +66,6 @@ public class CardBattleManager : MonoBehaviour {
     }
     private void Update()
     {
-        DeckCounter.text = "Remaining Cards =" + inUseDeck.Count;
         if (draw1card)
         {
             drawACard();
@@ -86,11 +80,6 @@ public class CardBattleManager : MonoBehaviour {
         {
             dragBlock.SetActive(true);
         }
-    }
-
-    public void setTurnText(String thisText)
-    {
-        turnMonitor.text = thisText;
     }
 
     public void drawACard()

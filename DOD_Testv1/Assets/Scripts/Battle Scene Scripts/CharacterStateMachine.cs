@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Guirao.UltimateTextDamage;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class CharacterStateMachine : MonoBehaviour
 	private GameObject playerGO;
 
 	private bool enemyDmgEnabled;
-	private Text turnBox;
+	private TextMeshProUGUI turnBox;
 	private bool dyingState;
 	private bool isDead;
 	public enum TurnState
@@ -37,8 +38,8 @@ public class CharacterStateMachine : MonoBehaviour
 	{
 		if (character.charType == Character.Type.PLAYER)
 		{
-			GameObject turnBoxGO = GameObject.Find("Turn Counter Text");
-			turnBox = turnBoxGO.GetComponent<Text>();
+			GameObject turnBoxGO = GameObject.Find("Player Notification");
+			turnBox = turnBoxGO.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
 		}
 		else if (character.charType == Character.Type.ENEMY)
 		{
@@ -293,18 +294,21 @@ public class CharacterStateMachine : MonoBehaviour
 				GameObject UTD = GameObject.Find("Enemy1UTD");
 				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
 				StartCoroutine(EnemyDmgAnimate(1));
+				StartCoroutine(AttackFX(1));
 			}
 			else if (name == "Enemy 2")
 			{
 				GameObject UTD = GameObject.Find("Enemy2UTD");
 				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
 				StartCoroutine(EnemyDmgAnimate(2));
+				StartCoroutine(AttackFX(2));
 			}
 			else if (name == "Enemy 3")
 			{
 				GameObject UTD = GameObject.Find("Enemy3UTD");
 				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
 				StartCoroutine(EnemyDmgAnimate(3));
+				StartCoroutine(AttackFX(3));
 			}
 		}
 		else
@@ -314,6 +318,18 @@ public class CharacterStateMachine : MonoBehaviour
 			player.health -= dmg;
 			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
+			if (name == "Enemy 1")
+			{
+				StartCoroutine(AttackFX(1));
+			}
+			else if (name == "Enemy 2")
+			{
+				StartCoroutine(AttackFX(2));
+			}
+			else if (name == "Enemy 3")
+			{
+				StartCoroutine(AttackFX(3));
+			}
 			StartCoroutine(EnemyDmgAnimate(4));
 		}
 		//Debug.Log("Did Damage to Player");
@@ -363,6 +379,29 @@ public class CharacterStateMachine : MonoBehaviour
 			go.transform.GetChild(5).gameObject.SetActive(true);
 			yield return new WaitForSeconds(2);
 			go.transform.GetChild(5).gameObject.SetActive(false);
+		}
+	}
+
+	IEnumerator AttackFX(int attackingNum)
+	{
+		GameObject go = GameObject.Find("Animation Master");
+		if (attackingNum == 1)
+		{
+			go.transform.GetChild(15).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(15).gameObject.SetActive(false);
+		}
+		else if (attackingNum == 2)
+		{
+			go.transform.GetChild(16).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(16).gameObject.SetActive(false);			
+		}
+		else if (attackingNum == 3)
+		{
+			go.transform.GetChild(17).gameObject.SetActive(true);
+			yield return new WaitForSeconds(2);
+			go.transform.GetChild(17).gameObject.SetActive(false);
 		}
 	}
 

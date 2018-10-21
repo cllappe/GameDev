@@ -418,8 +418,8 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (this.GetComponent<CardDisplay>().numOfTurns != 0)
             {
                 Debug.Log("Play Extra Crit");
-                player.GetComponent<CharacterStateMachine>().actionsLeft += this.GetComponent<CardDisplay>().numOfTurns;
-                CombatLog.GetComponent<CombatLogPopulate>().populate("CRITICAL: Gained " + this.GetComponent<CardDisplay>().numOfTurns + " extra actions this turn.", true);
+                player.GetComponent<CharacterStateMachine>().actionsLeft += this.GetComponent<CardDisplay>().critNumOfTurns;
+                CombatLog.GetComponent<CombatLogPopulate>().populate("CRITICAL: Gained " + this.GetComponent<CardDisplay>().critNumOfTurns + " extra actions this turn.", true);
             }
 
             if (this.GetComponent<CardDisplay>().critDmgAdd != 0)
