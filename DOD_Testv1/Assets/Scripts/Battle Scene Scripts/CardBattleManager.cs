@@ -31,17 +31,9 @@ public class CardBattleManager : MonoBehaviour {
 
     public GameObject CombatLog;
 
-    private void Awake()
-    {
-        if (instance == null){
-            instance = this;
-        }
-        else{
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(this.gameObject);
-       
-    }
+    public GameObject playerGO;
+
+    private int emptyDeckDmg;
 
     private void Start()
     {
@@ -63,7 +55,9 @@ public class CardBattleManager : MonoBehaviour {
             dragable.placeholderParent = display.transform.parent;
             dragable.targets = display.cardTargets;
         }
+        emptyDeckDmg = 1;
     }
+    
     private void Update()
     {
         if (draw1card)
@@ -84,21 +78,33 @@ public class CardBattleManager : MonoBehaviour {
 
     public void drawACard()
     {
-        if (hand.transform.GetChild(0).childCount < 5){
-            GameObject go = Instantiate(cardPrefab) as GameObject;
-            CardDisplay display = go.GetComponent<CardDisplay>();
-            Dragable dragable = go.GetComponent<Dragable>();
-            int randomSelectedCard = Random.Range(0, inUseDeck.Count);
-            display.CardSetup(inUseDeck[randomSelectedCard]);
-            inUseDeck.RemoveAt(randomSelectedCard);
-            display.transform.SetParent(hand.transform.GetChild(0), false);
-            dragable.parentToReturnTo = display.transform.parent;
-            dragable.placeholderParent = display.transform.parent;
-            dragable.targets = display.cardTargets;
+        if (inUseDeck.Count != 0){
+            if (hand.transform.GetChild(0).childCount < 5)
+            {
+                GameObject go = Instantiate(cardPrefab) as GameObject;
+                CardDisplay display = go.GetComponent<CardDisplay>();
+                Dragable dragable = go.GetComponent<Dragable>();
+                int randomSelectedCard = Random.Range(0, inUseDeck.Count);
+                display.CardSetup(inUseDeck[randomSelectedCard]);
+                inUseDeck.RemoveAt(randomSelectedCard);
+                display.transform.SetParent(hand.transform.GetChild(0), false);
+                dragable.parentToReturnTo = display.transform.parent;
+                dragable.placeholderParent = display.transform.parent;
+                dragable.targets = display.cardTargets;
+            }
+            else
+            {
+                CombatLog.GetComponent<CombatLogPopulate>()
+                    .populate("Overdrawn. You're hand was full, no additional card drawn.", false);
+            }
         }
         else
         {
-            CombatLog.GetComponent<CombatLogPopulate>().populate("Overdrawn. You're hand was full, no additional card drawn.", false);
+            playerGO = GameObject.Find("Player");
+            CombatLog.GetComponent<CombatLogPopulate>()
+                .populate("You have run out of cards. Take " + emptyDeckDmg + " damage.", false);
+            playerGO.GetComponent<CharacterStateMachine>().character.health -= emptyDeckDmg;
+            emptyDeckDmg++;
         }
     }
 }

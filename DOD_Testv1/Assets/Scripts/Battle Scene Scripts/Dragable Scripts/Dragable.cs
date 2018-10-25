@@ -18,7 +18,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public float mouseOffset;
     public static bool validDrop = false;
     public static bool dragging = false;
-    private bool validDropHappened = false;
+    private bool DropHappened = false;
     public static bool playerTurn;
     public static bool actionsIncreased = false;
 
@@ -99,10 +99,11 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (playerTurn)
         {
-            if (validDrop){
+            DropHappened = true;
+            if (validDrop)
+            {
                 //Debug.Log("In Valid Drop");
                 startPos = this.transform.position;
-                validDropHappened = true;
                 this.transform.SetParent(parentToReturnTo);
                 this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
                 //Debug.Log(DropZone.droppedOn);
@@ -124,11 +125,12 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void OnMouseExit()
     {
-        if (!validDropHappened)
+        if (!DropHappened)
         {
             iTween.MoveTo(gameObject, startPos, 0f);
         }
 
+        DropHappened = false;
         validDrop = false;
     }
 

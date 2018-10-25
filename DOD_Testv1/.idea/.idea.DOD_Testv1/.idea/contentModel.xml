@@ -6,6 +6,12 @@
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Art" t="Include">
+          <e p="Painterly Icon Art" t="Include">
+            <e p="README 1.txt" t="Include" />
+            <e p="Readme.txt" t="Include" />
+          </e>
+        </e>
         <e p="HD_Background_Art" t="Include">
           <e p="Readme.txt" t="Include" />
         </e>

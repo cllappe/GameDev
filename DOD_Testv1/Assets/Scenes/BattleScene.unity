@@ -148,7 +148,7 @@ RectTransform:
   m_Father: {fileID: 708445461}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.00000011920929}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -494,6 +494,7 @@ MonoBehaviour:
   charOrder: []
   dragBlock: {fileID: 1655362180}
   CombatLog: {fileID: 1865775250}
+  playerGO: {fileID: 0}
 --- !u!4 &225702886
 Transform:
   m_ObjectHideFlags: 0
@@ -582,7 +583,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 67265494}
   m_HandleRect: {fileID: 67265493}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -28226,7 +28227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00001542916, y: 0.000019073486}
+  m_AnchoredPosition: {x: -0.00001542916, y: 0.000011444092}
   m_SizeDelta: {x: -142.554, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1865775252
