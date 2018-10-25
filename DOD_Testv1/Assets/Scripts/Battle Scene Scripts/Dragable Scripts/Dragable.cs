@@ -415,7 +415,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     player.GetComponent<CharacterDisplay>().dmgMod + ".", true);
             }
 
-            if (this.GetComponent<CardDisplay>().numOfTurns != 0)
+            if (this.GetComponent<CardDisplay>().critNumOfTurns != 0)
             {
                 Debug.Log("Play Extra Crit");
                 player.GetComponent<CharacterStateMachine>().actionsLeft += this.GetComponent<CardDisplay>().critNumOfTurns;
