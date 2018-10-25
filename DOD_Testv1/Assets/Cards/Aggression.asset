@@ -14,7 +14,7 @@ MonoBehaviour:
   cardID: 0
   cardName: Aggression
   discription: For the next 3 turns, do double damage.
-  art: {fileID: 21300000, guid: 53085f18b2c38eb4e8539c23811c3347, type: 3}
+  art: {fileID: 21300000, guid: dbb244a9808054c04bc406c5f47a93e4, type: 3}
   targets: 0
   type: 1
   damage: 0
