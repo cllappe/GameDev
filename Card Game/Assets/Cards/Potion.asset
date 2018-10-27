@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4890163b9ad23468a8dbcf0d8295e44b, type: 3}
+  m_Name: Potion
+  m_EditorClassIdentifier: 
+  cardID: 0
+  cardName: Potion
+  discription: Gain 10 Hit Points
+  art: {fileID: 21300000, guid: d16f2ef7a7284498c9ca69caa4bd5ff3, type: 3}
+  targets: 0
+  type: 0
+  damage: 0
+  numberOfTargets: 1
+  lifeSteal: 0
+  heal: 10
+  numOfTurns: 0
+  addLuck: 0
+  increaseDamage: 0
+  damageReducedBy: 0
+  playableAmountIncrease: 0
+  draw: 0
+  reflects: 0
+  canCrit: 1
+  critNumOfTargets: 0
+  critHeal: 100
+  critLifeSteal: 0
+  critNumOfTurns: 0
+  critDmgAdd: 0
+  critSkip: 0
+  critEnemyCritNegate: 0
+  critDraw: 0

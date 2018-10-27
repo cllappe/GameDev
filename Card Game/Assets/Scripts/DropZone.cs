@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Targets acceptableCard;
+    public static String droppedOn;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -35,6 +37,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     public void OnDrop(PointerEventData eventData)
     {
         //Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
+        droppedOn = gameObject.name;
 
         Dragable d = eventData.pointerDrag.GetComponent<Dragable>();
         if (acceptableCard == d.targets)

@@ -17,5 +17,12 @@ public class Character : ScriptableObject{
     public Type charType;
     public Sprite avatar;
     public int health;
+    public int luck;
+    public int basicAttackDmg;
+    public GameObject healthBar;
+    public bool dmgReflected = false;
+    public float defence;
+    public int dmgMod;
+    public bool skipTurn = false;
 
 }

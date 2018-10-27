@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Name: Fallen
   m_EditorClassIdentifier: 
   charType: 1
-  avatar: {fileID: 21300000, guid: 40b59c573168d46ac8d6f59ded4f2527, type: 3}
+  avatar: {fileID: 21300000, guid: 714fdb509f0e747cd9f2b0bfba3ce8ab, type: 3}
   health: 20
+  luck: 0
+  basicAttackDmg: 4
+  healthBar: {fileID: 0}
+  dmgReflected: 0
+  defence: 0
+  dmgMod: 0
+  skipTurn: 0
