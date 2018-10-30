@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,8 +14,8 @@ public class LevelManager : MonoBehaviour
     public List<Character> enemyList;
     
 
-    public Enemies enemyArray;
-    public static int enemyId = 0;
+    public List<Character> enemyArray;
+    public static int enemyId;
     public static int numberOfEnemies;
 
     public GameObject avatarPrefab;
@@ -60,7 +61,9 @@ public class LevelManager : MonoBehaviour
         numberOfEnemies = UnityEngine.Random.Range(1, 4);
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            Character enemyCopy = Instantiate(enemyArray.enemies[enemyId]);
+            enemyId = UnityEngine.Random.Range(0, enemyArray.Count);
+            Debug.Log(enemyId);
+            Character enemyCopy = Instantiate(enemyArray[enemyId]);
             enemyList.Add(enemyCopy);
             EnemySetup(enemySpawn[i], i);
             dropZones[i].SetActive(true);
@@ -78,7 +81,7 @@ public class LevelManager : MonoBehaviour
         go1.name = "Enemy " + (iteration + 1);
         CharacterDisplay display1 = go1.GetComponent<CharacterDisplay>();
         CharacterStateMachine csm1 = go1.GetComponent<CharacterStateMachine>();
-        display1.characterSetup(enemyList.First());
+        display1.characterSetup(enemyList[iteration]);
         csm1.csm_Set(enemyList[iteration]);
         go1.tag = "Enemy";
         go1.transform.Rotate(Vector3.up * 180);

@@ -447,6 +447,9 @@
             </e>
           </e>
         </e>
+        <e p="Ultimate Game Music Collection" t="Include">
+          <e p="_README.txt" t="Include" />
+        </e>
         <e p="UltimateTextDamage" t="Include">
           <e p="Demo" t="Include">
             <e p="Scripts" t="Include">
