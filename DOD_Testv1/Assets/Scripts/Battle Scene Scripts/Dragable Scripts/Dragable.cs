@@ -359,7 +359,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             for (int i = 0; i < enemies.Length; i++)
             {
                 int dmg = this.GetComponent<CardDisplay>().damage * 
-                    GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                          GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
                 Character effectedChar = enemies[i].GetComponent<CharacterStateMachine>().character;
                 effectedChar.health -= dmg;
                 utds[i].GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), utds[i].transform, "damage");
@@ -447,7 +447,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 Debug.Log("Life Steal Crit");
                 player.GetComponent<CharacterStateMachine>().character.health +=
-                    this.GetComponent<CardDisplay>().damage * player.GetComponent<CharacterDisplay>().dmgMod;
+                    this.GetComponent<CardDisplay>().damage * player.GetComponent<CharacterStateMachine>().character.dmgMod;
                 if (player.GetComponent<CharacterStateMachine>().character.health > 100)
                 {
                     player.GetComponent<CharacterStateMachine>().character.health = 100;
@@ -468,7 +468,8 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (this.GetComponent<CardDisplay>().critDmgAdd != 0)
             {
                 Debug.Log("Dmg Crit");
-                int dmg = this.GetComponent<CardDisplay>().critDmgAdd;
+                int dmg = this.GetComponent<CardDisplay>().critDmgAdd * 
+                    player.GetComponent<CharacterStateMachine>().character.dmgMod;
                 if (this.GetComponent<CardDisplay>().critNumOfTargets == 3)
                 {
                     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

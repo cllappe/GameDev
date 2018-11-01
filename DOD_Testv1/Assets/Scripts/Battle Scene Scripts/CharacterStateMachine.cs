@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class CharacterStateMachine : MonoBehaviour
 {
@@ -95,9 +96,31 @@ public class CharacterStateMachine : MonoBehaviour
 				{
 					if (enemyDmgEnabled)
 					{
-						CardBattleManager.enemyTurn = true;
-						Invoke("enemyAttack", 2);
-						enemyDmgEnabled = false;
+						Scene currentScene = SceneManager.GetActiveScene();
+
+						string sceneName = currentScene.name;
+						if (sceneName == "MiniBossBattle")
+						{
+							int miniAttackVar = UnityEngine.Random.Range(0, 100);
+							if (miniAttackVar <= character.luck)
+							{
+								CardBattleManager.enemyTurn = true;
+								Invoke("miniBossSpecialAttack",2);
+								enemyDmgEnabled = false;
+							}
+							else
+							{
+								CardBattleManager.enemyTurn = true;
+								Invoke("enemyAttack", 2);
+								enemyDmgEnabled = false;
+							}
+						}
+						else
+						{
+							CardBattleManager.enemyTurn = true;
+							Invoke("enemyAttack", 2);
+							enemyDmgEnabled = false;	
+						}
 					}
 				}	
 
@@ -159,8 +182,19 @@ public class CharacterStateMachine : MonoBehaviour
 				{
 					if (name == "Enemy 1")
 					{
-						GameObject.Find("Enemy1DropZone").SetActive(false);
-						GameObject.Find("Enemy1UTD").SetActive(false);
+						Scene currentScene = SceneManager.GetActiveScene();
+
+						string sceneName = currentScene.name;
+						if (sceneName == "BattleScene")
+						{
+							GameObject.Find("Enemy1DropZone").SetActive(false);
+							GameObject.Find("Enemy1UTD").SetActive(false);	
+						}
+						else if (sceneName == "MiniBossBattle")
+						{
+							GameObject.Find("MiniBossDropZone").SetActive(false);
+							GameObject.Find("MiniBossUTD").SetActive(false);
+						}
 					}
 					else if (name == "Enemy 2")
 					{
@@ -188,7 +222,7 @@ public class CharacterStateMachine : MonoBehaviour
 				{
 					if (character == GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.First())
 					{
-						if (character.charType == Character.Type.ENEMY && GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount != 0)
+						if ((character.charType == Character.Type.ENEMY ||character.charType == Character.Type.MINIBOSS )&& GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount != 0)
 						{
 							if (character.skipTurn)
 							{
@@ -453,6 +487,46 @@ public class CharacterStateMachine : MonoBehaviour
 			yield return new WaitForSeconds(2);
 			go.transform.GetChild(10).gameObject.SetActive(false);
 		}
+	}
+
+	public void miniBossSpecialAttack()
+	{
+		Debug.Log("MiniBossSpecialAttack function called");
+		if (character.dmgReflected)
+		{
+			//Debug.Log("Damage Should Be Reflected");
+			character.health -= character.basicAttackDmg;
+			character.dmgReflected = false;
+			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
+			GameObject UTD = GameObject.Find("MiniBossUTD");
+			UTD.GetComponent<UltimateTextDamageManager>()
+				.Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+			StartCoroutine(EnemyDmgAnimate(2));
+			StartCoroutine(miniSpecialAttackFX());
+		}
+		else
+		{
+			GameObject PlayerUTD = GameObject.Find("PlayerUTD");
+			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			player.health -= dmg;
+			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
+			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
+			StartCoroutine(miniSpecialAttackFX());
+		}
+		//Debug.Log("Did Damage to Player");
+		actionsLeft--;
+		//Debug.Log(character.name + " " + actionsLeft);
+		CardBattleManager.enemyTurn = false;
+		//enemyDmgEnabled = false;
+		turnMonitor();
+	}
+
+	IEnumerator miniSpecialAttackFX()
+	{
+		GameObject go = GameObject.Find("Animation Master");
+		go.transform.GetChild(18).gameObject.SetActive(true);
+		yield return new WaitForSeconds(2);
+		go.transform.GetChild(18).gameObject.SetActive(false);
 	}
 }
 
