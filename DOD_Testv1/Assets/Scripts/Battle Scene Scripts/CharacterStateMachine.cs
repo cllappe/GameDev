@@ -43,7 +43,7 @@ public class CharacterStateMachine : MonoBehaviour
 			GameObject turnBoxGO = GameObject.Find("Player Notification");
 			turnBox = turnBoxGO.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
 		}
-		else if (character.charType == Character.Type.ENEMY || character.charType == Character.Type.MINIBOSS)
+		else if (character.charType == Character.Type.ENEMY || character.charType == Character.Type.MINIBOSS || character.charType == Character.Type.BOSS)
 		{
 			playerGO = GameObject.Find("Player");
 			player = playerGO.GetComponent<CharacterStateMachine>().character;
@@ -222,7 +222,7 @@ public class CharacterStateMachine : MonoBehaviour
 				{
 					if (character == GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.First())
 					{
-						if ((character.charType == Character.Type.ENEMY ||character.charType == Character.Type.MINIBOSS )&& GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount != 0)
+						if ((character.charType == Character.Type.ENEMY ||character.charType == Character.Type.MINIBOSS || character.charType == Character.Type.BOSS )&& GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount != 0)
 						{
 							if (character.skipTurn)
 							{

@@ -96,6 +96,23 @@ public class LevelManager : MonoBehaviour
             playerCopy = Instantiate(player);
             PlayerSetup();
         }
+        else if (sceneName == "BossBattle")
+        {
+            numberOfEnemies = 1;
+            Debug.Log("BossBattle");
+            enemySpawn.Add(enemy1Spawn);
+            dropZones.Add(GameObject.Find("BossDropZone"));
+            enemyUTDs.Add(GameObject.Find("BossUTD"));
+            enemyId = UnityEngine.Random.Range(0, enemyArray.Count);
+            Debug.Log(enemyId);
+            Character enemyCopy = Instantiate(enemyArray[enemyId]);
+            enemyList.Add(enemyCopy);
+            EnemySetup(enemySpawn[0], 0);
+            dropZones[0].SetActive(true);
+            enemyUTDs[0].SetActive(true);
+            playerCopy = Instantiate(player);
+            PlayerSetup();
+        }
         
     }
 
@@ -115,7 +132,11 @@ public class LevelManager : MonoBehaviour
         string sceneName = currentScene.name;
         if (sceneName == "MiniBossBattle")
         {
-            go1.transform.localScale += new Vector3(1f, 1f, 0);
+            go1.transform.localScale += new Vector3(.5f, .5f, 0);
+        }
+        else if (sceneName == "BossBattle")
+        {
+            go1.transform.localScale += new Vector3(1.25f, 1.25f, 0);
         }
         if (iteration == 0)
         {
