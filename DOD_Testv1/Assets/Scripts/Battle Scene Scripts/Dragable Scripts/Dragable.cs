@@ -319,7 +319,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 if (this.GetComponent<CardDisplay>().turnOnReflect)
                 {
                     dropedOnChar.dmgReflected = true;
-                    CombatLog.GetComponent<CombatLogPopulate>().populate("Reflecting Enemy 1's next attack.",false);
+                    CombatLog.GetComponent<CombatLogPopulate>().populate("Reflecting Mini-Boss's next attack.",false);
                     if (this.GetComponent<CardDisplay>().canCrit)
                     {
                         critMethod(dropedOn,CombatLog);
@@ -348,6 +348,47 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         critMethod(dropedOn,CombatLog);
                     }
                 }
+                StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 2));
+            }            
+            else if (dropZoneName == "BossDropZone")
+            {
+                GameObject EnemyUTD = GameObject.Find("BossUTD");
+                GameObject dropedOn = GameObject.Find("Enemy 1");
+                Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
+                //Debug.Log(dropedOnChar.health);
+                if (this.GetComponent<CardDisplay>().turnOnReflect)
+                {
+                    dropedOnChar.dmgReflected = true;
+                    CombatLog.GetComponent<CombatLogPopulate>().populate("Reflecting Boss's next attack.",false);
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn,CombatLog);
+                    }
+                }
+                else
+                {
+                    int damage = this.GetComponent<CardDisplay>().damage * 
+                                 GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                    dropedOnChar.health -= damage;
+                    EnemyUTD.GetComponent<UltimateTextDamageManager>().Add(damage.ToString(),EnemyUTD.transform.position, "damage");
+                    if (this.GetComponent<CardDisplay>().lifeSteal)
+                    {
+                        GameObject player = GameObject.Find("Player");
+                        player.GetComponent<CharacterStateMachine>().character.health += damage;
+                        if (player.GetComponent<CharacterStateMachine>().character.health > 100)
+                        {
+                            player.GetComponent<CharacterStateMachine>().character.health = 100;
+                        }
+                        GameObject PlayerUTD = GameObject.Find("PlayerUTD");
+                        PlayerUTD.GetComponent<UltimateTextDamageManager>()
+                            .Add(damage.ToString(), PlayerUTD.transform, "heal");
+                    }
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn,CombatLog);
+                    }
+                }
+                
 
                 StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 2));
             }
@@ -546,7 +587,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (CardName == "Scorch")
         {
             go.transform.GetChild(0).gameObject.SetActive(true);
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3);
             go.transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (CardName == "Wave")
@@ -558,7 +599,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         else if (CardName == "Tremor")
         {
             go.transform.GetChild(2).gameObject.SetActive(true);
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3);
             go.transform.GetChild(2).gameObject.SetActive(false);
         }
         else if (CardName == "Drain")

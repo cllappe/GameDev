@@ -115,6 +115,28 @@ public class CharacterStateMachine : MonoBehaviour
 								enemyDmgEnabled = false;
 							}
 						}
+						else if (sceneName == "BossBattle")
+						{
+							int bossAttackVar = UnityEngine.Random.Range(0, 100);
+							if (bossAttackVar <= 20)
+							{
+								CardBattleManager.enemyTurn = true;
+								Invoke("bossSpecialAttack1",2);
+								enemyDmgEnabled = false;
+							}
+							else if (bossAttackVar <= 60 && bossAttackVar > 20)
+							{
+								CardBattleManager.enemyTurn = true;
+								Invoke("bossSpecialAttack2",2);
+								enemyDmgEnabled = false;
+							}
+							else
+							{
+								CardBattleManager.enemyTurn = true;
+								Invoke("enemyAttack", 2);
+								enemyDmgEnabled = false;
+							}
+						}
 						else
 						{
 							CardBattleManager.enemyTurn = true;
@@ -329,7 +351,7 @@ public class CharacterStateMachine : MonoBehaviour
 				Scene currentScene = SceneManager.GetActiveScene();
 
 				string sceneName = currentScene.name;
-				if (sceneName == "MiniBossBattle")
+				if (sceneName == "MiniBossBattle" || sceneName == "BossBattle" )
 				{
 					GameObject UTD = GameObject.Find("MiniBossUTD");
 					UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
@@ -371,7 +393,7 @@ public class CharacterStateMachine : MonoBehaviour
 				Scene currentScene = SceneManager.GetActiveScene();
 
 				string sceneName = currentScene.name;
-				if (sceneName == "MiniBossBattle")
+				if (sceneName == "MiniBossBattle" || sceneName == "BossBattle")
 				{
 					StartCoroutine(AttackFX(2));
 				}
@@ -451,6 +473,7 @@ public class CharacterStateMachine : MonoBehaviour
 		}
 		else if (attackingNum == 2)
 		{
+			Debug.Log("Enemy Attack 2 should turn on");
 			go.transform.GetChild(16).gameObject.SetActive(true);
 			yield return new WaitForSeconds(2);
 			go.transform.GetChild(16).gameObject.SetActive(false);			
@@ -521,12 +544,92 @@ public class CharacterStateMachine : MonoBehaviour
 		turnMonitor();
 	}
 
+	public void bossSpecialAttack1()
+	{
+		Debug.Log("BossSpecialAttack1 function called");
+		if (character.dmgReflected)
+		{
+			//Debug.Log("Damage Should Be Reflected");
+			character.health -= character.basicAttackDmg;
+			character.dmgReflected = false;
+			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
+			GameObject UTD = GameObject.Find("BossUTD");
+			UTD.GetComponent<UltimateTextDamageManager>()
+				.Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+			StartCoroutine(EnemyDmgAnimate(2));
+			StartCoroutine(bossSpecialAttackFX1());
+		}
+		else
+		{
+			GameObject PlayerUTD = GameObject.Find("PlayerUTD");
+			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			player.health -= dmg;
+			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
+			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
+			StartCoroutine(bossSpecialAttackFX1());
+		}
+		//Debug.Log("Did Damage to Player");
+		actionsLeft--;
+		//Debug.Log(character.name + " " + actionsLeft);
+		CardBattleManager.enemyTurn = false;
+		//enemyDmgEnabled = false;
+		turnMonitor();
+	}
+
+	public void bossSpecialAttack2()
+	{
+		Debug.Log("BossSpecialAttack2 function called");
+		if (character.dmgReflected)
+		{
+			//Debug.Log("Damage Should Be Reflected");
+			character.health -= character.basicAttackDmg;
+			character.dmgReflected = false;
+			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
+			GameObject UTD = GameObject.Find("BossUTD");
+			UTD.GetComponent<UltimateTextDamageManager>()
+				.Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+			StartCoroutine(EnemyDmgAnimate(2));
+			StartCoroutine(bossSpecialAttackFX2());
+		}
+		else
+		{
+			GameObject PlayerUTD = GameObject.Find("PlayerUTD");
+			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			player.health -= dmg;
+			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
+			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
+			StartCoroutine(bossSpecialAttackFX2());
+		}
+		//Debug.Log("Did Damage to Player");
+		actionsLeft--;
+		//Debug.Log(character.name + " " + actionsLeft);
+		CardBattleManager.enemyTurn = false;
+		//enemyDmgEnabled = false;
+		turnMonitor();
+	}
+
 	IEnumerator miniSpecialAttackFX()
 	{
 		GameObject go = GameObject.Find("Animation Master");
 		go.transform.GetChild(18).gameObject.SetActive(true);
 		yield return new WaitForSeconds(2);
 		go.transform.GetChild(18).gameObject.SetActive(false);
+	}
+
+	IEnumerator bossSpecialAttackFX1()
+	{
+		GameObject go = GameObject.Find("Animation Master");
+		go.transform.GetChild(19).gameObject.SetActive(true);
+		yield return new WaitForSeconds(2);
+		go.transform.GetChild(19).gameObject.SetActive(false);
+	}
+
+	IEnumerator bossSpecialAttackFX2()
+	{
+		GameObject go = GameObject.Find("Animation Master");
+		go.transform.GetChild(20).gameObject.SetActive(true);
+		yield return new WaitForSeconds(2);
+		go.transform.GetChild(20).gameObject.SetActive(false);
 	}
 }
 
