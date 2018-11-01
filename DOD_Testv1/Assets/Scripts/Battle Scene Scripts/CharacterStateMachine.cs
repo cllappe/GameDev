@@ -5,6 +5,7 @@ using System.Linq;
 using Guirao.UltimateTextDamage;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CharacterStateMachine : MonoBehaviour
@@ -41,7 +42,7 @@ public class CharacterStateMachine : MonoBehaviour
 			GameObject turnBoxGO = GameObject.Find("Player Notification");
 			turnBox = turnBoxGO.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
 		}
-		else if (character.charType == Character.Type.ENEMY)
+		else if (character.charType == Character.Type.ENEMY || character.charType == Character.Type.MINIBOSS)
 		{
 			playerGO = GameObject.Find("Player");
 			player = playerGO.GetComponent<CharacterStateMachine>().character;
@@ -291,10 +292,23 @@ public class CharacterStateMachine : MonoBehaviour
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
 			if (name == "Enemy 1")
 			{
-				GameObject UTD = GameObject.Find("Enemy1UTD");
-				UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
-				StartCoroutine(EnemyDmgAnimate(1));
-				StartCoroutine(AttackFX(1));
+				Scene currentScene = SceneManager.GetActiveScene();
+
+				string sceneName = currentScene.name;
+				if (sceneName == "MiniBossBattle")
+				{
+					GameObject UTD = GameObject.Find("MiniBossUTD");
+					UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+					StartCoroutine(EnemyDmgAnimate(2));
+					StartCoroutine(AttackFX(2));
+				}
+				else
+				{
+					GameObject UTD = GameObject.Find("Enemy1UTD");
+					UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+					StartCoroutine(EnemyDmgAnimate(1));
+					StartCoroutine(AttackFX(1));
+				}
 			}
 			else if (name == "Enemy 2")
 			{
@@ -320,7 +334,17 @@ public class CharacterStateMachine : MonoBehaviour
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
 			if (name == "Enemy 1")
 			{
-				StartCoroutine(AttackFX(1));
+				Scene currentScene = SceneManager.GetActiveScene();
+
+				string sceneName = currentScene.name;
+				if (sceneName == "MiniBossBattle")
+				{
+					StartCoroutine(AttackFX(2));
+				}
+				else
+				{
+					StartCoroutine(AttackFX(1));	
+				}
 			}
 			else if (name == "Enemy 2")
 			{

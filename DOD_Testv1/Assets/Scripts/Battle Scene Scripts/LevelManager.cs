@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -43,35 +44,59 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        enemySpawn.Add(enemy1Spawn);
-        enemySpawn.Add(enemy2Spawn);
-        enemySpawn.Add(enemy3Spawn);
-        dropZones.Add(GameObject.Find("Enemy1DropZone"));
-        dropZones.Add(GameObject.Find("Enemy2DropZone"));
-        dropZones.Add(GameObject.Find("Enemy3DropZone"));
-        enemyUTDs.Add(GameObject.Find("Enemy1UTD"));
-        enemyUTDs.Add(GameObject.Find("Enemy2UTD"));
-        enemyUTDs.Add(GameObject.Find("Enemy3UTD"));
-        for (int i = 0; i < 3; i++)
-        {
-            dropZones[i].SetActive(false);
-            enemyUTDs[i].SetActive(false);
-        }
+        Scene currentScene = SceneManager.GetActiveScene();
 
-        numberOfEnemies = UnityEngine.Random.Range(1, 4);
-        for (int i = 0; i < numberOfEnemies; i++)
+        string sceneName = currentScene.name;
+        if (sceneName == "BattleScene")
         {
+            enemySpawn.Add(enemy1Spawn);
+            enemySpawn.Add(enemy2Spawn);
+            enemySpawn.Add(enemy3Spawn);
+            dropZones.Add(GameObject.Find("Enemy1DropZone"));
+            dropZones.Add(GameObject.Find("Enemy2DropZone"));
+            dropZones.Add(GameObject.Find("Enemy3DropZone"));
+            enemyUTDs.Add(GameObject.Find("Enemy1UTD"));
+            enemyUTDs.Add(GameObject.Find("Enemy2UTD"));
+            enemyUTDs.Add(GameObject.Find("Enemy3UTD"));
+            for (int i = 0; i < 3; i++)
+            {
+                dropZones[i].SetActive(false);
+                enemyUTDs[i].SetActive(false);
+            }
+
+            numberOfEnemies = UnityEngine.Random.Range(1, 4);
+            for (int i = 0; i < numberOfEnemies; i++)
+            {
+                enemyId = UnityEngine.Random.Range(0, enemyArray.Count);
+                Debug.Log(enemyId);
+                Character enemyCopy = Instantiate(enemyArray[enemyId]);
+                enemyList.Add(enemyCopy);
+                EnemySetup(enemySpawn[i], i);
+                dropZones[i].SetActive(true);
+                enemyUTDs[i].SetActive(true);
+            }
+
+            playerCopy = Instantiate(player);
+            PlayerSetup();
+        }
+        else if (sceneName == "MiniBossBattle")
+        {
+            numberOfEnemies = 1;
+            Debug.Log("MiniBossBattle");
+            enemySpawn.Add(enemy1Spawn);
+            dropZones.Add(GameObject.Find("MiniBossDropZone"));
+            enemyUTDs.Add(GameObject.Find("MiniBossUTD"));
             enemyId = UnityEngine.Random.Range(0, enemyArray.Count);
             Debug.Log(enemyId);
             Character enemyCopy = Instantiate(enemyArray[enemyId]);
             enemyList.Add(enemyCopy);
-            EnemySetup(enemySpawn[i], i);
-            dropZones[i].SetActive(true);
-            enemyUTDs[i].SetActive(true);
+            EnemySetup(enemySpawn[0], 0);
+            dropZones[0].SetActive(true);
+            enemyUTDs[0].SetActive(true);
+            playerCopy = Instantiate(player);
+            PlayerSetup();
         }
-
-        playerCopy = Instantiate(player);
-        PlayerSetup();
+        
     }
 
     private void EnemySetup(Transform enemySpawnPoint, int iteration)
@@ -85,6 +110,13 @@ public class LevelManager : MonoBehaviour
         csm1.csm_Set(enemyList[iteration]);
         go1.tag = "Enemy";
         go1.transform.Rotate(Vector3.up * 180);
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        string sceneName = currentScene.name;
+        if (sceneName == "MiniBossBattle")
+        {
+            go1.transform.localScale += new Vector3(1f, 1f, 0);
+        }
         if (iteration == 0)
         {
             display1.healthBarGO = go1.transform.GetChild(0).GetChild(1).gameObject;

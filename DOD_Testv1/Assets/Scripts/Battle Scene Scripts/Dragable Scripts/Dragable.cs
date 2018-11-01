@@ -310,6 +310,47 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 }
                 StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 4));
             }
+            else if (dropZoneName == "MiniBossDropZone")
+            {
+                GameObject EnemyUTD = GameObject.Find("MiniBossUTD");
+                GameObject dropedOn = GameObject.Find("Enemy 1");
+                Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
+                //Debug.Log(dropedOnChar.health);
+                if (this.GetComponent<CardDisplay>().turnOnReflect)
+                {
+                    dropedOnChar.dmgReflected = true;
+                    CombatLog.GetComponent<CombatLogPopulate>().populate("Reflecting Enemy 1's next attack.",false);
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn,CombatLog);
+                    }
+                }
+                else
+                {
+                    int damage = this.GetComponent<CardDisplay>().damage * 
+                                 GameObject.Find("Player").GetComponent<CharacterStateMachine>().character.dmgMod;
+                    dropedOnChar.health -= damage;
+                    EnemyUTD.GetComponent<UltimateTextDamageManager>().Add(damage.ToString(),EnemyUTD.transform.position, "damage");
+                    if (this.GetComponent<CardDisplay>().lifeSteal)
+                    {
+                        GameObject player = GameObject.Find("Player");
+                        player.GetComponent<CharacterStateMachine>().character.health += damage;
+                        if (player.GetComponent<CharacterStateMachine>().character.health > 100)
+                        {
+                            player.GetComponent<CharacterStateMachine>().character.health = 100;
+                        }
+                        GameObject PlayerUTD = GameObject.Find("PlayerUTD");
+                        PlayerUTD.GetComponent<UltimateTextDamageManager>()
+                            .Add(damage.ToString(), PlayerUTD.transform, "heal");
+                    }
+                    if (this.GetComponent<CardDisplay>().canCrit)
+                    {
+                        critMethod(dropedOn,CombatLog);
+                    }
+                }
+
+                StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 2));
+            }
         }
         else
         {
