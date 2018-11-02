@@ -15,9 +15,13 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 931f14c31d60744cb8e9956a433969ee, type: 3}
   health: 15
   luck: 0
-  basicAttackDmg: 3
+  basicAttackDmg: 2
   healthBar: {fileID: 0}
   dmgReflected: 0
   defence: 0
   dmgMod: 0
   skipTurn: 0
+  specialPrecent1: 0
+  specialPrecent2: 0
+  specialMod1: 0
+  specialMod2: 0

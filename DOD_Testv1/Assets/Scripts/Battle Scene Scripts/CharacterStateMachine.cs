@@ -102,7 +102,7 @@ public class CharacterStateMachine : MonoBehaviour
 						if (sceneName == "MiniBossBattle")
 						{
 							int miniAttackVar = UnityEngine.Random.Range(0, 100);
-							if (miniAttackVar <= character.luck)
+							if (miniAttackVar <= character.specialPrecent1)
 							{
 								CardBattleManager.enemyTurn = true;
 								Invoke("miniBossSpecialAttack",2);
@@ -118,13 +118,13 @@ public class CharacterStateMachine : MonoBehaviour
 						else if (sceneName == "BossBattle")
 						{
 							int bossAttackVar = UnityEngine.Random.Range(0, 100);
-							if (bossAttackVar <= 20)
+							if (bossAttackVar <= character.specialMod1)
 							{
 								CardBattleManager.enemyTurn = true;
 								Invoke("bossSpecialAttack1",2);
 								enemyDmgEnabled = false;
 							}
-							else if (bossAttackVar <= 60 && bossAttackVar > 20)
+							else if (bossAttackVar <= character.specialMod1 + character.specialMod2 && bossAttackVar > character.specialMod1)
 							{
 								CardBattleManager.enemyTurn = true;
 								Invoke("bossSpecialAttack2",2);
@@ -351,9 +351,16 @@ public class CharacterStateMachine : MonoBehaviour
 				Scene currentScene = SceneManager.GetActiveScene();
 
 				string sceneName = currentScene.name;
-				if (sceneName == "MiniBossBattle" || sceneName == "BossBattle" )
+				if (sceneName == "MiniBossBattle")
 				{
 					GameObject UTD = GameObject.Find("MiniBossUTD");
+					UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+					StartCoroutine(EnemyDmgAnimate(2));
+					StartCoroutine(AttackFX(2));
+				}
+				else if (sceneName == "BossBattle")
+				{
+					GameObject UTD = GameObject.Find("BossUTD");
 					UTD.GetComponent<UltimateTextDamageManager>().Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
 					StartCoroutine(EnemyDmgAnimate(2));
 					StartCoroutine(AttackFX(2));
@@ -518,19 +525,19 @@ public class CharacterStateMachine : MonoBehaviour
 		if (character.dmgReflected)
 		{
 			//Debug.Log("Damage Should Be Reflected");
-			character.health -= character.basicAttackDmg;
+			character.health -= (int)(character.basicAttackDmg * character.specialMod1);
 			character.dmgReflected = false;
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
 			GameObject UTD = GameObject.Find("MiniBossUTD");
 			UTD.GetComponent<UltimateTextDamageManager>()
-				.Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+				.Add((character.basicAttackDmg * character.specialMod1).ToString(), UTD.transform, "damage");
 			StartCoroutine(EnemyDmgAnimate(2));
 			StartCoroutine(miniSpecialAttackFX());
 		}
 		else
 		{
 			GameObject PlayerUTD = GameObject.Find("PlayerUTD");
-			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * character.specialMod1 * player.defence);
 			player.health -= dmg;
 			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
@@ -550,19 +557,19 @@ public class CharacterStateMachine : MonoBehaviour
 		if (character.dmgReflected)
 		{
 			//Debug.Log("Damage Should Be Reflected");
-			character.health -= character.basicAttackDmg;
+			character.health -= (int)(character.basicAttackDmg * character.specialMod1);
 			character.dmgReflected = false;
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
 			GameObject UTD = GameObject.Find("BossUTD");
 			UTD.GetComponent<UltimateTextDamageManager>()
-				.Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+				.Add((character.basicAttackDmg * character.specialMod1).ToString(), UTD.transform, "damage");
 			StartCoroutine(EnemyDmgAnimate(2));
 			StartCoroutine(bossSpecialAttackFX1());
 		}
 		else
 		{
 			GameObject PlayerUTD = GameObject.Find("PlayerUTD");
-			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * character.specialMod1 * player.defence);
 			player.health -= dmg;
 			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();
@@ -582,19 +589,19 @@ public class CharacterStateMachine : MonoBehaviour
 		if (character.dmgReflected)
 		{
 			//Debug.Log("Damage Should Be Reflected");
-			character.health -= character.basicAttackDmg;
+			character.health -= (int)(character.basicAttackDmg * character.specialMod2);
 			character.dmgReflected = false;
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdateHealthBars();
 			GameObject UTD = GameObject.Find("BossUTD");
 			UTD.GetComponent<UltimateTextDamageManager>()
-				.Add(character.basicAttackDmg.ToString(), UTD.transform, "damage");
+				.Add((character.basicAttackDmg * character.specialMod2).ToString(), UTD.transform, "damage");
 			StartCoroutine(EnemyDmgAnimate(2));
 			StartCoroutine(bossSpecialAttackFX2());
 		}
 		else
 		{
 			GameObject PlayerUTD = GameObject.Find("PlayerUTD");
-			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * player.defence);
+			int dmg =  Mathf.RoundToInt(character.basicAttackDmg * character.specialMod2 * player.defence);
 			player.health -= dmg;
 			PlayerUTD.GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(), PlayerUTD.transform, "damage");
 			GameObject.Find("LevelManager").GetComponent<LevelManager>().UpdatePlayerHealthBar();

@@ -17,6 +17,10 @@ public class CharacterDisplay : MonoBehaviour {
     public float defence;
     public int dmgMod;
     public bool skipTurn;
+    public int specialPrecent1;
+    public int specialPrecent2;
+    public float specialMod1;
+    public float specialMod2;
 
     public void characterSetup(Character thisCharacter){
         myCharacter = thisCharacter;
@@ -30,6 +34,10 @@ public class CharacterDisplay : MonoBehaviour {
         defence = myCharacter.defence;
         dmgMod = myCharacter.dmgMod;
         skipTurn = myCharacter.skipTurn;
+        specialPrecent1 = myCharacter.specialPrecent1;
+        specialPrecent2 = myCharacter.specialPrecent2;
+        specialMod1 = myCharacter.specialMod1;
+        specialMod2 = myCharacter.specialMod2;
 
     }
 }

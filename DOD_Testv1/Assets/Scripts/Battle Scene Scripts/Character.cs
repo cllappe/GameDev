@@ -24,5 +24,11 @@ public class Character : ScriptableObject{
     public float defence;
     public int dmgMod;
     public bool skipTurn = false;
+    public int specialPrecent1;
+    public int specialPrecent2;
+    public float specialMod1;
+    public float specialMod2;
+    
+
 
 }

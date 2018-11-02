@@ -42,6 +42,7 @@ public class CardBattleManager : MonoBehaviour {
         for (int j = 0; j < 25; j++)
         {
             inUseDeck.Add(deck.cards[j]);
+            inUseDeck.Add(deck.cards[j]);
         }
         for (int i = 0; i < 5; i++){
             GameObject go = Instantiate(cardPrefab) as GameObject;
