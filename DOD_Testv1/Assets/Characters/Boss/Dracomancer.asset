@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charType: 3
   avatar: {fileID: 21300000, guid: 9d647dc94c0fc49ff92632b72119d72f, type: 3}
-  health: 100
+  health: 80
   luck: 0
   basicAttackDmg: 22
   healthBar: {fileID: 0}
