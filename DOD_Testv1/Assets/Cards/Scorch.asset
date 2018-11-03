@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 0
   cardName: Scorch
-  discription: Deal 2 damage to all enemies
+  discription: Deal 4 damage to all enemies
   art: {fileID: 21300000, guid: 8d3687ceea6f645dcb769ee5a28e26d1, type: 3}
   targets: 1
   type: 2
-  damage: 2
+  damage: 4
   numberOfTargets: 3
   lifeSteal: 0
   heal: 0

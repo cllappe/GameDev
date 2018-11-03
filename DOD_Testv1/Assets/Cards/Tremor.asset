@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 0
   cardName: Tremor
-  discription: Deal 2 damage to all enemies
+  discription: Deal 4 damage to all enemies
   art: {fileID: 21300000, guid: ca2297a11c3e84fde924f3287cee2685, type: 3}
   targets: 1
   type: 2
-  damage: 2
+  damage: 4
   numberOfTargets: 3
   lifeSteal: 0
   heal: 0

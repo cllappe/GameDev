@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 0
   cardName: Wave
-  discription: Deal 2 damage to all Enemies
+  discription: Deal 4 damage to all Enemies
   art: {fileID: 21300000, guid: c70e2a4630b54437db5d120f93e7c2e3, type: 3}
   targets: 1
   type: 2
-  damage: 2
+  damage: 4
   numberOfTargets: 3
   lifeSteal: 0
   heal: 0

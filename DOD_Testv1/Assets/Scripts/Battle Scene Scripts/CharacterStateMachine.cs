@@ -295,6 +295,7 @@ public class CharacterStateMachine : MonoBehaviour
 				turnBox.text = "VICTORY!";
 				GameObject go = GameObject.Find("Animation Master");
 				go.transform.GetChild(13).gameObject.SetActive(true);
+				GameObject.Find("HealthHolder").GetComponent<HealthHolder>().playerHealth = character.health;
 				enabled = false;
 				break;
 			}

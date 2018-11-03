@@ -325,6 +325,7 @@
               <e p="Dragable.cs" t="Include" />
             </e>
             <e p="DropZone.cs" t="Include" />
+            <e p="HealthHolder.cs" t="Include" />
             <e p="LevelManager.cs" t="Include" />
           </e>
           <e p="Damageable.cs" t="Include" />
