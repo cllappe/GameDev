@@ -272,7 +272,7 @@ RectTransform:
   m_Father: {fileID: 708445461}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.00000011920929}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -748,7 +748,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 67265494}
   m_HandleRect: {fileID: 67265493}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1145,7 +1145,7 @@ SpriteRenderer:
   m_Size: {x: 0.7, y: 0.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &494576851
@@ -12893,7 +12893,7 @@ SpriteRenderer:
   m_Size: {x: 0.49, y: 0.77}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1261351473
@@ -18463,7 +18463,7 @@ SpriteRenderer:
   m_Size: {x: 0.7, y: 0.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1468907813
@@ -29243,7 +29243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00001542916, y: 0.000022888184}
+  m_AnchoredPosition: {x: -0.00001542916, y: 0.0000076293945}
   m_SizeDelta: {x: -142.554, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1865775252

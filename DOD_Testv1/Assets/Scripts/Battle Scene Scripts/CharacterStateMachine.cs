@@ -93,6 +93,15 @@ public class CharacterStateMachine : MonoBehaviour
 							GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount++;
 							//Debug.Log(GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount);
 						}
+						else if (GameObject.Find("Hand").transform.childCount == 0)
+						{
+							actionsLeft = 0;
+							Dragable.playerTurn = false;
+							CardBattleManager.draw1card = true;
+							GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount++;
+							GameObject CombatLog = GameObject.Find("Combat Log");
+							CombatLog.GetComponent<CombatLogPopulate>().populate("You ran out of cards. Unfortunate.", false);
+						}
 						//Debug.Log("CSM " + actionsLeft);
 						Dragable.validDrop = false;
 					}
