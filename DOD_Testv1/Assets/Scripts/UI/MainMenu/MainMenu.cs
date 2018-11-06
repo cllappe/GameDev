@@ -23,9 +23,6 @@ public class MainMenu : MonoBehaviour
 
     public void ContinueGame()
     {
-        //PlayerData continueData = new PlayerData();
-        //continueData = SaveGame.Load<PlayerData>("PlayerData/Position");
-        //SceneManager.LoadScene(continueData.lastLevel);
         SaveSystem.LoadFromSlot(0);
         SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
     }
@@ -35,6 +32,17 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Quit Game");
         SceneManager.LoadScene("Game_Intro");
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    private void OnGUI()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 }

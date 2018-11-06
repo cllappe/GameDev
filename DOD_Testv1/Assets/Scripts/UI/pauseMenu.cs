@@ -10,6 +10,7 @@ public class pauseMenu : MonoBehaviour {
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
     Scene CurrentScene;
+
     private PlayerController player;
     private HealthBar hp;
 
@@ -35,6 +36,7 @@ public class pauseMenu : MonoBehaviour {
             }
         }
 	}
+
     public void ResumeGame()
     {
         PauseMenuUI.SetActive(false);
@@ -47,6 +49,7 @@ public class pauseMenu : MonoBehaviour {
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
+
     public void ReturnToHub()
     {
         PauseMenuUI.SetActive(false);
@@ -54,38 +57,30 @@ public class pauseMenu : MonoBehaviour {
         GameIsPaused = false;
         SceneManager.LoadScene("LevelSelect");
         SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
-
     }
+
     public void ResetLevel()
     {
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        SceneManager.LoadScene(CurrentScene.name);
+        SceneManager.LoadScene("Dungeon_V1");
         SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
     }
+
     public void QuitGame()
     {
-        //C:\Users\Austi\AppData\LocalLow\ReverieMachine\Reverie
+        string sceneName = CurrentScene.name;
 
-        //PlayerData cData = new PlayerData();
-        //cData.lastLevel = CurrentScene.buildIndex;
-        //cData.gold = player.Gold;
-        //cData.health = hp.health;
-        //SaveGame.Save("PlayerData/Position", cData);
-
-
-        //enemy = GameObject.FindGameObjectsWithTag("Enemy");
-
-
-
-        SaveSystem.SaveToSlot(0);
-
+        if(sceneName == "Dungeon_V1")
+            SaveSystem.SaveToSlot(0);
 
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        SceneManager.UnloadSceneAsync("Pause_Menu");
         SceneManager.LoadScene("Game_Intro");
+
 
     }
 }

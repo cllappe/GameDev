@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using PixelCrushers.DialogueSystem;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -16,12 +16,10 @@ public class PlayerController : MonoBehaviour {
     int clickNum = 1;
     Animator anim;
 
-
     //Health 
     public static int maxHealth = 100; // Minimum health is 0.0f (dead)
     public int currentHealth = 100; // Players current health
     public float healthBarLenght;
-    //public Texture healthBarFull;
 
     //Gold
     public int Gold;
@@ -34,8 +32,11 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void Start () {
+        
         rb2d = GetComponent<Rigidbody2D> ();
         anim = GetComponent<Animator> ();
+
+
 
         // Load Player data (i.e. gold, hp, etc)      
         if (PlayerPrefs.HasKey("Save0"))
@@ -49,17 +50,19 @@ public class PlayerController : MonoBehaviour {
             currentHealth = 100;
         }
 
+        //Save Gold after Battle 
+        if(PlayerPrefs.HasKey("Save1"))
+            Gold = DialogueLua.GetActorField("Player", "gold").asInt;
 
-        if (PlayerPrefs.GetInt("lastlevel") == 7 || PlayerPrefs.GetInt("lastlevel") == 8 || PlayerPrefs.GetInt("lastlevel") == 9)
+        //
+        //if (PlayerPrefs.GetInt("lastlevel") == 7 || PlayerPrefs.GetInt("lastlevel") == 8 || PlayerPrefs.GetInt("lastlevel") == 9)
+        if (PlayerPrefs.GetString("lastlevel") == "battle")
         {
-            Debug.Log("Came from battle");
             currentHealth = PlayerPrefs.GetInt("battlehp");
             PlayerPrefs.DeleteKey("battlehp");
             PlayerPrefs.DeleteKey("lastlevel");
-            Debug.Log("battlehp = " + PlayerPrefs.GetInt("battlehp"));
-            Debug.Log("lastlevel = " + PlayerPrefs.GetInt("lastlevel"));
         } 
-
+        
         // Set Gold UI text element
         GoldCount.text = "Gold: " + Gold.ToString();
 
@@ -75,11 +78,9 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentHealth = currentHealth - 10;
-            //SaveHealth();
         }
 
         HealthBarfull.fillAmount = currentHealth / 100f;
-
     }
 
     void OnGUI()
@@ -133,10 +134,8 @@ public class PlayerController : MonoBehaviour {
         
         if (Input.GetButtonDown("Fire1"))
         {
-            
             anim.SetFloat("Attack", clickNum);
             attack = true;
-
         }
 
         if (Input.GetButtonDown("Fire2") && anim.GetFloat("Speed") > 0.1)
@@ -165,8 +164,6 @@ public class PlayerController : MonoBehaviour {
                 Flip();
             else if (x < 0 && facingRight)
                 Flip();
-
-            
         }
 
     }
@@ -206,17 +203,14 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D Pickup)
     {
-        //if(Pickup.gameObject.CompareTag("currency"))
-        //{
-            if (Pickup.gameObject.CompareTag("Coin"))
-                Gold += 1;
-            else if (Pickup.gameObject.CompareTag("Money Bag"))
-                Gold += 15;
-            else if (Pickup.gameObject.CompareTag("Gold Bar"))
-                Gold += 25;
-            setGoldText();
 
-
+        if (Pickup.gameObject.CompareTag("Coin"))
+            Gold += 1;
+        else if (Pickup.gameObject.CompareTag("Money Bag"))
+            Gold += 15;
+        else if (Pickup.gameObject.CompareTag("Gold Bar"))
+            Gold += 25;
+        setGoldText();
 
         if (Pickup.gameObject.CompareTag("Carrot"))
             currentHealth += 10;
@@ -224,12 +218,6 @@ public class PlayerController : MonoBehaviour {
             currentHealth += 15;
         else if (Pickup.gameObject.CompareTag("Steak"))
             currentHealth += 25;
-        //setGoldText();
-        //}
-        //if(Pickup.gameObject.CompareTag(""))
-        //{
-            
-        //}
     }
 
     void setGoldText()
@@ -239,6 +227,7 @@ public class PlayerController : MonoBehaviour {
 
     public void OnRecordPersistentData()
     {
+        //Saving Health :]
         DialogueLua.SetActorField("Player", "gold", Gold);
         DialogueLua.SetActorField("Player", "health", currentHealth);
     

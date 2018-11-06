@@ -12,6 +12,9 @@ TagManager:
   - Steak
   - Carrot
   - Grapes
+  - NEnemy
+  - MEnemy
+  - BEnemy
   layers:
   - Default
   - TransparentFX

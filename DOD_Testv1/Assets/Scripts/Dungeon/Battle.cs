@@ -11,6 +11,7 @@ public class Battle : MonoBehaviour {
 
     private void Awake()
     {
+ 
         ds = this.gameObject.GetComponent<DestructibleSaver>();
     }
 
@@ -19,16 +20,16 @@ public class Battle : MonoBehaviour {
     {
         if (Colider.gameObject.name == "Player")
         {
-
+            PlayerPrefs.SetString("Enemy", gameObject.name);
             //gameObject.SetActive(false);
             ds._isDestroyed = true;
             Destroy(gameObject);
             SaveSystem.SaveToSlot(1);
 
 
-            //SceneManager.LoadSceneAsync("BattleScene");
-            //SceneManager.LoadSceneAsync("MiniBossBattle");
-            SceneManager.LoadSceneAsync("BossBattle");
+          
+            SceneManager.LoadSceneAsync(level);
+
             SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
         }
         

@@ -40,6 +40,7 @@ public class CharacterStateMachine : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        //Setting Battle as the LAST LEVEL for Save 
         PlayerPrefs.SetInt("lastLevel", SceneManager.GetActiveScene().buildIndex);
 
 		if (character.charType == Character.Type.PLAYER)
@@ -51,6 +52,7 @@ public class CharacterStateMachine : MonoBehaviour
 		{
 			playerGO = GameObject.Find("Player");
 			player = playerGO.GetComponent<CharacterStateMachine>().character;
+            //Getting Health from Dungeon 
             player.health = DialogueLua.GetActorField("Player", "health").asInt;
 		}
 		currentState = TurnState.BEGINING;
@@ -307,8 +309,15 @@ public class CharacterStateMachine : MonoBehaviour
 			case (TurnState.VICTORY):
 			{
                 turnBox.text = "VICTORY!";
+                
+                //Saved HP after Winning Battle 
+                //PlayerPrefs.SetInt("lastlevel", SceneManager.GetActiveScene().buildIndex);                 PlayerPrefs.SetInt("battlehp", character.health);
+                PlayerPrefs.SetString("lastlevel", "battle");
+                //Win Animation                  GameObject go = GameObject.Find("Animation Master");                 go.transform.GetChild(13).gameObject.SetActive(true);                 enabled = false;
 
-                PlayerPrefs.SetInt("lastlevel", SceneManager.GetActiveScene().buildIndex);                 PlayerPrefs.SetInt("battlehp", character.health);                 GameObject go = GameObject.Find("Animation Master");                 go.transform.GetChild(13).gameObject.SetActive(true);                 enabled = false;                 LevelManager.numberOfEnemies = 0;                 CardBattleManager.deadEnemies = 0;                 // Loading player position in dungeon before battle                 SaveSystem.LoadFromSlot(1);                 SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);                         break; 
+                //Reset State Machine                          LevelManager.numberOfEnemies = 0;                 CardBattleManager.deadEnemies = 0;
+                 // Loading player position in dungeon before battle & Menu                 SaveSystem.LoadFromSlot(1);                 SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive); 
+                 break; 
 			}
 			case (TurnState.DEFEAT):
 			{
@@ -316,6 +325,10 @@ public class CharacterStateMachine : MonoBehaviour
 				GameObject go = GameObject.Find("Animation Master");
 				go.transform.GetChild(10).SetPositionAndRotation(new Vector3(-5, 0, 4), Quaternion.identity);
 				go.transform.GetChild(10).gameObject.SetActive(true);
+                
+                Time.timeScale = 1f;
+                SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);
+
 				enabled = false;
 				break;
 			}
