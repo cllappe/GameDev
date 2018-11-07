@@ -78,6 +78,12 @@
             </e>
           </e>
         </e>
+        <e p="Editor" t="Include">
+          <e p="DamageableEdititor.cs" t="Include" />
+          <e p="DamagerEdititor.cs" t="Include" />
+          <e p="DataPersistantEdititor.cs" t="Include" />
+          <e p="PlayerPrefsReset.cs" t="Include" />
+        </e>
         <e p="HD_Background_Art" t="Include">
           <e p="Readme.txt" t="Include" />
         </e>
@@ -1802,16 +1808,14 @@
             <e p="LevelManager.cs" t="Include" />
           </e>
           <e p="Damageable.cs" t="Include" />
-          <e p="DamageableEdititor.cs" t="Include" />
           <e p="Damager.cs" t="Include" />
-          <e p="DamagerEdititor.cs" t="Include" />
           <e p="Data" t="Include">
             <e p="Player_Prefs.cs" t="Include" />
           </e>
-          <e p="DataPersistantEdititor.cs" t="Include" />
           <e p="Dungeon" t="Include">
             <e p="Battle.cs" t="Include" />
             <e p="CameraController.cs" t="Include" />
+            <e p="ChestSpawn.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="ShopAnimation.cs" t="Include" />
             <e p="SkeletonAI.cs" t="Include" />
@@ -1823,6 +1827,7 @@
           <e p="InteractonTrigger2D.cs" t="Include" />
           <e p="InventoryController.cs" t="Include" />
           <e p="LayerMaskExtensions.cs" t="Include" />
+          <e p="LoadingScreenControl.cs" t="Include" />
           <e p="LocalTransformDuplicator.cs" t="Include" />
           <e p="Loot.cs" t="Include" />
           <e p="Movement.cs" t="Include" />
@@ -1834,6 +1839,7 @@
             <e p="PlayerStats.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
+            <e p="gameOver.cs" t="Include" />
             <e p="Intro" t="Include">
               <e p="delayAnimation.cs" t="Include" />
               <e p="fadeIn.cs" t="Include" />

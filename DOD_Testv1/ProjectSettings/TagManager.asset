@@ -15,6 +15,9 @@ TagManager:
   - NEnemy
   - MEnemy
   - BEnemy
+  - FxTemporaire
+  - UTD
+  - Loading
   layers:
   - Default
   - TransparentFX
@@ -24,7 +27,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Loading
   - 
   - 
   - 
