@@ -14,10 +14,10 @@ public class DungeonAudioController : MonoBehaviour {
 
 	void Footstep()
     {
-        //soundSource.PlayOneShot(sounds[0], 1.0f);
+        soundSource.PlayOneShot(sounds[0], 1.0f);
     }
 
-    void Slide()
+    public void Slide()
     {
         soundSource.PlayOneShot(sounds[1], 1.0f);
     }
@@ -25,5 +25,15 @@ public class DungeonAudioController : MonoBehaviour {
     void Attack()
     {
         soundSource.PlayOneShot(sounds[2], 1.0f);
+    }
+
+    public void Barrel()
+    {
+        //soundSource.PlayOneShot(sounds[3], 1.0f);
+    }
+
+    public void Chest()
+    {
+        //soundSource.PlayOneShot(sounds[4], 1.0f);
     }
 }

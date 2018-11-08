@@ -16,7 +16,7 @@ public class loadMenu : MonoBehaviour
         if (Input.anyKey)
         {
             StartCoroutine(Fading());
-           // SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenu");
 
         }
     }
@@ -26,7 +26,7 @@ public class loadMenu : MonoBehaviour
         animator.SetBool("Fade", true);
         yield return new WaitUntil(() => Mathf.Approximately(black.color.a, 1));
         //SceneManager.LoadScene(index);
-        SceneManager.LoadScene("MainMenu");
+       // SceneManager.LoadScene("MainMenu");
     }
 
 }

@@ -8,11 +8,15 @@ public class Battle : MonoBehaviour {
 
     public string level;
     private DestructibleSaver ds;
+    //private LoadingScreenBattle loadingScreen;
+    //public GameObject lscontroller;
+
 
     private void Awake()
     {
  
         ds = this.gameObject.GetComponent<DestructibleSaver>();
+       // loadingScreen = lscontroller.GetComponent<LoadingScreenBattle>();
     }
 
     // Use this for initialization
@@ -26,9 +30,8 @@ public class Battle : MonoBehaviour {
             Destroy(gameObject);
             SaveSystem.SaveToSlot(1);
 
-
-          
-            SceneManager.LoadSceneAsync(level);
+            //loadingScreen.LoadScreen(level);
+            SceneManager.LoadScene(level);
 
             SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
         }

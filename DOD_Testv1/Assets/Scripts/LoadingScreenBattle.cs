@@ -4,21 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LoadingScreenControl : MonoBehaviour
-{
+public class LoadingScreenBattle : MonoBehaviour {
 
-    public GameObject loadingScreenObject;
-    public Slider slider;
+	// Use this for initialization
+     public GameObject loadingScreenObject;
+     public Slider slider;
 
     private AsyncOperation async;
 
-    public void LoadScreen(int loadIndex)
+    public void LoadScreen(string loadIndex)
     {
         StartCoroutine(LoadingScreen(loadIndex));
         SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
     }
 
-    IEnumerator LoadingScreen(int sceneIndex)
+    IEnumerator LoadingScreen(string sceneIndex)
     {
         loadingScreenObject.SetActive(true);
         async = SceneManager.LoadSceneAsync(sceneIndex);
