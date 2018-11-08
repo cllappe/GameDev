@@ -673,9 +673,9 @@ public class CharacterStateMachine : MonoBehaviour
 
 	public void toDungeon()
 	{  
-		SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
 		GameObject.Find("LoadingScreenControl").GetComponent<LoadingScreenControl>().LoadScreen(9);
 		SaveSystem.LoadFromSlot(1); 
+		SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
 	}
 }
 

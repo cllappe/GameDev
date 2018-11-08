@@ -21,7 +21,6 @@ public class LoadingScreenControl : MonoBehaviour
     {
         Debug.Log("LOADING SCREEN:" + sceneIndex);
         loadingScreenObject.SetActive(true);
-        SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
         async = SceneManager.LoadSceneAsync(sceneIndex);
         async.allowSceneActivation = false;
 
@@ -33,6 +32,7 @@ public class LoadingScreenControl : MonoBehaviour
             {
                 slider.value = 1f;
                 async.allowSceneActivation = true;
+                SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
                 yield return null;
             }
         }
