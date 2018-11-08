@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8063cd61-a9c4-4826-ac99-fb8940b3ae6b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DOD_Testv1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DOD_Testv1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Battle Scene Scripts/CharacterStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Battle Scene Scripts/CharacterStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LoadingScreenControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LoadingScreenControl.cs" afterDir="false" />
-    </list>
+    <list default="true" id="8063cd61-a9c4-4826-ac99-fb8940b3ae6b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +12,7 @@
     <session id="-1046673556">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -258,8 +254,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Battle Scene Scripts/CharacterStateMachine.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="677" column="69" selection-start-line="677" selection-start-column="69" selection-end-line="677" selection-end-column="69" />
+            <state relative-caret-position="343">
+              <caret line="668" column="61" lean-forward="true" selection-start-line="668" selection-start-column="61" selection-end-line="668" selection-end-column="61" />
               <folding>
                 <marker date="1541705965394" expanded="false" signature="6:310" ph="..." />
                 <marker date="1541705965394" expanded="true" signature="362:22013" ph="{...}" />
@@ -535,12 +531,12 @@
       <workItem from="1541341671283" duration="2288000" />
       <workItem from="1541695034627" duration="4954000" />
       <workItem from="1541703959662" duration="549000" />
-      <workItem from="1541705279836" duration="738000" />
+      <workItem from="1541705279836" duration="815000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18847000" />
+    <option name="totallyTimeSpent" value="19019000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -845,8 +841,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Battle Scene Scripts/CharacterStateMachine.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="677" column="69" selection-start-line="677" selection-start-column="69" selection-end-line="677" selection-end-column="69" />
+        <state relative-caret-position="343">
+          <caret line="668" column="61" lean-forward="true" selection-start-line="668" selection-start-column="61" selection-end-line="668" selection-end-column="61" />
           <folding>
             <marker date="1541705965394" expanded="false" signature="6:310" ph="..." />
             <marker date="1541705965394" expanded="true" signature="362:22013" ph="{...}" />
