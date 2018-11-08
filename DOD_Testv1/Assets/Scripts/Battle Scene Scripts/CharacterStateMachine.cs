@@ -310,13 +310,20 @@ public class CharacterStateMachine : MonoBehaviour
 			{
                 turnBox.text = "VICTORY!";
                 
-                //Saved HP after Winning Battle                  PlayerPrefs.SetInt("battlehp", character.health);
+                //Saved HP after Winning Battle                  
+				PlayerPrefs.SetInt("battlehp", character.health);
                 PlayerPrefs.SetString("lastlevel", "battle");
 
-                //Win Animation                  GameObject go = GameObject.Find("Animation Master");                 go.transform.GetChild(13).gameObject.SetActive(true);                 enabled = false;
+                //Win Animation                  
+				GameObject go = GameObject.Find("Animation Master");                 
+				go.transform.GetChild(13).gameObject.SetActive(true);                 
+				enabled = false;
 
-                //Reset State Machine                          LevelManager.numberOfEnemies = 0;                 CardBattleManager.deadEnemies = 0;
-                 // Loading player position in dungeon before battle & Menu                 SaveSystem.LoadFromSlot(1);                 SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive); 
+                //Reset State Machine                          
+				LevelManager.numberOfEnemies = 0;                 
+				CardBattleManager.deadEnemies = 0;
+                 // Loading player position in dungeon before battle & Menu
+				Invoke("toDungeon",3);
                  break; 
 			}
 			case (TurnState.DEFEAT):
@@ -662,6 +669,13 @@ public class CharacterStateMachine : MonoBehaviour
 		go.transform.GetChild(20).gameObject.SetActive(true);
 		yield return new WaitForSeconds(2);
 		go.transform.GetChild(20).gameObject.SetActive(false);
+	}
+
+	public void toDungeon()
+	{
+		GameObject.Find("LoadingScreenControl").GetComponent<LoadingScreenControl>().LoadScreen(9);
+		SaveSystem.LoadFromSlot(1);   
+		SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
 	}
 }
 
