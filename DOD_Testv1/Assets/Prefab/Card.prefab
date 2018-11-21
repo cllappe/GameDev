@@ -87,10 +87,10 @@ GameObject:
   - component: {fileID: 224250522714967544}
   - component: {fileID: 114438144538715556}
   - component: {fileID: 225086004634342970}
-  - component: {fileID: 65132785055021154}
   - component: {fileID: 114052867681786320}
   - component: {fileID: 114262164117654122}
   - component: {fileID: 114556155741697580}
+  - component: {fileID: 54312352664741238}
   m_Layer: 10
   m_Name: Card
   m_TagString: Untagged
@@ -180,18 +180,21 @@ Transform:
   m_Father: {fileID: 224250522714967544}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65132785055021154
-BoxCollider:
+--- !u!54 &54312352664741238
+Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364672442513524}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.3504624, y: 7.117405, z: 0.010000002}
-  m_Center: {x: 0.015010834, y: -0.07846911, z: -0.02}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!114 &114052867681786320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,7 +209,7 @@ MonoBehaviour:
   cardFront: {fileID: 224138213426441780}
   cardBack: {fileID: 224377320798783598}
   TargetFacePoint: {fileID: 4914513418124092}
-  col: {fileID: 65132785055021154}
+  col: {fileID: 0}
 --- !u!114 &114164082564471848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,6 +384,9 @@ MonoBehaviour:
   parentToReturnTo: {fileID: 0}
   placeholderParent: {fileID: 0}
   mouseOffset: 0
+  rb: {fileID: 0}
+  hovering: 0
+  terminateHover: 0
 --- !u!114 &114682633387711314
 MonoBehaviour:
   m_ObjectHideFlags: 1
