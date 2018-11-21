@@ -500,6 +500,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         int blessingValue = Random.Range(0, 100);
         if (blessingValue <= player.GetComponent<CharacterStateMachine>().character.luck)
         {
+            GameObject.Find("PlayerUTD").GetComponent<UltimateTextDamageManager>().Add("Critical",GameObject.Find("PlayerUTD").transform,"crit");
             StartCoroutine(annimationCoRoutine("Crit", 4));
             if (this.GetComponent<CardDisplay>().critHeal != 0)
             {
@@ -510,7 +511,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 {
                     player.GetComponent<CharacterStateMachine>().character.health = 100;
                 }
-
+                GameObject.Find("PlayerUTD").GetComponent<UltimateTextDamageManager>().Add("100",GameObject.Find("PlayerUTD").transform,"crit");
                 CombatLog.GetComponent<CombatLogPopulate>().populate("CRITICAL: Healed for 100%.", true);
             }
 
@@ -527,6 +528,8 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 CombatLog.GetComponent<CombatLogPopulate>().populate(
                     "CRITICAL: Life Steal triggered for " + this.GetComponent<CardDisplay>().damage *
                     player.GetComponent<CharacterDisplay>().dmgMod + ".", true);
+                GameObject.Find("PlayerUTD").GetComponent<UltimateTextDamageManager>().Add((this.GetComponent<CardDisplay>().damage *
+                                                                                           player.GetComponent<CharacterDisplay>().dmgMod).ToString(),GameObject.Find("PlayerUTD").transform,"crit");
             }
 
             if (this.GetComponent<CardDisplay>().critNumOfTurns != 0)
@@ -544,14 +547,18 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 if (this.GetComponent<CardDisplay>().critNumOfTargets == 3)
                 {
                     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                    GameObject[] utds = GameObject.FindGameObjectsWithTag("UTD");
                     for (int i = 0; i < enemies.Length; i++)
                     {
                         Character effectedChar = enemies[i].GetComponent<CharacterStateMachine>().character;
+                        utds[i].GetComponent<UltimateTextDamageManager>().Add(dmg.ToString(),utds[i].transform,"crit");
                         effectedChar.health -= dmg;
+                        
                     }
 
                     CombatLog.GetComponent<CombatLogPopulate>()
                         .populate("CRITICAL: " + dmg + " extra damage done to all enemies.", true);
+                    
                 }
                 else
                 {

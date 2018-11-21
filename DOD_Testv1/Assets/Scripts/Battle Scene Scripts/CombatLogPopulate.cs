@@ -11,6 +11,8 @@ public class CombatLogPopulate : MonoBehaviour
 	public GameObject textPrefab;
 
 	public ScrollRect scrollRect;
+
+	private Color critColor;
 	// Use this for initialization
 	private void Start()
 	{
@@ -24,7 +26,10 @@ public class CombatLogPopulate : MonoBehaviour
 		newText = GameObject.Instantiate(textPrefab, transform);
 		if (crit)
 		{
-			newText.GetComponent<TextMeshProUGUI>().color = Color.blue;
+			if (ColorUtility.TryParseHtmlString("#CF0081", out critColor))
+			{
+				newText.GetComponent<TextMeshProUGUI>().color = critColor;
+			}
 		}
 		else
 		{
