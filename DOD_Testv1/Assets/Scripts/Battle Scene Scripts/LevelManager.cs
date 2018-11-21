@@ -40,6 +40,13 @@ public class LevelManager : MonoBehaviour
 
     public int turnCount;
     public bool charRemoved;
+    
+    public int aggressionPowerUpEnd = 0;
+    public int luckyPowerUpEnd = 0;
+    public int defPowerUpEnd = 0;
+    public bool aggressionPowerUpOn;
+    public bool luckyPowerUpOn;
+    public bool defPowerUpOn;
 
 
     private void Start()

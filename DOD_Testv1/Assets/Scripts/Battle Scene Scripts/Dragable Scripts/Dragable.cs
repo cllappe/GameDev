@@ -21,7 +21,6 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private bool DropHappened = false;
     public static bool playerTurn;
     public static bool actionsIncreased = false;
-
     private Vector3 startPos;
 
     GameObject placeholder = null;
@@ -137,6 +136,7 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private void cardAction(string dropZoneName)
     {
         GameObject CombatLog = GameObject.Find("Combat Log");
+        GameObject LevelManager = GameObject.Find("LevelManager");
         if (this.GetComponent<CardDisplay>().numberOfTargets == 1)
         {
             if (dropZoneName == "Enemy1DropZone")
@@ -303,9 +303,30 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
                     if (this.GetComponent<CardDisplay>().numOfTurns != 0)
                     {
+                        Debug.Log(GetComponent<CardDisplay>().nameText.text);
+                        Debug.Log("AggressionBool " + LevelManager.GetComponent<LevelManager>().aggressionPowerUpOn);
+                        Debug.Log("LuckyBool "+LevelManager.GetComponent<LevelManager>().luckyPowerUpOn);
+                        Debug.Log("DefBool "+LevelManager.GetComponent<LevelManager>().defPowerUpOn);
                         int startTurn = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount;
-                        int endTurn = startTurn + this.GetComponent<CardDisplay>().numOfTurns + 1;
-                        StartCoroutine(powerUpCoRoutine(PlayerUTD, startTurn,endTurn, CombatLog));
+                        if (GetComponent<CardDisplay>().nameText.text == "Lucky" && LevelManager.GetComponent<LevelManager>().luckyPowerUpOn)
+                        {
+                            LevelManager.GetComponent<LevelManager>().luckyPowerUpEnd += GetComponent<CardDisplay>().numOfTurns;
+                            CombatLog.GetComponent<CombatLogPopulate>().populate(this.GetComponent<CardDisplay>().luckUp + "Lucky Power Up Extended by "+GetComponent<CardDisplay>().numOfTurns+" turns.", false);
+                        }
+                        else if (GetComponent<CardDisplay>().nameText.text == "Aggression" && LevelManager.GetComponent<LevelManager>().aggressionPowerUpOn)
+                        {
+                            LevelManager.GetComponent<LevelManager>().aggressionPowerUpEnd += GetComponent<CardDisplay>().numOfTurns;
+                            CombatLog.GetComponent<CombatLogPopulate>().populate(this.GetComponent<CardDisplay>().luckUp + "Aggression Power Up Extended by "+GetComponent<CardDisplay>().numOfTurns +" turns.", false);
+                        }
+                        else if (GetComponent<CardDisplay>().nameText.text == "Defensive" && LevelManager.GetComponent<LevelManager>().defPowerUpOn)
+                        {
+                            LevelManager.GetComponent<LevelManager>().defPowerUpEnd += GetComponent<CardDisplay>().numOfTurns;
+                            CombatLog.GetComponent<CombatLogPopulate>().populate(this.GetComponent<CardDisplay>().luckUp + "Defensive Power Up Extended by "+GetComponent<CardDisplay>().numOfTurns+" turns.", false);
+                        }
+                        else
+                        {
+                            StartCoroutine(powerUpCoRoutine(PlayerUTD, startTurn, CombatLog));   
+                        }
                     }
                 }
                 StartCoroutine(annimationCoRoutine(this.GetComponent<CardDisplay>().nameText.text, 4));
@@ -416,11 +437,11 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
-    IEnumerator powerUpCoRoutine(GameObject PlayerUTD,int startTurn,int endTurn, GameObject CombatLog)
+    IEnumerator powerUpCoRoutine(GameObject PlayerUTD,int startTurn, GameObject CombatLog)
     {
-        Debug.Log("Entered Co-Routine. Current Turn: " + startTurn + " End Turn: " + endTurn);
         GameObject dropedOn = GameObject.Find("Player");
         Character dropedOnChar = dropedOn.GetComponent<CharacterStateMachine>().character;
+        GameObject LevelManager = GameObject.Find("LevelManager");
         
         int initalLuck = dropedOnChar.luck;
         float initalDefence = dropedOnChar.defence;
@@ -430,36 +451,45 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             if (this.GetComponent<CardDisplay>().luckUp != 0)
             {
+                LevelManager.GetComponent<LevelManager>().luckyPowerUpEnd = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
+                LevelManager.GetComponent<LevelManager>().luckyPowerUpOn = true;
                 dropedOnChar.luck += this.GetComponent<CardDisplay>().luckUp;
                 Debug.Log(dropedOnChar.luck);
                 CombatLog.GetComponent<CombatLogPopulate>().populate(this.GetComponent<CardDisplay>().luckUp + "% luck added for 3 turns.", false);
                 yield return new WaitUntil(() =>
-                    GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == endTurn);
+                    GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == LevelManager.GetComponent<LevelManager>().luckyPowerUpEnd);
                 CombatLog.GetComponent<CombatLogPopulate>().populate("Luck has returned to normal.", false);
                 dropedOnChar.luck = initalLuck;
                 Debug.Log("Luck Reset");
+                LevelManager.GetComponent<LevelManager>().luckyPowerUpOn = false;
             }
 
             if (this.GetComponent<CardDisplay>().reduceDmgMod != 0.0f)
             {
+                LevelManager.GetComponent<LevelManager>().defPowerUpEnd = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
+                LevelManager.GetComponent<LevelManager>().defPowerUpOn = true;
                 dropedOnChar.defence = this.GetComponent<CardDisplay>().reduceDmgMod;
                 CombatLog.GetComponent<CombatLogPopulate>().populate(this.GetComponent<CardDisplay>().reduceDmgMod*100 + "% damage received for 3 turns.", false);
                 yield return new WaitUntil(() =>
-                    GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == endTurn);
+                    GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == LevelManager.GetComponent<LevelManager>().defPowerUpEnd);
                 CombatLog.GetComponent<CombatLogPopulate>().populate("Damage received has returned to 100%.", false);
                 dropedOnChar.defence = initalDefence;
                 Debug.Log("Defence Reset");
+                LevelManager.GetComponent<LevelManager>().defPowerUpOn = false;
             }
 
             if (this.GetComponent<CardDisplay>().dmgIncMod != 0)
             {
+                LevelManager.GetComponent<LevelManager>().aggressionPowerUpEnd = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
+                LevelManager.GetComponent<LevelManager>().aggressionPowerUpOn = true;
                 dropedOnChar.dmgMod = this.GetComponent<CardDisplay>().dmgIncMod;
                 CombatLog.GetComponent<CombatLogPopulate>().populate(this.GetComponent<CardDisplay>().dmgIncMod + " times damage done for 3 turns.", false);
                 yield return new WaitUntil(() =>
-                    GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == endTurn);
+                    GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == LevelManager.GetComponent<LevelManager>().aggressionPowerUpEnd);
                 CombatLog.GetComponent<CombatLogPopulate>().populate("Out going damage is no longer modified by " + this.GetComponent<CardDisplay>().dmgIncMod + ".", false);
                 dropedOnChar.dmgMod = initalDmgMod;
                 Debug.Log("Dmg Mod Reset");
+                LevelManager.GetComponent<LevelManager>().aggressionPowerUpOn = true;
             }
         }
     }
@@ -682,19 +712,17 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
         else if (CardName == "Lucky")
         {
-            int endTurn = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
             go.transform.GetChild(7).gameObject.SetActive(true);
             yield return new WaitUntil(() =>
-                GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == endTurn);
+                GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount == GameObject.Find("LevelManager").GetComponent<LevelManager>().luckyPowerUpEnd);
             go.transform.GetChild(7).gameObject.SetActive(false);                
         }
         else if (CardName == "Defensive")
         {
-            int endTurn = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
             go.transform.GetChild(8).gameObject.SetActive(true);
             yield return new WaitUntil(() =>
                 GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount ==
-                endTurn);
+                GameObject.Find("LevelManager").GetComponent<LevelManager>().defPowerUpEnd);
             go.transform.GetChild(8).gameObject.SetActive(false);                
         }
         else if (CardName == "Sleight")
@@ -705,11 +733,10 @@ public class Dragable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
         else if (CardName == "Aggression")
         {
-            int endTurn = GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount + 4;
             go.transform.GetChild(11).gameObject.SetActive(true);
             yield return new WaitUntil(() =>
                 GameObject.Find("LevelManager").GetComponent<LevelManager>().turnCount ==
-                endTurn);
+                GameObject.Find("LevelManager").GetComponent<LevelManager>().aggressionPowerUpEnd);
             go.transform.GetChild(11).gameObject.SetActive(false);                
         }
         else if (CardName == "Haste")
