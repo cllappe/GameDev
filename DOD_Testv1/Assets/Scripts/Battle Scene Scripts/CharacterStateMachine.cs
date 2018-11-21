@@ -23,6 +23,7 @@ public class CharacterStateMachine : MonoBehaviour
 	private TextMeshProUGUI turnBox;
 	private bool dyingState;
 	private bool isDead;
+	private bool autoHeal;
 	public enum TurnState
 	{
 		BEGINING,
@@ -66,6 +67,11 @@ public class CharacterStateMachine : MonoBehaviour
 		{
 			case (TurnState.BEGINING):
 			{
+				string CurrentScene = SceneManager.GetActiveScene().name;
+				if (Character.Type.PLAYER == character.charType && CurrentScene == "BossBattle")
+				{
+					autoHeal = true;
+				}
 				dyingState = false;
 				isDead = false;
 				turnMonitor();
@@ -80,6 +86,12 @@ public class CharacterStateMachine : MonoBehaviour
 
 				if (character.charType == Character.Type.PLAYER)
 				{
+					if (autoHeal && character.health <= 20)
+					{
+						character.health = 100;
+						GameObject.Find("Combat Log").GetComponent<CombatLogPopulate>().populate("Auto Heal has been triggered! Use your second chance wisely!.", false);
+						autoHeal = false;
+					}
 					//Debug.Log("Current Player Health " + character.health);
 					//Debug.Log("Current Luck " + character.luck);
 					turnBox.text = "Actions Remaining = " + actionsLeft;
