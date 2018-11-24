@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreenObject: {fileID: 119055773}
-  slider: {fileID: 0}
+  slider: {fileID: 607310586}
 --- !u!224 &77195663
 RectTransform:
   m_ObjectHideFlags: 0

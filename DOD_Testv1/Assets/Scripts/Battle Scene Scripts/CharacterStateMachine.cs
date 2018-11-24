@@ -25,6 +25,8 @@ public class CharacterStateMachine : MonoBehaviour
 	private bool dyingState;
 	private bool isDead;
 	private bool autoHeal;
+	
+	private bool justExitedWaiting;
 	public enum TurnState
 	{
 		BEGINING,
@@ -82,7 +84,11 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.ACTION):
 			{
-				turnAnimation.Play("turnAnimation");
+				if (justExitedWaiting)
+				{
+					turnAnimation.Play("turnAnimation");
+					justExitedWaiting = false;
+				}
 				if (actionsLeft == 0 && !CardBattleManager.enemyTurn)
 				{
 					actionsLeft = 1;
@@ -177,7 +183,6 @@ public class CharacterStateMachine : MonoBehaviour
 						}
 					}
 				}	
-
 				turnMonitor();
 				break;
 			}
@@ -291,6 +296,7 @@ public class CharacterStateMachine : MonoBehaviour
 								if (!GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved)
 								{
 									currentState = TurnState.ACTION;
+									justExitedWaiting = true;
 									GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
 									GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved = true;
 								}	
@@ -309,6 +315,7 @@ public class CharacterStateMachine : MonoBehaviour
 							else
 							{
 								currentState = TurnState.ACTION;
+								justExitedWaiting = true;
 								GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Remove(character);
 								GameObject.Find("LevelManager").GetComponent<LevelManager>().charRemoved = true;
 							}	
