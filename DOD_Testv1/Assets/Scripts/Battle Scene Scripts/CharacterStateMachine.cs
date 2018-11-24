@@ -18,6 +18,7 @@ public class CharacterStateMachine : MonoBehaviour
 	public int actionsLeft = 0;
 	private Character player;
 	private GameObject playerGO;
+	private Animator turnAnimation;
 
 	private bool enemyDmgEnabled;
 	private TextMeshProUGUI turnBox;
@@ -46,11 +47,13 @@ public class CharacterStateMachine : MonoBehaviour
 
 		if (character.charType == Character.Type.PLAYER)
 		{
+			turnAnimation = GameObject.Find("PlayerTurn").GetComponent<Animator>();
 			GameObject turnBoxGO = GameObject.Find("Player Notification");
 			turnBox = turnBoxGO.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
 		}
 		else if (character.charType == Character.Type.ENEMY || character.charType == Character.Type.MINIBOSS || character.charType == Character.Type.BOSS)
 		{
+			turnAnimation = GameObject.Find("EnemyTurn").GetComponent<Animator>();
 			playerGO = GameObject.Find("Player");
 			player = playerGO.GetComponent<CharacterStateMachine>().character;
             //Getting Health from Dungeon 
@@ -79,6 +82,7 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.ACTION):
 			{
+				turnAnimation.Play("turnAnimation");
 				if (actionsLeft == 0 && !CardBattleManager.enemyTurn)
 				{
 					actionsLeft = 1;

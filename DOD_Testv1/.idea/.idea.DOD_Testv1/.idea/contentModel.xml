@@ -1809,6 +1809,13 @@
             <e p="DropZone.cs" t="Include" />
             <e p="LevelManager.cs" t="Include" />
           </e>
+          <e p="Cutscene" t="Include">
+            <e p="FinalCut.cs" t="Include" />
+            <e p="FinalCutFade.cs" t="Include" />
+            <e p="FinalText.cs" t="Include" />
+            <e p="PlayerAnimation.cs" t="Include" />
+            <e p="TextAnimation.cs" t="Include" />
+          </e>
           <e p="Damageable.cs" t="Include" />
           <e p="Damager.cs" t="Include" />
           <e p="Data" t="Include">

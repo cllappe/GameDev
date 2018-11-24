@@ -27,7 +27,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: EnemyTurn
+  m_Name: turnAnimation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -81,7 +81,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102054601777497248}
-    m_Position: {x: 300, y: -12, z: 0}
+    m_Position: {x: 300, y: -24, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102541922559661304}
     m_Position: {x: 420, y: 168, z: 0}
