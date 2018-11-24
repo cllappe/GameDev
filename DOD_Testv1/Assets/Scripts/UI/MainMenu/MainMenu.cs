@@ -18,7 +18,8 @@ public class MainMenu : MonoBehaviour
         PersistentDataManager.Reset();
 
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("Cutscene_0");
+
     }
 
     public void ContinueGame()
@@ -37,6 +38,12 @@ public class MainMenu : MonoBehaviour
     public void Credits()
     {
         SceneManager.LoadScene("Credits");
+    }
+    public void LoadLevelSelectMenu()
+    {
+        SaveSystem.DeleteSavedGameInSlot(0);
+        PersistentDataManager.Reset();
+        SceneManager.LoadScene("LevelSelect");
     }
 
     private void OnGUI()

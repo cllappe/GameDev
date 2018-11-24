@@ -73,7 +73,6 @@ public class pauseMenu : MonoBehaviour {
     public void QuitGame()
     {
         string sceneName = CurrentScene.name;
-
         if(sceneName == "Dungeon_V1")
             SaveSystem.SaveToSlot(0);
 

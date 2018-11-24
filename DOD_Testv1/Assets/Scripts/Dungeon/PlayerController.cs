@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour {
         if (PlayerPrefs.HasKey("Save0"))
         {
             Gold = DialogueLua.GetActorField("Player", "Gold").asInt;                 
-            //currentHealth = DialogueLua.GetActorField("Player", "health").asInt;
+            currentHealth = DialogueLua.GetActorField("Player", "health").asInt;
         }
         else
         {
