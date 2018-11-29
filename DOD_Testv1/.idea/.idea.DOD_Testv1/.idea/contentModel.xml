@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\cllap\.Rider2018.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\cllap\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_DOD_Testv1.-1663234978.00" t="ExcludeRecursive" />
-    <e p="C:\Users\cllap\OneDrive\Documents\GameDev\DOD_Testv1" t="IncludeRecursive">
+    <e p="C:\Users\cllap\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_DOD_Testv1.-283454043.00" t="ExcludeRecursive" />
+    <e p="C:\Users\cllap\OneDrive\Documents\GameDev\GameDev\DOD_Testv1" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
@@ -1829,6 +1829,7 @@
             <e p="PlayerController.cs" t="Include" />
             <e p="ShopAnimation.cs" t="Include" />
             <e p="SkeletonAI.cs" t="Include" />
+            <e p="Spikes.cs" t="Include" />
             <e p="TorchLight.cs" t="Include" />
           </e>
           <e p="Enemies.cs" t="Include" />
@@ -1876,6 +1877,7 @@
             </e>
           </e>
         </e>
+        <e p="SwordSound.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Examples &amp; Extras" t="Include">
             <e p="Fonts" t="Include">

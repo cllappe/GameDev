@@ -21,7 +21,6 @@ public class CharacterStateMachine : MonoBehaviour
 	private Animator turnAnimation;
 
 	private bool enemyDmgEnabled;
-	private TextMeshProUGUI turnBox;
 	private bool dyingState;
 	private bool isDead;
 	private bool autoHeal;
@@ -51,8 +50,6 @@ public class CharacterStateMachine : MonoBehaviour
         if (character.charType == Character.Type.PLAYER)
 		{
 			turnAnimation = GameObject.Find("PlayerTurn").GetComponent<Animator>();
-			GameObject turnBoxGO = GameObject.Find("Player Notification");
-			turnBox = turnBoxGO.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
 		}
 		else if (character.charType == Character.Type.ENEMY || character.charType == Character.Type.MINIBOSS || character.charType == Character.Type.BOSS)
 		{
@@ -105,7 +102,7 @@ public class CharacterStateMachine : MonoBehaviour
 					}
 					//Debug.Log("Current Player Health " + character.health);
 					//Debug.Log("Current Luck " + character.luck);
-					turnBox.text = "Actions Remaining = " + actionsLeft;
+
 					Dragable.playerTurn = true;
 					if (Dragable.validDrop)
 					{
@@ -274,10 +271,6 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.WAITING):
 			{					
-				if (character.charType == Character.Type.PLAYER)
-				{
-             		turnBox.text = "Enemy Turn";
-       			}
 				if (GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.Count > 1 && !CardBattleManager.enemyTurn && !Dragable.playerTurn)
 				{
 					if (character == GameObject.Find("GameManager").GetComponent<CardBattleManager>().charOrder.First())
@@ -332,8 +325,9 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.VICTORY):
 			{
-                turnBox.text = "VICTORY!";
-                
+				GameObject.Find("TurnAnimations").transform.GetChild(2).gameObject.SetActive(true);
+				GameObject.Find("VICTORY").GetComponent<Animator>().Play("Victory");
+				
                 //Saved HP after Winning Battle                  
 				PlayerPrefs.SetInt("battlehp", character.health);
                 PlayerPrefs.SetString("lastlevel", "battle");
@@ -352,7 +346,8 @@ public class CharacterStateMachine : MonoBehaviour
 			}
 			case (TurnState.DEFEAT):
 			{
-				turnBox.text = "Defeat";
+				GameObject.Find("TurnAnimations").transform.GetChild(3).gameObject.SetActive(true);
+				GameObject.Find("DEFEAT").GetComponent<Animator>().Play("Defeat");
 				GameObject go = GameObject.Find("Animation Master");
 				go.transform.GetChild(10).SetPositionAndRotation(new Vector3(-5, 0, 4), Quaternion.identity);
 				go.transform.GetChild(10).gameObject.SetActive(true);
