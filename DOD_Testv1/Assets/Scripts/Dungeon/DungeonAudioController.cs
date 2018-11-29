@@ -5,35 +5,69 @@ using UnityEngine;
 public class DungeonAudioController : MonoBehaviour {
 
     private AudioSource soundSource;
-    public AudioClip[] sounds;
+    [SerializeField] private AudioClip footstepClip;
+    [SerializeField] private AudioClip slideClip;
+    [SerializeField] private AudioClip attackClip;
+    [SerializeField] private AudioClip barrelClip;
+    [SerializeField] private AudioClip chestClip;
+    [SerializeField] private AudioClip foodClip;
+    [SerializeField] private AudioClip coinClip;
+    [SerializeField] private AudioClip bagClip;
+    [SerializeField] private AudioClip barClip;
+    [SerializeField] private AudioClip spikeHit;
 
     void Awake()
     {
         soundSource = GetComponent<AudioSource>();
     }
 
-	void Footstep()
+	public void Footstep()
     {
-        soundSource.PlayOneShot(sounds[0], 1.0f);
+        soundSource.PlayOneShot(footstepClip, 1.0f);
     }
 
     public void Slide()
     {
-        soundSource.PlayOneShot(sounds[1], 1.0f);
+        soundSource.PlayOneShot(slideClip, 1.0f);
     }
 
-    void Attack()
+    public void Attack()
     {
-        soundSource.PlayOneShot(sounds[2], 1.0f);
+        soundSource.PlayOneShot(attackClip, 1.0f);
     }
 
     public void Barrel()
     {
-        //soundSource.PlayOneShot(sounds[3], 1.0f);
+        soundSource.PlayOneShot(barrelClip, 1.0f);
     }
 
     public void Chest()
     {
-        //soundSource.PlayOneShot(sounds[4], 1.0f);
+        soundSource.PlayOneShot(chestClip, 1.0f);
+    }
+
+    public void Food()
+    {
+        soundSource.PlayOneShot(foodClip, 1.0f);
+    }
+
+    public void Coin()
+    {
+        soundSource.PlayOneShot(coinClip, 1.0f);
+    }
+
+    public void Bag()
+    {
+        soundSource.PlayOneShot(bagClip, 1.0f);
+    }
+
+    public void Bar()
+    {
+        soundSource.PlayOneShot(barClip, 1.0f);
+    }
+
+    public void SpikeHit()
+    {
+        soundSource.PlayOneShot(spikeHit, 1.0f);
     }
 }

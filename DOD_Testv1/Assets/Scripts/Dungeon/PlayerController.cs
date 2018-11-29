@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour {
         if (PlayerPrefs.HasKey("Save0"))
         {
             Gold = DialogueLua.GetActorField("Player", "Gold").asInt;                 
-            currentHealth = DialogueLua.GetActorField("Player", "health").asInt;
+            //currentHealth = DialogueLua.GetActorField("Player", "health").asInt;
         }
         else
         {
@@ -77,10 +77,10 @@ public class PlayerController : MonoBehaviour {
     {
         //Health
         adjustCurrentHealth(0);
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            currentHealth = currentHealth - 10;
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    currentHealth = currentHealth - 10;
+        //}
 
         HealthBarfull.fillAmount = currentHealth / 100f;
         x = Input.GetAxis("Horizontal");
@@ -112,18 +112,19 @@ public class PlayerController : MonoBehaviour {
             anim.SetFloat("Speed", 0);
     }
 
-    void OnGUI()
-    {
-        //Health 
+    //void OnGUI()
+    //{
+    //    //Health 
 
-        //GUI.Box(new Rect(10, 10, healthBarLenght, 20), currentHealth + "/" + maxHealth);
+    //    //GUI.Box(new Rect(10, 10, healthBarLenght, 20), currentHealth + "/" + maxHealth);
 
-        if (currentHealth == 0)
-        {
-            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Game Over");
-            Time.timeScale = 0.0f;
-        }
-    }
+    //    if (currentHealth == 0)
+    //    {
+    //        //GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Game Over");
+    //        //Time.timeScale = 0.0f;
+    //        SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);
+    //    }
+    //}
 
     public void adjustCurrentHealth(int adj)
     {
@@ -210,20 +211,47 @@ public class PlayerController : MonoBehaviour {
     {
 
         if (Pickup.gameObject.CompareTag("Coin"))
+        {
+            audioController.Coin();
             DialogueLua.SetActorField("Player", "Gold", DialogueLua.GetActorField("Player", "Gold").asInt + 1);
+        }            
         else if (Pickup.gameObject.CompareTag("Money Bag"))
-            DialogueLua.SetActorField("Player", "Gold", DialogueLua.GetActorField("Player", "Gold").asInt + 15);    
+        {
+            audioController.Bag();
+            DialogueLua.SetActorField("Player", "Gold", DialogueLua.GetActorField("Player", "Gold").asInt + 15); 
+        }           
         else if (Pickup.gameObject.CompareTag("Gold Bar"))
+        {
+            audioController.Bar();
             DialogueLua.SetActorField("Player", "Gold", DialogueLua.GetActorField("Player", "Gold").asInt + 25);
+        }            
         setGoldText();
 
-
         if (Pickup.gameObject.CompareTag("Carrot"))
+        {
+            audioController.Food();
             currentHealth += 10;
+        }            
         else if (Pickup.gameObject.CompareTag("Grapes"))
+        {
+            audioController.Food();
             currentHealth += 15;
+        }            
         else if (Pickup.gameObject.CompareTag("Steak"))
+        {
+            audioController.Food();
             currentHealth += 25;
+        }          
+
+        if (Pickup.gameObject.CompareTag("Spikes") && anim.GetBool("Sliding") == false)
+        {
+            audioController.SpikeHit();
+            currentHealth -= 5;
+            if (currentHealth <= 0)
+            {
+                SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);
+            }
+        }          
     }
 
     void setGoldText()

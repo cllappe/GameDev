@@ -7,10 +7,12 @@ public class startExplosion : MonoBehaviour
     
     public Animator animation;
     public float time;
+    AudioSource combustSound;
 
     void Start()
     {
         animation = GetComponent<Animator>();
+        combustSound = GetComponent<AudioSource>();
         StartCoroutine(AnimationDelay());
     }
 
@@ -18,5 +20,6 @@ public class startExplosion : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         animation.Play("ExplosionTorch");
+        combustSound.Play();
     }
 }

@@ -41,7 +41,7 @@ public class gameOver : MonoBehaviour {
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        SceneManager.UnloadSceneAsync("Pause_Menu");
+        //SceneManager.UnloadSceneAsync("Pause_Menu");
         SceneManager.LoadScene("Game_Intro");
 
 

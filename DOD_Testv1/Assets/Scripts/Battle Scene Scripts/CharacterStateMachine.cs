@@ -45,9 +45,10 @@ public class CharacterStateMachine : MonoBehaviour
 	void Start ()
 	{
         //Setting Battle as the LAST LEVEL for Save 
-        PlayerPrefs.SetInt("lastLevel", SceneManager.GetActiveScene().buildIndex);
+        //PlayerPrefs.SetInt("lastLevel", SceneManager.GetActiveScene().buildIndex);
+        //PlayerPrefs.SetString("lastLevel", SceneManager.GetActiveScene().name);
 
-		if (character.charType == Character.Type.PLAYER)
+        if (character.charType == Character.Type.PLAYER)
 		{
 			turnAnimation = GameObject.Find("PlayerTurn").GetComponent<Animator>();
 			GameObject turnBoxGO = GameObject.Find("Player Notification");
